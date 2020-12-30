@@ -1,17 +1,17 @@
 import { Browser } from 'puppeteer';
 import cheerio from 'cheerio';
-import { Announcement } from './types';
-import { Urls } from './constants';
-import l from './logger';
+import { Announcement } from '../types';
+import { Urls } from '../constants';
+import l from '../logger';
 
-export const getRzeszowiakAnnouncements = async (browser: Browser): Promise<Announcement[]> => {
-	const url = Urls.Rzeszowiak;
-
+export const getRzeszowiakAnnouncements = async (
+	browser: Browser
+): Promise<Announcement[]> => {
 	const startPage = await browser.newPage();
-	const response = await startPage.goto(url);
-
+	const response = await startPage.goto(Urls.Rzeszowiak);
+	// @improvement: use getRzeszowiakPageContent
 	if (!response) {
-		throw new Error(`Unable to load "${url}"`);
+		throw new Error(`Unable to load "${Urls.Rzeszowiak}"`);
 	}
 
 	const content = await startPage.content();
@@ -22,19 +22,27 @@ export const getRzeszowiakAnnouncements = async (browser: Browser): Promise<Anno
 		const attr = (el as cheerio.TagElement).attribs['href'];
 		pagesUrls.push(attr);
 	});
-
+	const now = Date.now();
 	const promises = pagesUrls.map(async (url) => {
-		const content = await getRzeszowiakPageContent(browser, url);
+		const content = await getRzeszowiakPageContent(
+			browser,
+			'http://www.rzeszowiak.pl' + url
+		);
 		const $ = cheerio.load(content);
 		const $ads = $('.normalbox');
+		const now = Date.now();
 		const pageAds = await parseRzeszowiakPageAnnouncements($, $ads);
+		l.info(
+			'--parseRzeszowiakPageAnnouncements execution time:',
+			Date.now() - now,
+			'ms'
+		);
+
 		return pageAds;
 	});
 
 	const announcements = await Promise.all(promises);
-
-	await browser.close();
-
+	l.info('--getRzeszowiakAnnouncements execution time:', Date.now() - now, 'ms');
 	return announcements.flat(1);
 };
 
@@ -56,18 +64,18 @@ const parseRzeszowiakPageAnnouncements = async (
 	$: cheerio.Root,
 	$ads: cheerio.Cheerio
 ): Promise<Announcement[]> => {
-	const promises: Promise<Announcement>[] = [];
-	$ads.toArray().map(async (ad) => {
+	const adsElements = $ads.toArray();
+	const announcements = adsElements.map((ad) => {
 		const announcement = {} as Announcement;
 		const $ad = $(ad);
 		const $titleLink = $ad.find('.normalbox-title-left a');
 		// @todo: remove index
-		announcement.title = $titleLink.text();
+		announcement.title = $titleLink.text().trim();
 		announcement.url = $titleLink.attr('href')!;
 		let priceText = $ad.find('.normalbox-title-left2 strong').text();
 		priceText = priceText.replace(/[^\d\.,]/gi, '');
 		if (priceText !== +priceText + '') {
-			l.debug(`Price "${priceText}" is not a number.`);
+			l.debug(`[Rzeszowiak] Price "${priceText}" is not a number.`, announcement.url);
 		}
 		announcement.price = priceText;
 
@@ -80,10 +88,7 @@ const parseRzeszowiakPageAnnouncements = async (
 		const dt = $ad.find('.normalbox-more .dodane b').text();
 		// @todo: parse words like "dziś" to date
 		announcement.dt = dt;
-
 		return announcement;
 	});
-
-	const announcements = await Promise.all(promises);
 	return announcements;
 };

@@ -24,6 +24,8 @@ async function start() {
 	todayAnnouncements.rzeszowiak = todayRzAnnouncements;
 	await browser.close();
 
+	
+	throw new Error('make it generic - data for olx / rzeszowiak overrides each other');
 	const dirPath = path.resolve(__dirname, '..', 'data', 'announcements');
 	try {
 		await access(dirPath);

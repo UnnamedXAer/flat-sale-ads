@@ -1,6 +1,7 @@
 import { Browser } from 'puppeteer';
-import { getRzeszowiakAnnouncements } from '../announcements';
+import { getRzeszowiakAnnouncements } from './rAnnouncements';
 import { SiteName, Announcement } from '../types';
+import { getOlxAnnouncements } from './oAnnouncements';
 
 export const getAnnouncements = (
 	browser: Browser,
@@ -10,7 +11,7 @@ export const getAnnouncements = (
 		case 'rzeszowiak':
 			return getRzeszowiakAnnouncements(browser);
 		case 'olx':
-			throw new Error('The "olx" site is not supported yet.');
+			return getOlxAnnouncements(browser);
 		default:
 			throw new Error('Unrecognized site name: ' + siteName);
 	}
