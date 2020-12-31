@@ -1,53 +1,13 @@
 require('dotenv').config();
-import pp from 'puppeteer';
+import { scrapeAnnouncements } from './announcement';
 import { config } from './config';
-import path from 'path';
-import { access, mkdir, writeFile } from 'fs/promises';
 import l from './logger';
-import { DayAnnouncements } from './types';
-import { formatDateToFileName } from './formatDate';
-import { getAnnouncements } from './announcement';
 
-l.info('START');
+const programStartTime = Date.now();
+l.info('Program START');
 
 async function start() {
-	const browser = await pp.launch({ headless: true });
-	const todayAnnouncements: DayAnnouncements = {
-		olx: null,
-		rzeszowiak: null
-	};
-	const todayRzAnnouncements = await getAnnouncements(browser, 'rzeszowiak');
-	l.info(
-		'Number of todays "Rzeszowiak" announcements is: ',
-		todayRzAnnouncements.length
-	);
-	todayAnnouncements.rzeszowiak = todayRzAnnouncements;
-	await browser.close();
-
-	
-	throw new Error('make it generic - data for olx / rzeszowiak overrides each other');
-	const dirPath = path.resolve(__dirname, '..', 'data', 'announcements');
-	try {
-		await access(dirPath);
-	} catch (err) {
-		l.warn('Folder for the announcements does not exist or is not accessible.');
-		l.info('Try to create folder for the announcements.');
-		try {
-			await mkdir(dirPath, { recursive: true });
-		} catch (err) {
-			l.error('Fail to create folder for the announcements.', err);
-			throw err;
-		}
-	}
-	const pathName = path.join(dirPath, `${formatDateToFileName()}.json`);
-	const text = JSON.stringify(todayAnnouncements, null, config.isDev ? '\t' : 0);
-	try {
-		l.info('About to save the announcements.');
-		await writeFile(pathName, text);
-	} catch (err) {
-		l.error('Fail to save the announcements to file.', err);
-		throw err;
-	}
+	await scrapeAnnouncements();
 }
 
 start()
@@ -58,5 +18,9 @@ start()
 		);
 	})
 	.finally(() => {
-		l.info('End!');
+		l.info('Program END!');
+		const executionTime = Date.now() - programStartTime;
+		const executionTimeText =
+			executionTime >= 1000 ? executionTime / 1000 + ' s' : executionTime + ' ms';
+		l.debug('Execution time: ', executionTimeText);
 	});
