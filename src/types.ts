@@ -6,6 +6,9 @@ export interface Config {
 	envPrefix: EnvPrefix;
 	logsLevel: number;
 	appTemporaryDataFolder: string;
+	dateTimeFormatParams: [string, Intl.DateTimeFormatOptions];
+	dateFormatParams: [string, Intl.DateTimeFormatOptions];
+	timeFormatParams: [string, Intl.DateTimeFormatOptions];
 }
 
 export interface Announcement {

@@ -123,3 +123,91 @@ const parseOlxPageAnnouncements = async (
 	});
 	return announcements;
 };
+
+export function parseOlxAdTime(olxTime: string): string {
+	const olxTimeArr = olxTime.split(' ');
+	if (olxTimeArr[0] === 'dzisiaj' || olxTimeArr[0] === 'wczoraj') {
+		return parseOlxAdTimeWithTodayYesterday(olxTimeArr[0], olxTimeArr[1]);
+	}
+
+	// @i: in this case the "olxTime" will be like 29 gru
+	// @i: so we just need to map the mont prefix to full name
+	const dayMonthArr = olxTime.split(' ');
+	const monthPrefix = dayMonthArr[1].substr(0, 3); // @i: not sure if all moth are represented as 3 chars
+	const currentDate = new Date();
+	let day = +dayMonthArr[0];
+
+	if (isNaN(day)) {
+		return olxTime;
+	}
+
+	let year = currentDate.getFullYear();
+	const monthNum = mapMonthPrefixToMonth(monthPrefix, true) as number;
+	if (monthNum === 11) {
+		if (currentDate.getDate() < day) {
+			year = year - 1;
+		}
+	}
+
+	const adDate = new Date(year, monthNum, day).toLocaleString(
+		...config.dateFormatParams
+	);
+	return adDate;
+}
+
+export function parseOlxAdTimeWithTodayYesterday(
+	daySynonym: 'dzisiaj' | 'wczoraj',
+	time: string
+): string {
+	const timeArr = time.split(':');
+	const hour = +timeArr[0];
+	const minutes = +timeArr[1];
+	if (isNaN(hour) || isNaN(minutes)) {
+		return daySynonym + ' ' + time;
+	}
+
+	const currentDate = new Date();
+	const adDate = new Date(
+		currentDate.getFullYear(),
+		currentDate.getMonth(),
+		currentDate.getDate() + (daySynonym === 'wczoraj' ? -1 : 0),
+		hour,
+		minutes
+	).toLocaleString(...config.dateTimeFormatParams);
+	return adDate;
+}
+
+export function mapMonthPrefixToMonth(
+	monthPrefix: string,
+	asNumber: boolean = true
+): string | number {
+	switch (monthPrefix) {
+		case 'sty':
+			return asNumber ? 0 : 'styczeń';
+		case 'lut':
+			return asNumber ? 1 : 'luty';
+		case 'mar':
+			return asNumber ? 2 : 'marzec';
+		case 'kwi':
+			return asNumber ? 3 : 'kwiecień';
+		case 'maj':
+			return asNumber ? 4 : 'maj';
+		case 'cze':
+			return asNumber ? 5 : 'czerwiec';
+		case 'lip':
+			return asNumber ? 6 : 'lipiec';
+		case 'sie':
+			return asNumber ? 7 : 'sierpień';
+		case 'wrz':
+			return asNumber ? 8 : 'wrzesień';
+		case 'paź':
+		case 'paz':
+			return asNumber ? 9 : 'październik';
+		case 'lis':
+			return asNumber ? 10 : 'listopad';
+		case 'gru':
+			return asNumber ? 11 : 'grudzień';
+		default:
+			throw new Error('Unrecognized month prefix');
+	}
+}
