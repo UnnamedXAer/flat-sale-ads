@@ -1,12 +1,26 @@
 require('dotenv').config();
-import { scrapeAnnouncements } from './announcement';
+import pp from 'puppeteer';
+import { config } from './config';
 import l, { lTime } from './logger';
+import { Scrapper } from './pageScraper/scrapper';
 
 const programStartTime = Date.now();
 l.info('Program START');
 
 async function start() {
-	await scrapeAnnouncements();
+	const browserLaunchOptions: pp.LaunchOptions = {
+		headless: false,
+		timeout: 0,
+		defaultViewport: null,
+		args: []
+	};
+	if (config.startMaximized === true) {
+		browserLaunchOptions.args!.push('--start-maximized');
+	}
+	const browser = await pp.launch(browserLaunchOptions);
+	const scrapper = new Scrapper();
+	await scrapper.scrapeAnnouncements(browser, ['olx','rzeszowiak']);
+	await browser.close();
 }
 
 start()
