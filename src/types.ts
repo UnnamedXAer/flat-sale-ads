@@ -18,6 +18,7 @@ export interface Announcement {
 	description: string;
 	url: string;
 	imgUrl: string;
+	_debugInfo?: any;
 }
 
 export type DayAnnouncements = {

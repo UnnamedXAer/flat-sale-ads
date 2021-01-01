@@ -45,7 +45,6 @@ describe('Parse olx ads time', () => {
 
 	test('should return date in app standardized format - handle short date', () => {
 		expect(parseOlxAdTime('29 gru')).toBe('29 grudnia 2020');
-
 		expect(parseOlxAdTime('1 sty')).toBe('1 stycznia 2020');
 	});
 
@@ -58,24 +57,29 @@ describe('Parse olx ads time', () => {
 		);
 	});
 
-	test('should return date in app standardized format - handle today on new year', () => {
+	test('should return date in app standardized format - handle today / yesterday on new year', () => {
 		mockDate(true);
 		expect(parseOlxAdTimeWithTodayYesterday('dzisiaj', '12:22')).toBe(
 			'1 stycznia 2021, 12:22'
 		);
-		mockDate(false);
-
-	});
-
-	test('should return date in app standardized format - handle yesterday on new year', () => {
 		expect(parseOlxAdTimeWithTodayYesterday('wczoraj', '12:22')).toBe(
-			'30 grudnia 2020, 12:22'
+			'31 grudnia 2020, 12:22'
 		);
+		mockDate(false);
 	});
 
 	test('should handle date with broken time - handle today / yesterday on new year', () => {
 		expect(parseOlxAdTimeWithTodayYesterday('wczoraj', '1.2:22')).toBe(
-			'wczoraj 1.2:12'
+			'wczoraj 1.2:22'
+		);
+		expect(parseOlxAdTimeWithTodayYesterday('wczoraj', '1,2:22')).toBe(
+			'wczoraj 1,2:22'
+		);
+		expect(parseOlxAdTimeWithTodayYesterday('wczoraj', '.9:22')).toBe(
+			'wczoraj .9:22'
+		);
+		expect(parseOlxAdTimeWithTodayYesterday('wczoraj', '1 2:22')).toBe(
+			'wczoraj 1 2:22'
 		);
 	});
 
@@ -84,13 +88,10 @@ describe('Parse olx ads time', () => {
 		expect(parseOlxAdTime('dzisiaj 12:22')).toBe('31 grudnia 2020, 12:22');
 	});
 
-	test('should parse olx date to app standardized format - handle today on new year', () => {
-		expect(parseOlxAdTime('wczoraj 12:22')).toBe('30 grudnia 2020, 12:22');
+	test('should parse olx date to app standardized format - handle today / yesterday on new year', () => {
+		mockDate(true);
 		expect(parseOlxAdTime('dzisiaj 12:22')).toBe('1 stycznia 2021, 12:22');
-	});
-
-	test('should parse olx date to app standardized format - handle yesterday on new year', () => {
-		expect(parseOlxAdTime('wczoraj 12:22')).toBe('30 grudnia 2020, 12:22');
-		expect(parseOlxAdTime('dzisiaj 12:22')).toBe('1 stycznia 2021, 12:22');
+		expect(parseOlxAdTime('wczoraj 12:22')).toBe('31 grudnia 2020, 12:22');
+		mockDate(false);
 	});
 });

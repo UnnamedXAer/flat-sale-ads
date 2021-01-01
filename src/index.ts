@@ -1,7 +1,7 @@
 require('dotenv').config();
 import { scrapeAnnouncements } from './announcement';
 import { config } from './config';
-import l from './logger';
+import l, { lTime } from './logger';
 
 const programStartTime = Date.now();
 l.info('Program START');
@@ -20,7 +20,5 @@ start()
 	.finally(() => {
 		l.info('Program END!');
 		const executionTime = Date.now() - programStartTime;
-		const executionTimeText =
-			executionTime >= 1000 ? executionTime / 1000 + ' s' : executionTime + ' ms';
-		l.debug('Execution time: ', executionTimeText);
+		l.debug('Execution time: ', lTime(executionTime));
 	});

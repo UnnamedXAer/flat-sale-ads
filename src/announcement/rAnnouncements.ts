@@ -64,6 +64,7 @@ const parseRzeszowiakPageAnnouncements = async (
 	$: cheerio.Root,
 	$ads: cheerio.Cheerio
 ): Promise<Announcement[]> => {
+	// @improvement - check if promoted ads should not be excluded.
 	const adsElements = $ads.toArray();
 	const announcements = adsElements.map((ad) => {
 		const announcement = {} as Announcement;

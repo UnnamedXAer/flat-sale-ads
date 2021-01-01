@@ -2,106 +2,127 @@ import { Browser } from 'puppeteer';
 import cheerio from 'cheerio';
 import { Announcement } from '../types';
 import l from '../logger';
-import { Urls } from '../constants';
+import { DAY_MS, Urls } from '../constants';
 import { config } from '../config';
 
-export const getOlxAnnouncements = async (browser: Browser): Promise<Announcement[]> => {
-	const startPage = await browser.newPage();
-	const response = await startPage.goto(Urls.Olx);
+let _debugInfo = { url: String(Urls.Olx), idx: 0 };
 
-	if (!response) {
-		throw new Error(`Unable to load "${Urls.Olx}"`);
+export async function getOlxAnnouncements(browser: Browser): Promise<Announcement[]> {
+	const $firstPage = await getOlxPage(browser, Urls.Olx);
+	const [firstPageAds, isDone] = await getOlxPageAds($firstPage);
+	const announcements: Announcement[] = firstPageAds;
+
+	if (isDone) {
+		l.debug('[Olx] Scraping ended on the first page.');
+		return announcements;
 	}
 
-	const content = await startPage.content();
-	const $ = cheerio.load(content);
-	const pagesUrls: string[] = [];
+	const pageUrls = getOlxUrlsToNextPages($firstPage);
 
-	const pagesLinkElements = $('div.pager.rel.clr').find(
-		'a.block.br3.brc8.large.tdnone.lheight24'
-	);
-	if (pagesLinkElements.length === 0) {
-		l.warn('[Olx] Unable to read the links to the next pages.');
+	if (pageUrls.length === 0) {
+		l.warn(
+			'[Olx] There was only one page or the service was not able to read the links to the next pages.'
+		);
+		return announcements;
 	}
 
-	pagesLinkElements.map((idx, _el) => {
-		// @improvement: olx just add &page=num to url so there is no need to read in from elements
-		// @i: if we switch to used attr remember the current page does not have link
-		// const attr = (el as cheerio.TagElement).attribs['href'];
-		// pagesUrls.push(attr);
-		pagesUrls.push(Urls.Olx + '&page=' + (idx + 1));
-	});
-	const now = Date.now();
-	const promises = pagesUrls.map<Promise<Announcement[]>>(async (url) => {
-		const content = await getOlxPageContent(browser, url);
-		const $ = cheerio.load(content);
-		// // @i: remove fixed promoted offers, because the are also included in normal offers list
-		// $('table.fixed.offers.breakword.offers--top.redesigned').remove();
-		// const fixedOffers = $('table.fixed.offers.breakword.offers--top.redesigned');
-		// if (fixedOffers.length > 0) {
-		// 	throw new Error('Fixed offers where not removed!');
-		// }
-		// const $ads = $('table.fixed.offers.breakword.redesigned').find(
-		const $ads = $('table#offers_table').find('div.offer-wrapper>table');
-		const now = Date.now();
-		const pageAds = await parseOlxPageAnnouncements($, $ads);
-		l.info('--parseOlxPageAnnouncements execution time:', Date.now() - now, 'ms');
-
-		return pageAds;
-	});
-
-	const announcements = await Promise.all(promises);
-	l.info('--getOlxAnnouncements execution time:', Date.now() - now, 'ms');
-	const flatted = announcements.flat(1);
-	if (config.isDev) {
-		const withMissingData = flatted
-			.map((x) => {
-				if (
-					x.title === '' ||
-					x.price === '' ||
-					x.url === '' ||
-					x.dt === '' ||
-					x.imgUrl === ''
-				) {
-					return x;
-				}
-				return null;
-			})
-			.filter((x) => x != null);
-
-		if (withMissingData.length > 0) {
-			l.warn('[Olx] Some of the ads have missing data', withMissingData);
+	for (let i = 0; i < pageUrls.length; i++) {
+		_debugInfo.url = pageUrls[i];
+		const $page = await getOlxPage(browser, pageUrls[i]);
+		const [pageAds, isDone] = await getOlxPageAds($page);
+		announcements.push(...pageAds);
+		if (isDone) {
+			break;
 		}
 	}
-	return flatted;
-};
+	return announcements;
+}
 
-const getOlxPageContent = async (browser: Browser, url: string): Promise<string> => {
+export function getOlxUrlsToNextPages($page: cheerio.Root) {
+	const pagesUrls: string[] = [];
+	// @i: the first page does not have link
+	const pagesCount = $page('div.pager.rel.clr').find(
+		'a.block.br3.brc8.large.tdnone.lheight24'
+	).length;
+	// @i: olx just add &page=num to url so there is no need to read links from the elements
+	// @i: pages starts from 1, skip first page
+	for (let i = 2; i < pagesCount; i++) {
+		pagesUrls.push(Urls.Olx + '&page=' + i);
+	}
+
+	l.debug(`Olx pages number: ${pagesUrls.length} + 1 (first page).`);
+
+	return pagesUrls;
+}
+
+export async function getOlxPage(browser: Browser, url: string): Promise<cheerio.Root> {
 	const page = await browser.newPage();
 	const response = await page.goto(url);
-	if (!response) {
+	if (!response || response.status() !== 200) {
 		throw new Error(`Unable to load "${url}"`);
 	}
+	l.fatal('--', response.status());
 	const content = await page.content();
 	await page.close({ runBeforeUnload: false });
-	return content;
-};
+	const $page = cheerio.load(content);
+	return $page;
+}
 
-const parseOlxPageAnnouncements = async (
-	$: cheerio.Root,
+export async function getOlxPageAds(
+	$page: cheerio.Root
+): Promise<[ads: Announcement[], isDone: boolean]> {
+	const $ads = $page('table#offers_table').find('div.offer-wrapper>table');
+	const now = Date.now();
+	const [pageAds, isDone] = parseOlxPageAds($page, $ads);
+	l.info('--parseOlxPageAnnouncements execution time:', Date.now() - now, 'ms');
+
+	return [pageAds, isDone];
+}
+
+export function parseOlxPageAds(
+	$page: cheerio.Root,
 	$ads: cheerio.Cheerio
-): Promise<Announcement[]> => {
-	const adsElements = $ads.toArray();
-	const announcements = adsElements.map((ad) => {
+): [ads: Announcement[], isDone: boolean] {
+	const announcements: Announcement[] = [];
+	for (let i = 0, len = $ads.length; i < len; i++) {
 		const announcement = {} as Announcement;
-		const $ad = $(ad);
-		const $titleLink = $ad.find('.title-cell a');
+		const $ad = $page($ads[i]);
 
+		const dt = $ad
+			.find('.bottom-cell .breadcrumb.x-normal>span > [data-icon*="clock"]')
+			.parent()
+			.text();
+		const parsedDate = parseOlxAdTime(dt);
+		let adDate: string;
+
+		if (typeof parsedDate === 'object') {
+			let isTodayOrYesterday = /(dzisiaj|wczoraj)/.test(dt);
+			// @i: now minus 24 hours with some padding (30s) for the program execution
+			// @i: the padding also solves midnight dates.
+			const currentDate = Date.now() - (DAY_MS + 1000 * 30);
+			// @info: for "dziś/wczoraj" we got the ad's hour and min therefore we can determine if is older then 24h
+			// @info: for other cases like "29 gru" the time will be 00:00, so some more hours will be included
+			if (currentDate > parsedDate.getTime() - (isTodayOrYesterday ? 0 : DAY_MS)) {
+				return [announcements, true];
+			}
+
+			adDate = parsedDate.toLocaleString(
+				...(isTodayOrYesterday
+					? config.dateTimeFormatParams
+					: config.dateFormatParams)
+			);
+		} else {
+			// @i: type string means that service was not able to get/parse date.
+			adDate = parsedDate;
+		}
+
+		announcement.dt = adDate;
+		const $titleLink = $ad.find('.title-cell a');
 		announcement.title = $titleLink.text().replace(/[\n]/gi, '').trim();
 		announcement.url = $titleLink.attr('href')!;
 		let priceText = $ad.find('.td-price .price>strong').text();
-		priceText = priceText.replace(/[^\d\.,]/gi, '');
-		if (priceText !== +priceText + '') {
+		priceText = priceText.replace(/[^\d\.,]/gi, '').replace(/,/g, '.');
+		if (isNaN(+priceText)) {
 			l.debug(`[Olx] Price "${priceText}" is not a number.`, announcement.url);
 		}
 		announcement.price = priceText;
@@ -111,58 +132,70 @@ const parseOlxPageAnnouncements = async (
 
 		// @i: there is no description in ad card, it would require to open details to gen desc.
 		announcement.description = '';
+		_debugInfo.idx = i;
+		announcement._debugInfo = { ..._debugInfo };
+		announcements.push(announcement);
+	}
 
-		// @todo: break when older then 24h
-		const dt = $ad
-			.find('.bottom-cell .breadcrumb.x-normal>span > [data-icon*="clock"]')
-			.parent()
-			.text();
-		// @todo: parse words like "dziś" to date
-		announcement.dt = dt;
-		return announcement;
-	});
-	return announcements;
-};
+	return [announcements, false];
+}
 
-export function parseOlxAdTime(olxTime: string): string {
-	const olxTimeArr = olxTime.split(' ');
+export function parseOlxAdTime(olxTime: string): Date | string {
+	const olxTimeArr = olxTime.split(' ').filter((x) => x !== '');
+	if (olxTimeArr.length > 2) {
+		l.silly('1.	returning default time:', olxTime);
+		return olxTime;
+	}
+
 	if (olxTimeArr[0] === 'dzisiaj' || olxTimeArr[0] === 'wczoraj') {
 		return parseOlxAdTimeWithTodayYesterday(olxTimeArr[0], olxTimeArr[1]);
 	}
 
+	return parseOlxAdDateWithMontPrefix(olxTimeArr[1], olxTimeArr[0]);
+}
+
+export function parseOlxAdDateWithMontPrefix(
+	monthPrefix: string,
+	day: string
+): Date | string {
 	// @i: in this case the "olxTime" will be like 29 gru
 	// @i: so we just need to map the mont prefix to full name
-	const dayMonthArr = olxTime.split(' ');
-	const monthPrefix = dayMonthArr[1].substr(0, 3); // @i: not sure if all moth are represented as 3 chars
+	monthPrefix = monthPrefix.substr(0, 3); // @i: not sure if all moth are represented as 3 chars
 	const currentDate = new Date();
-	let day = +dayMonthArr[0];
+	let dayNum = parseInt(day, 10);
 
-	if (isNaN(day)) {
-		return olxTime;
+	if (isNaN(dayNum) || +day !== dayNum) {
+		l.silly('2.	returning default time:', day + ' ' + monthPrefix);
+		return day + ' ' + monthPrefix;
 	}
 
 	let year = currentDate.getFullYear();
 	const monthNum = mapMonthPrefixToMonth(monthPrefix, true) as number;
 	if (monthNum === 11) {
-		if (currentDate.getDate() < day) {
+		if (currentDate.getDate() < dayNum) {
 			year = year - 1;
 		}
 	}
 
-	const adDate = new Date(year, monthNum, day).toLocaleString(
-		...config.dateFormatParams
-	);
+	const adDate = new Date(year, monthNum, dayNum);
 	return adDate;
 }
 
 export function parseOlxAdTimeWithTodayYesterday(
 	daySynonym: 'dzisiaj' | 'wczoraj',
 	time: string
-): string {
+): Date | string {
 	const timeArr = time.split(':');
-	const hour = +timeArr[0];
-	const minutes = +timeArr[1];
-	if (isNaN(hour) || isNaN(minutes)) {
+	const hour = parseInt(timeArr[0], 10);
+	const minutes = parseInt(timeArr[1], 10);
+	if (
+		isNaN(hour) ||
+		isNaN(minutes) ||
+		hour !== +timeArr[0] ||
+		minutes !== +timeArr[1]
+	) {
+		l.silly('3.	returning default time:', daySynonym + ' ' + time);
+
 		return daySynonym + ' ' + time;
 	}
 
@@ -173,7 +206,7 @@ export function parseOlxAdTimeWithTodayYesterday(
 		currentDate.getDate() + (daySynonym === 'wczoraj' ? -1 : 0),
 		hour,
 		minutes
-	).toLocaleString(...config.dateTimeFormatParams);
+	);
 	return adDate;
 }
 
