@@ -1,6 +1,5 @@
 require('dotenv').config();
 import { scrapeAnnouncements } from './announcement';
-import { config } from './config';
 import l, { lTime } from './logger';
 
 const programStartTime = Date.now();
@@ -12,13 +11,12 @@ async function start() {
 
 start()
 	.catch((err) => {
-		l.error(
-			'There was en error, check the previous console output.',
-			config.isDev ? err : void 0
-		);
+		l.error(err);
+		l.fatal('Program crashed. Please check the previous console output.');
+		process.exit(1);
 	})
 	.finally(() => {
-		l.info('Program END!');
 		const executionTime = Date.now() - programStartTime;
-		l.debug('Execution time: ', lTime(executionTime));
+		l.info('Total execution time: ', lTime(executionTime));
+		l.info('Program END!');
 	});
