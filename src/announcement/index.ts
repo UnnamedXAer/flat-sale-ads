@@ -12,7 +12,8 @@ export async function scrapeAnnouncements() {
 	const now = Date.now();
 	const browser = await pp.launch({ headless: false });
 	const nowAfterBrowserLaunch = Date.now();
-	const todayAnnouncements = await getAnnouncements(browser, currentSite);
+	// @todo: handle error
+	const [todayAnnouncements, error] = await getAnnouncements(browser, currentSite);
 	const nowAfterGettingAnnouncements = Date.now();
 	await saveSiteAnnouncements(currentSite, todayAnnouncements);
 	const nowAfterSavingAnnouncements = Date.now();
@@ -35,18 +36,18 @@ export async function scrapeAnnouncements() {
 	)}
 	browser close time: ${lTime(nowAfterClosingBrowser - nowAfterSavingAnnouncements)}
 	validation time: ${lTime(nowAfterValidation - nowAfterClosingBrowser)}
-	*** total execution time: ${lTime(nowAfterClosingBrowser - now)}
-	total execution with validation time: ${lTime(nowAfterValidation - now)}
+	total execution time: ${lTime(nowAfterClosingBrowser - now)}
+	**total execution with validation time: ${lTime(nowAfterValidation - now)}
 	`);
 }
 
 export function getAnnouncements(
 	browser: Browser,
 	siteName: SiteName
-): Promise<Announcement[]> {
+): Promise<[Announcement[], Error | null]> {
 	switch (siteName) {
 		case 'rzeszowiak':
-			return getRzeszowiakAnnouncements(browser);
+			return getRzeszowiakAnnouncements(browser).then((res) => [res, null]);
 		case 'olx':
 			return getOlxAnnouncements(browser);
 		default:

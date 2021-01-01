@@ -2,40 +2,59 @@ import { Browser } from 'puppeteer';
 import cheerio from 'cheerio';
 import { Announcement } from '../types';
 import l from '../logger';
-import { DAY_MS, Urls } from '../constants';
+import { DAY_MS } from '../constants';
 import { config } from '../config';
 
-let _debugInfo = { url: String(Urls.Olx), idx: 0 };
+let _debugInfo = { url: String(config.urls.olx), idx: 0 };
 
-export async function getOlxAnnouncements(browser: Browser): Promise<Announcement[]> {
-	const $firstPage = await getOlxPage(browser, Urls.Olx);
-	const [firstPageAds, isDone] = await getOlxPageAds($firstPage);
-	const announcements: Announcement[] = firstPageAds;
+const sleep = (timeout: number) =>
+	new Promise((resolve) =>
+		setTimeout(() => {
+			resolve(true);
+		}, timeout)
+	);
 
-	if (isDone) {
-		l.debug('[Olx] Scraping ended on the first page.');
-		return announcements;
-	}
-
-	const pageUrls = getOlxUrlsToNextPages($firstPage);
-
-	if (pageUrls.length === 0) {
-		l.warn(
-			'[Olx] There was only one page or the service was not able to read the links to the next pages.'
-		);
-		return announcements;
-	}
-
-	for (let i = 0; i < pageUrls.length; i++) {
-		_debugInfo.url = pageUrls[i];
-		const $page = await getOlxPage(browser, pageUrls[i]);
-		const [pageAds, isDone] = await getOlxPageAds($page);
-		announcements.push(...pageAds);
-		if (isDone) {
-			break;
+export async function getOlxAnnouncements(
+	browser: Browser
+): Promise<[Announcement[], Error | null]> {
+	const announcements: Announcement[] = [];
+	const pageUrls: string[] = [config.urls.olx];
+	const startTime = Date.now();
+	let isDone = false;
+	let scrapedPagesCount = 0;
+	let retries = 0;
+	do {
+		let pageAnnouncements: Announcement[];
+		const url = pageUrls[0];
+		let $currentPge: cheerio.Root;
+		try {
+			$currentPge = await getOlxPage(browser, url);
+		} catch (err) {
+			if (Date.now() - startTime > config.scrapeSiteTimeout) {
+				return [
+					announcements,
+					new Error(`[Olx] Scraping exceeded ${config.scrapeSiteTimeout} min.`)
+				];
+			}
+			retries++;
+			const timeout = (retries < 15 ? retries : 15) * 1000;
+			l.debug(`Setting retry #${retries} timeout: ${timeout}.`);
+			await sleep(timeout);
+			continue;
 		}
-	}
-	return announcements;
+		_debugInfo.url = url;
+		[pageAnnouncements, isDone] = await getOlxPageAds($currentPge);
+		announcements.push(...pageAnnouncements);
+		scrapedPagesCount++;
+		pageUrls.shift();
+		if (isDone === false && scrapedPagesCount === 1) {
+			pageUrls.push(...getOlxUrlsToNextPages($currentPge));
+		}
+	} while (isDone === false && pageUrls.length > 0);
+
+	l.info(`[Olx] Scraped pages count: ${scrapedPagesCount}, retries count ${retries}.`);
+
+	return [announcements, null];
 }
 
 export function getOlxUrlsToNextPages($page: cheerio.Root) {
@@ -47,21 +66,35 @@ export function getOlxUrlsToNextPages($page: cheerio.Root) {
 	// @i: olx just add &page=num to url so there is no need to read links from the elements
 	// @i: pages starts from 1, skip first page
 	for (let i = 2; i < pagesCount; i++) {
-		pagesUrls.push(Urls.Olx + '&page=' + i);
+		pagesUrls.push(config.urls.olx + '&page=' + i);
 	}
-
 	l.debug(`Olx pages number: ${pagesUrls.length} + 1 (first page).`);
 
 	return pagesUrls;
 }
 
 export async function getOlxPage(browser: Browser, url: string): Promise<cheerio.Root> {
+	const now = Date.now();
 	const page = await browser.newPage();
-	const response = await page.goto(url);
-	if (!response || response.status() !== 200) {
-		throw new Error(`Unable to load "${url}"`);
+	l.debug('[Olx] browser.newPage execution time: ' + (Date.now() - now));
+
+	try {
+		const now1 = Date.now();
+		const response = await page.goto(url);
+		l.debug('[Olx] page.goto execution time: ' + (Date.now() - now1));
+		if (!response) {
+			throw Error('Could not get response the page.');
+		}
+		const responseStatus = response ? response.status() : null;
+		if (responseStatus !== 200) {
+			throw Error(`Wrong response status ( ${responseStatus} ) .`);
+		}
+	} catch (err) {
+		await page.close({ runBeforeUnload: true });
+		throw new Error(
+			`Unable to correctly load page:\n"${url}"\ndue to following error: \n ${err.message}`
+		);
 	}
-	l.fatal('--', response.status());
 	const content = await page.content();
 	await page.close({ runBeforeUnload: false });
 	const $page = cheerio.load(content);

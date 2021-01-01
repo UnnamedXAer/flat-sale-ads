@@ -4,11 +4,16 @@ export interface Config {
 	NODE_ENV: NODE_ENV;
 	isDev: boolean;
 	envPrefix: EnvPrefix;
+	scrapeSiteTimeout: number;
+	startMaximized: boolean;
 	logsLevel: number;
 	appTemporaryDataFolder: string;
 	dateTimeFormatParams: [string, Intl.DateTimeFormatOptions];
 	dateFormatParams: [string, Intl.DateTimeFormatOptions];
 	timeFormatParams: [string, Intl.DateTimeFormatOptions];
+	urls: {
+		[key in SiteName]: string;
+	};
 }
 
 export interface Announcement {

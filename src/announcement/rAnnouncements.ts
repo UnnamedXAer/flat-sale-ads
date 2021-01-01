@@ -1,17 +1,17 @@
 import { Browser } from 'puppeteer';
 import cheerio from 'cheerio';
 import { Announcement } from '../types';
-import { Urls } from '../constants';
 import l from '../logger';
+import { config } from '../config';
 
 export const getRzeszowiakAnnouncements = async (
 	browser: Browser
 ): Promise<Announcement[]> => {
 	const startPage = await browser.newPage();
-	const response = await startPage.goto(Urls.Rzeszowiak);
+	const response = await startPage.goto(config.urls.rzeszowiak);
 	// @improvement: use getRzeszowiakPageContent
 	if (!response) {
-		throw new Error(`Unable to load "${Urls.Rzeszowiak}"`);
+		throw new Error(`Unable to load "${config.urls.rzeszowiak}"`);
 	}
 
 	const content = await startPage.content();
