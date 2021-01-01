@@ -6,11 +6,21 @@ import { SiteName, Announcement } from '../types';
 import { getOlxAnnouncements } from './oAnnouncements';
 import { saveSiteAnnouncements } from '../files';
 import { validateAnnouncementsAndReturn } from './validate';
+import { config } from '../config';
 
 export async function scrapeAnnouncements() {
 	const currentSite: SiteName = 'olx';
 	const now = Date.now();
-	const browser = await pp.launch({ headless: false });
+	const browserLaunchOptions: pp.LaunchOptions = {
+		headless: false,
+		timeout: 0,
+		defaultViewport: null,
+		args: []
+	};
+	if (config.startMaximized === true) {
+		browserLaunchOptions.args!.push('--start-maximized');
+	}
+	const browser = await pp.launch(browserLaunchOptions);
 	const nowAfterBrowserLaunch = Date.now();
 	// @todo: handle error
 	const [todayAnnouncements, error] = await getAnnouncements(browser, currentSite);
