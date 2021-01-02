@@ -2,22 +2,22 @@ import { config } from '../config';
 import { DAY_MS } from '../constants';
 import l from '../logger';
 import { SiteName, Announcement } from '../types';
-import { ISiteScrapper, SiteScrapperDebugInfo } from './types';
+import { ISiteScraper, SiteScraperDebugInfo } from './types';
 
-export class OlxScrapper implements ISiteScrapper {
-	_debugInfo: SiteScrapperDebugInfo = {
+export class OlxScraper implements ISiteScraper {
+	_debugInfo: SiteScraperDebugInfo = {
 		idx: -1,
 		url: ''
 	};
 	serviceName: SiteName = 'olx';
 
-	async getPageAds(
-		$page: cheerio.Root
-	): Promise<[ads: Announcement[], isDone: boolean]> {
+	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean] {
 		const $ads = $page('table#offers_table').find('div.offer-wrapper>table');
 		const now = Date.now();
 		const [pageAds, isDone] = this.parsePageAds($page, $ads);
-		l.info('--parseOlxPageAnnouncements execution time:', Date.now() - now, 'ms');
+		l.info(
+			`[${this.serviceName}]->parsePageAds execution time: ${Date.now() - now} ms.`
+		);
 
 		return [pageAds, isDone];
 	}
@@ -27,49 +27,28 @@ export class OlxScrapper implements ISiteScrapper {
 		$ads: cheerio.Cheerio
 	): [ads: Announcement[], isDone: boolean] {
 		const announcements: Announcement[] = [];
+		let isDone = false;
 		for (let i = 0, len = $ads.length; i < len; i++) {
 			const announcement = {} as Announcement;
 			const $ad = $page($ads[i]);
 
-			const dt = $ad
-				.find('.bottom-cell .breadcrumb.x-normal>span > [data-icon*="clock"]')
-				.parent()
-				.text();
-			const parsedDate = this.parseAdTime(dt);
-			let adDate: string;
-
-			if (typeof parsedDate === 'object') {
-				let isTodayOrYesterday = /(dzisiaj|wczoraj)/.test(dt);
-				// @i: now minus 24 hours with some padding (30s) for the program execution
-				// @i: the padding also solves midnight dates.
-				const currentDate = Date.now() - (DAY_MS + 1000 * 30);
-				// @info: for "dziś/wczoraj" we got the ad's hour and min therefore we can determine if is older then 24h
-				// @info: for other cases like "29 gru" the time will be 00:00, so some more hours will be included
-				if (
-					currentDate >
-					parsedDate.getTime() - (isTodayOrYesterday ? 0 : DAY_MS)
-				) {
-					return [announcements, true];
-				}
-
-				adDate = parsedDate.toLocaleString(
-					...(isTodayOrYesterday
-						? config.dateTimeFormatParams
-						: config.dateFormatParams)
-				);
-			} else {
-				// @i: type string means that service was not able to get/parse date.
-				adDate = parsedDate;
+			const [adTime, _isAddTooOld] = this.getAdTime($ad);
+			isDone = _isAddTooOld;
+			if (isDone === true) {
+				break;
 			}
 
-			announcement.dt = adDate;
+			announcement.dt = adTime;
 			const $titleLink = $ad.find('.title-cell a');
 			announcement.title = $titleLink.text().replace(/[\n]/gi, '').trim();
 			announcement.url = $titleLink.attr('href')!;
 			let priceText = $ad.find('.td-price .price>strong').text();
 			priceText = priceText.replace(/[^\d\.,]/gi, '').replace(/,/g, '.');
 			if (isNaN(+priceText)) {
-				l.debug(`[Olx] Price "${priceText}" is not a number.`, announcement.url);
+				l.debug(
+					`[${this.serviceName}] Price "${priceText}" is not a number.`,
+					announcement.url
+				);
 			}
 			announcement.price = priceText;
 
@@ -83,20 +62,66 @@ export class OlxScrapper implements ISiteScrapper {
 			announcements.push(announcement);
 		}
 
-		return [announcements, false];
+		return [announcements, isDone];
 	}
-	parseAdTime(olxTime: string): string | Date {
-		const olxTimeArr = olxTime.split(' ').filter((x) => x !== '');
-		if (olxTimeArr.length > 2) {
-			l.silly('1.	returning default time:', olxTime);
-			return olxTime;
+
+	getAdTime($ad: cheerio.Cheerio): [adTime: string, isDone: boolean] {
+		const scrapedDate = $ad
+			.find('.bottom-cell .breadcrumb.x-normal>span > [data-icon*="clock"]')
+			.parent()
+			.text();
+		const parsedDate = this.parseAdTime(scrapedDate);
+		let adDate: string;
+
+		if (typeof parsedDate === 'object') {
+			let isTodayOrYesterday = /(dzisiaj|wczoraj)/.test(scrapedDate);
+
+			if (this.checkIfAdTooOld(parsedDate, isTodayOrYesterday) === true) {
+				return [scrapedDate, true];
+			}
+			adDate = parsedDate.toLocaleString(
+				...(isTodayOrYesterday
+					? config.dateTimeFormatParams
+					: config.dateFormatParams)
+			);
+		} else {
+			// @i: type string means that service was not able to get/parse date.
+			adDate = parsedDate;
+		}
+		return [adDate, false];
+	}
+
+	parseAdTime(scrapedTime: string): string | Date {
+		const scrapedTimeArr = scrapedTime.split(' ').filter((x) => x !== '');
+		if (scrapedTimeArr.length > 2) {
+			l.silly('1.	returning default time:', scrapedTime);
+			return scrapedTime;
 		}
 
-		if (olxTimeArr[0] === 'dzisiaj' || olxTimeArr[0] === 'wczoraj') {
-			return this.parseAdTimeWithTodayYesterday(olxTimeArr[0], olxTimeArr[1]);
+		if (scrapedTimeArr[0] === 'dzisiaj' || scrapedTimeArr[0] === 'wczoraj') {
+			return this.parseAdTimeWithTodayYesterdayWords(
+				scrapedTimeArr[0],
+				scrapedTimeArr[1]
+			);
 		}
 
-		return this.parseAdDateWithMontPrefix(olxTimeArr[1], olxTimeArr[0]);
+		return this.parseAdDateWithMontPrefix(scrapedTimeArr[1], scrapedTimeArr[0]);
+	}
+
+	checkIfAdTooOld(parsedDate: Date, isTodayOrYesterday: boolean): boolean {
+		// @i: now minus 24 hours with some padding (30s) for the program execution
+		// @i: the padding also solves midnight dates.
+		const oldestAllowedDate = Date.now() - (DAY_MS + 1000 * 30);
+		// @info: for "dziś/wczoraj" we got the ad's hour and min therefore we can determine if is older then 24h
+		// @info: for other cases like "29 gru" the time will be 00:00, so some more hours will be included
+		if (
+			oldestAllowedDate >
+			parsedDate.getTime() - (isTodayOrYesterday ? 0 : DAY_MS)
+		) {
+			// @i: time doesn't matter ad will not be included in results
+			return true;
+		}
+		return false;
 	}
 
 	getUrlsToNextPages($page: cheerio.Root): string[] {
@@ -108,7 +133,7 @@ export class OlxScrapper implements ISiteScrapper {
 		// @i: olx just add &page=num to url so there is no need to read links from the elements
 		// @i: pages starts from 1, skip first page
 		for (let i = 2; i < pagesCount; i++) {
-			pagesUrls.push(config.urls.olx + '&page=' + i);
+			pagesUrls.push(config.urls[this.serviceName] + '&page=' + i);
 		}
 		l.debug(
 			`${this.serviceName} pages number: ${pagesUrls.length} + 1 (first page).`
@@ -141,7 +166,7 @@ export class OlxScrapper implements ISiteScrapper {
 		return adDate;
 	}
 
-	parseAdTimeWithTodayYesterday(
+	parseAdTimeWithTodayYesterdayWords(
 		daySynonym: 'dzisiaj' | 'wczoraj',
 		time: string
 	): Date | string {

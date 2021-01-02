@@ -1,24 +1,26 @@
 import { Browser } from 'puppeteer';
 import { Announcement, SiteName } from '../types';
 
-export interface IScrapper {
+export interface IScraper {
 	scrapeAnnouncements(browser: Browser, sites: SiteName[]): Promise<void>;
 }
 
-export interface SiteScrapperDebugInfo {
+export interface SiteScraperDebugInfo {
 	url: string;
 	idx: number;
 	[key: string]: any;
 }
 
-export interface ISiteScrapper {
-	_debugInfo: SiteScrapperDebugInfo;
+export interface ISiteScraper {
+	_debugInfo: SiteScraperDebugInfo;
 	serviceName: SiteName;
-	getPageAds($page: cheerio.Root): Promise<[ads: Announcement[], isDone: boolean]>;
+	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean];
 	parsePageAds(
 		$page: cheerio.Root,
 		$ads: cheerio.Cheerio
 	): [ads: Announcement[], isDone: boolean];
-	parseAdTime(olxTime: string): Date | string;
+	getAdTime($ad: cheerio.Cheerio): [adTime: string, isDone: boolean];
+	parseAdTime(scrapedTime: string): Date | string;
+	checkIfAdTooOld(adDate: Date, ...args: any[]): boolean;
 	getUrlsToNextPages($page: cheerio.Root): string[];
 }

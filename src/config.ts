@@ -42,7 +42,7 @@ export const createConfig = (process: NodeJS.Process): Config => {
 		urls: {
 			rzeszowiak:
 				process.env.URL_RZESZOWIAK ||
-				'http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-agencje-2580011251?r=mieszkania',
+				'http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-agencje-2580011252?r=mieszkania',
 
 			// location = Rzeszów +10km
 			// price = 100k-400k

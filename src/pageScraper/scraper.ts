@@ -1,17 +1,17 @@
 import { Browser } from 'puppeteer';
 import path from 'path';
-import l, { lTime } from '../logger';
+import l from '../logger';
 import { Announcement, SiteName } from '../types';
 import cheerio from 'cheerio';
 import { config } from '../config';
 import { sleep } from '../sleep';
-import { IScrapper, ISiteScrapper } from './types';
+import { IScraper, ISiteScraper } from './types';
 import { ensurePathExists } from '../files';
-import { getScrapperByName } from './siteScrapperFactory';
+import { getScraperByName } from './siteScraperFactory';
 import { formatDateToFileName } from '../formatDate';
 import { writeFile } from 'fs/promises';
 
-export class Scrapper implements IScrapper {
+export class Scraper implements IScraper {
 	async scrapeAnnouncements(browser: Browser, sites: SiteName[]) {
 		let siteIndex = 0;
 		while (siteIndex < sites.length) {
@@ -26,35 +26,20 @@ export class Scrapper implements IScrapper {
 	}
 
 	private async scrapeSiteAnnouncements(browser: Browser, siteName: SiteName) {
-		const now = Date.now();
-		const nowAfterBrowserLaunch = Date.now();
-		const scrapper = new Scrapper();
-		const siteScrapper = getScrapperByName(siteName);
+		const scraper = new Scraper();
+		const siteScraper = getScraperByName(siteName);
 		// @todo: handle error
-		const [todayAnnouncements, error] = await scrapper.getAnnouncements(
+		const [todayAnnouncements, error] = await scraper.getAnnouncements(
 			browser,
-			siteScrapper
+			siteScraper
 		);
-		const nowAfterGettingAnnouncements = Date.now();
-		await this.saveSiteAnnouncements(siteScrapper.serviceName, todayAnnouncements);
-		const nowAfterSavingAnnouncements = Date.now();
-		this.validateAnnouncements(todayAnnouncements, siteScrapper.serviceName);
-		const nowAfterValidation = Date.now();
+		await this.saveSiteAnnouncements(siteScraper.serviceName, todayAnnouncements);
+		this.validateAnnouncements(todayAnnouncements, siteScraper.serviceName);
 
 		l.info(
-			`The number of today's "${siteScrapper.serviceName}" announcements is: `,
+			`The number of today's "${siteScraper.serviceName}" announcements is: `,
 			todayAnnouncements.length
 		);
-
-		l.info(`
-		scrapeAnnouncements("${siteScrapper.serviceName}")
-		browser launch time: ${lTime(nowAfterBrowserLaunch - now)}
-		scrape announcements time: ${lTime(nowAfterGettingAnnouncements - nowAfterBrowserLaunch)}
-		save announcements time: ${lTime(
-			nowAfterSavingAnnouncements - nowAfterGettingAnnouncements
-		)}
-		**total execution with validation time: ${lTime(nowAfterValidation - now)}
-		`);
 	}
 
 	private async saveSiteAnnouncements(
@@ -76,10 +61,10 @@ export class Scrapper implements IScrapper {
 
 	private async getAnnouncements(
 		browser: Browser,
-		siteScrapper: ISiteScrapper
+		siteScraper: ISiteScraper
 	): Promise<[Announcement[], Error | null]> {
 		const announcements: Announcement[] = [];
-		const pageUrls: string[] = [config.urls.olx];
+		const pageUrls: string[] = [config.urls[siteScraper.serviceName]];
 		const startTime = Date.now();
 		let isDone = false;
 		let scrapedPagesCount = 0;
@@ -89,36 +74,36 @@ export class Scrapper implements IScrapper {
 			const url = pageUrls[0];
 			let $currentPge: cheerio.Root;
 			try {
-				$currentPge = await this.getPage(browser, url, siteScrapper);
+				$currentPge = await this.getPage(browser, url, siteScraper);
 			} catch (err) {
 				if (Date.now() - startTime > config.scrapeSiteTimeout) {
 					return [
 						announcements,
 						new Error(
-							`[${siteScrapper.serviceName}] Scraping exceeded ${config.scrapeSiteTimeout} min.`
+							`[${siteScraper.serviceName}] Scraping exceeded ${config.scrapeSiteTimeout} min.`
 						)
 					];
 				}
 				retries++;
 				const timeout = (retries < 15 ? retries : 15) * 1000;
 				l.debug(
-					`[${siteScrapper.serviceName}] Setting retry #${retries} timeout: ${timeout}.`
+					`[${siteScraper.serviceName}] Setting retry #${retries} timeout: ${timeout}.`
 				);
 				await sleep(timeout);
 				continue;
 			}
-			siteScrapper._debugInfo.url = url;
-			[pageAnnouncements, isDone] = await siteScrapper.getPageAds($currentPge);
+			siteScraper._debugInfo.url = url;
+			[pageAnnouncements, isDone] = siteScraper.getPageAds($currentPge);
 			announcements.push(...pageAnnouncements);
 			scrapedPagesCount++;
 			pageUrls.shift();
 			if (isDone === false && scrapedPagesCount === 1) {
-				pageUrls.push(...siteScrapper.getUrlsToNextPages($currentPge));
+				pageUrls.push(...siteScraper.getUrlsToNextPages($currentPge));
 			}
 		} while (isDone === false && pageUrls.length > 0);
 
 		l.info(
-			`[${siteScrapper.serviceName}] Scraped pages count: ${scrapedPagesCount}, retries count ${retries}.`
+			`[${siteScraper.serviceName}] Scraped pages count: ${scrapedPagesCount}, retries count ${retries}.`
 		);
 
 		return [announcements, null];
@@ -127,12 +112,12 @@ export class Scrapper implements IScrapper {
 	private async getPage(
 		browser: Browser,
 		url: string,
-		siteScrapper: ISiteScrapper
+		siteScraper: ISiteScraper
 	): Promise<cheerio.Root> {
 		const now = Date.now();
 		const page = await browser.newPage();
 		l.debug(
-			`[${siteScrapper!.serviceName}] browser.newPage execution time: ` +
+			`[${siteScraper!.serviceName}] browser.newPage execution time: ` +
 				(Date.now() - now)
 		);
 
@@ -140,7 +125,7 @@ export class Scrapper implements IScrapper {
 			const now1 = Date.now();
 			const response = await page.goto(url);
 			l.debug(
-				`[${siteScrapper!.serviceName}] page.goto execution time: ` +
+				`[${siteScraper!.serviceName}] page.goto execution time: ` +
 					(Date.now() - now1)
 			);
 			if (!response) {
