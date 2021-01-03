@@ -9,7 +9,7 @@ export class RzeszowiakScraper implements ISiteScraper {
 	serviceName: SiteName = 'rzeszowiak';
 
 	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean] {
-		const $ads = $page('.normalbox');
+		const $ads = $page('.content-center .normalbox');
 		const [pageAds, isDone] = this.parsePageAds($page, $ads);
 		return [pageAds, isDone];
 	}
@@ -31,7 +31,7 @@ export class RzeszowiakScraper implements ISiteScraper {
 			}
 			announcement.dt = adDate;
 
-			const $titleLink = $ad.find('.normalbox-title-left a');
+			const $titleLink = $ad.find('.offer-item-title');
 			// @todo: remove index
 			announcement.title = $titleLink.text().trim();
 			announcement.url = $titleLink.attr('href')!;
@@ -50,7 +50,8 @@ export class RzeszowiakScraper implements ISiteScraper {
 
 			const description = $ad.find('.normalbox-body .normalbox-body-right').text();
 			announcement.description = description;
-
+			this._debugInfo.idx = i;
+			announcement._debugInfo = { ...this._debugInfo };
 			announcements.push(announcement);
 		}
 		return [announcements, isDone];

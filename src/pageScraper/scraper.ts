@@ -155,6 +155,7 @@ export class Scraper implements IScraper {
 			const withMissingData = announcements
 				.map((x) => {
 					if (
+						x.id === '' ||
 						x.title === '' ||
 						x.price === '' ||
 						x.url === '' ||

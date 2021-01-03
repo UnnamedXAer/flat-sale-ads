@@ -9,19 +9,22 @@ l.info('Program START');
 
 async function start() {
 	const browserLaunchOptions: pp.LaunchOptions = {
-		headless: false,
+		headless: true,
 		timeout: 0,
 		defaultViewport: null,
 		args: []
 	};
 	if (config.startMaximized === true) {
 		browserLaunchOptions.args!.push('--start-maximized');
+		browserLaunchOptions.headless = false;
 	}
 	const browser = await pp.launch(browserLaunchOptions);
 	const scraper = new Scraper();
 	await scraper.scrapeAnnouncements(browser, [
-		'olx', //
-		'rzeszowiak'
+		// 'olx', //
+		// 'rzeszowiak'//
+		// 'otodom' //
+		'gethome' //
 	]);
 	await browser.close();
 }

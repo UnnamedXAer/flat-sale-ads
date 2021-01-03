@@ -17,6 +17,7 @@ export interface Config {
 }
 
 export interface Announcement {
+	id: string;
 	dt: string;
 	title: string;
 	price: string;
@@ -30,4 +31,4 @@ export type DayAnnouncements = {
 	[key in SiteName]: Announcement[] | null;
 };
 
-export type SiteName = 'rzeszowiak' | 'olx';
+export type SiteName = 'rzeszowiak' | 'olx' | 'otodom' | 'gethome';
