@@ -8,15 +8,18 @@ const programStartTime = Date.now();
 l.info('Program START');
 
 async function start() {
+	const _config = config;
 	const browserLaunchOptions: pp.LaunchOptions = {
 		headless: true,
 		timeout: 0,
 		defaultViewport: null,
-		args: []
+		args: [],
+		devtools: false
 	};
-	if (config.startMaximized === true) {
+	if (_config.startMaximized === true) {
 		browserLaunchOptions.args!.push('--start-maximized');
 		browserLaunchOptions.headless = false;
+		browserLaunchOptions.devtools = true;
 	}
 	const browser = await pp.launch(browserLaunchOptions);
 	const scraper = new Scraper();

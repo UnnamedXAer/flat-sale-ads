@@ -2,14 +2,15 @@ import { config } from '../config';
 import { DAY_MS } from '../constants';
 import l from '../logger';
 import { SiteName, Announcement } from '../types';
-import { ISiteScraper, SiteScraperDebugInfo } from './types';
+import { ISiteScraperByHtml, ScraperDataType, SiteScraperDebugInfo } from './types';
 
-export class OlxScraper implements ISiteScraper {
+export class OlxScraper implements ISiteScraperByHtml {
 	_debugInfo: SiteScraperDebugInfo = {
 		idx: -1,
 		url: ''
 	};
 	serviceName: SiteName = 'olx';
+	scrapperDataType = ScraperDataType.Html;
 
 	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean] {
 		const $ads = $page('table#offers_table').find('div.offer-wrapper>table');

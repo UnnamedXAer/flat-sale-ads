@@ -2,14 +2,16 @@ import { config } from '../config';
 import { DAY_MS } from '../constants';
 import l from '../logger';
 import { SiteName, Announcement } from '../types';
-import { ISiteScraper, SiteScraperDebugInfo } from './types';
+import { ISiteScraperByHtml, ScraperDataType, SiteScraperDebugInfo } from './types';
 
-export class OtodomScraper implements ISiteScraper {
+export class OtodomScraper implements ISiteScraperByHtml {
 	_debugInfo: SiteScraperDebugInfo = {
 		idx: -1,
 		url: ''
 	};
 	serviceName: SiteName = 'otodom';
+	scrapperDataType = ScraperDataType.Html;
+	
 	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean] {
 		const $ads = $page('.col-md-content.section-listing__row-content').find(
 			'article.offer-item'

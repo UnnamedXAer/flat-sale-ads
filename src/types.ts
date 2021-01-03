@@ -1,3 +1,5 @@
+import { SiteScraperDebugInfo } from './pageScraper/types';
+
 export type NODE_ENV = 'production' | 'development' | 'test';
 export type EnvPrefix = 'test' | 'dev' | 'prod';
 export interface Config {
@@ -24,7 +26,7 @@ export interface Announcement {
 	description: string;
 	url: string;
 	imgUrl: string;
-	_debugInfo?: any;
+	_debugInfo?: SiteScraperDebugInfo;
 }
 
 export type DayAnnouncements = {

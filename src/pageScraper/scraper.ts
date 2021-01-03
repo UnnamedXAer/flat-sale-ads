@@ -1,11 +1,17 @@
-import { Browser } from 'puppeteer';
+import { Browser, Page } from 'puppeteer';
 import path from 'path';
 import l from '../logger';
 import { Announcement, SiteName } from '../types';
 import cheerio from 'cheerio';
 import { config } from '../config';
 import { sleep } from '../sleep';
-import { IScraper, ISiteScraper } from './types';
+import {
+	IScraper,
+	ISiteScraper,
+	ISiteScraperByHtml,
+	ISiteScraperByObject,
+	ScraperDataType
+} from './types';
 import { ensurePathExists } from '../files';
 import { getScraperByName } from './siteScraperFactory';
 import { formatDateToFileName } from '../formatDate';
@@ -26,13 +32,13 @@ export class Scraper implements IScraper {
 	}
 
 	private async scrapeSiteAnnouncements(browser: Browser, siteName: SiteName) {
-		const scraper = new Scraper();
 		const siteScraper = getScraperByName(siteName);
 		// @todo: handle error
-		const [todayAnnouncements, error] = await scraper.getAnnouncements(
+		const [todayAnnouncements, error] = await this.getAnnouncements(
 			browser,
 			siteScraper
 		);
+
 		await this.saveSiteAnnouncements(siteScraper.serviceName, todayAnnouncements);
 		this.validateAnnouncements(todayAnnouncements, siteScraper.serviceName);
 
@@ -65,24 +71,66 @@ export class Scraper implements IScraper {
 	): Promise<[Announcement[], Error | null]> {
 		const announcements: Announcement[] = [];
 		const pageUrls: string[] = [config.urls[siteScraper.serviceName]];
-		const startTime = Date.now();
 		let isDone = false;
 		let scrapedPagesCount = 0;
-		let retries = 0;
 		do {
 			let pageAnnouncements: Announcement[];
+			let currentPage: Page;
 			const url = pageUrls[0];
-			let $currentPge: cheerio.Root;
+
+			siteScraper._debugInfo.url = url;
 			try {
-				$currentPge = await this.getPage(browser, url, siteScraper);
+				currentPage = await this.getPage(browser, url, siteScraper);
+			} catch (err) {
+				return [announcements, err];
+			}
+			const $currentPage: cheerio.Root = await this.getPageContent(currentPage);
+
+			[pageAnnouncements, isDone] = await this.getScrapperPageAdds(
+				siteScraper,
+				$currentPage,
+				currentPage
+			);
+			announcements.push(...pageAnnouncements);
+			scrapedPagesCount++;
+			pageUrls.shift();
+			if (isDone === false && scrapedPagesCount === 1) {
+				pageUrls.push(...siteScraper.getUrlsToNextPages($currentPage));
+			}
+		} while (isDone === false && pageUrls.length > 0);
+
+		l.info(`[${siteScraper.serviceName}] Scraped pages count: ${scrapedPagesCount}.`);
+
+		return [announcements, null];
+	}
+
+	private async getScrapperPageAdds(
+		siteScraper: ISiteScraper,
+		$currentPage: cheerio.Root,
+		currentPage: Page
+	): Promise<[ads: Announcement[], isDone: boolean]> {
+		if (siteScraper.scrapperDataType === ScraperDataType.Html) {
+			return (siteScraper as ISiteScraperByHtml).getPageAds($currentPage);
+		}
+		return (siteScraper as ISiteScraperByObject).getPageAds(currentPage);
+	}
+
+	private async getPage(
+		browser: Browser,
+		url: string,
+		siteScraper: ISiteScraper
+	): Promise<Page> {
+		let retries = 0;
+		const startTime = Date.now();
+		do {
+			try {
+				const page = await this.loadPage(browser, url, siteScraper);
+				return page;
 			} catch (err) {
 				if (Date.now() - startTime > config.scrapeSiteTimeout) {
-					return [
-						announcements,
-						new Error(
-							`[${siteScraper.serviceName}] Scraping exceeded ${config.scrapeSiteTimeout} min.`
-						)
-					];
+					new Error(
+						`[${siteScraper.serviceName}] Scraping exceeded ${config.scrapeSiteTimeout} min.`
+					);
 				}
 				retries++;
 				const timeout = (retries < 15 ? retries : 15) * 1000;
@@ -90,30 +138,15 @@ export class Scraper implements IScraper {
 					`[${siteScraper.serviceName}] Setting retry #${retries} timeout: ${timeout}.`
 				);
 				await sleep(timeout);
-				continue;
 			}
-			siteScraper._debugInfo.url = url;
-			[pageAnnouncements, isDone] = siteScraper.getPageAds($currentPge);
-			announcements.push(...pageAnnouncements);
-			scrapedPagesCount++;
-			pageUrls.shift();
-			if (isDone === false && scrapedPagesCount === 1) {
-				pageUrls.push(...siteScraper.getUrlsToNextPages($currentPge));
-			}
-		} while (isDone === false && pageUrls.length > 0);
-
-		l.info(
-			`[${siteScraper.serviceName}] Scraped pages count: ${scrapedPagesCount}, retries count ${retries}.`
-		);
-
-		return [announcements, null];
+		} while (true);
 	}
 
-	private async getPage(
+	private async loadPage(
 		browser: Browser,
 		url: string,
 		siteScraper: ISiteScraper
-	): Promise<cheerio.Root> {
+	): Promise<Page> {
 		const now = Date.now();
 		const page = await browser.newPage();
 		l.debug(
@@ -141,8 +174,11 @@ export class Scraper implements IScraper {
 				`Unable to correctly load page:\n"${url}"\ndue to following error: \n ${err.message}`
 			);
 		}
+		return page;
+	}
+
+	private async getPageContent(page: Page): Promise<cheerio.Root> {
 		const content = await page.content();
-		await page.close({ runBeforeUnload: false });
 		const $page = cheerio.load(content);
 		return $page;
 	}
