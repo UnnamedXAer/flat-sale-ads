@@ -25,9 +25,9 @@ async function start() {
 	const scraper = new Scraper();
 	await scraper.scrapeAnnouncements(browser, [
 		// 'olx', //
-		// 'rzeszowiak'//
-		// 'otodom' //
-		'gethome' //
+		// 'rzeszowiak', //
+		'otodom', //
+		// 'gethome' //
 	]);
 	await browser.close();
 }

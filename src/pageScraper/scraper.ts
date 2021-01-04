@@ -13,7 +13,7 @@ import {
 	ScraperDataType
 } from './types';
 import { ensurePathExists } from '../files';
-import { getScraperByName } from './siteScraperFactory';
+import { makeSiteScraper } from './siteScraperFactory';
 import { formatDateToFileName } from '../formatDate';
 import { writeFile } from 'fs/promises';
 
@@ -26,15 +26,15 @@ export class Scraper implements IScraper {
 			if (++siteIndex < sites.length) {
 				promises.push(this.scrapeSiteAnnouncements(browser, sites[siteIndex]));
 			}
-
+			// @info: scrape up to two sites at a time.
 			await Promise.all(promises);
 		}
 	}
 
 	private async scrapeSiteAnnouncements(browser: Browser, siteName: SiteName) {
-		const siteScraper = getScraperByName(siteName);
+		const siteScraper = makeSiteScraper(siteName);
 		// @todo: handle error
-		const [todayAnnouncements, error] = await this.getAnnouncements(
+		const [todayAnnouncements, error] = await this.getSiteAnnouncements(
 			browser,
 			siteScraper
 		);
@@ -65,7 +65,7 @@ export class Scraper implements IScraper {
 		}
 	}
 
-	private async getAnnouncements(
+	private async getSiteAnnouncements(
 		browser: Browser,
 		siteScraper: ISiteScraper
 	): Promise<[Announcement[], Error | null]> {
@@ -86,7 +86,7 @@ export class Scraper implements IScraper {
 			}
 			const $currentPage: cheerio.Root = await this.getPageContent(currentPage);
 
-			[pageAnnouncements, isDone] = await this.getScrapperPageAdds(
+			[pageAnnouncements, isDone] = await this.getScraperPageAds(
 				siteScraper,
 				$currentPage,
 				currentPage
@@ -104,7 +104,7 @@ export class Scraper implements IScraper {
 		return [announcements, null];
 	}
 
-	private async getScrapperPageAdds(
+	private async getScraperPageAds(
 		siteScraper: ISiteScraper,
 		$currentPage: cheerio.Root,
 		currentPage: Page
@@ -198,7 +198,13 @@ export class Scraper implements IScraper {
 						x.dt === '' ||
 						x.imgUrl === ''
 					) {
-						return x;
+						return x.id
+							? x.id
+							: x.url
+							? x.url
+							: x.title
+							? x.title
+							: JSON.stringify(x._debugInfo, null, 2);
 					}
 					return null;
 				})

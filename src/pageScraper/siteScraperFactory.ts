@@ -6,7 +6,7 @@ import { OtodomScraper } from './otodomScraper';
 import { RzeszowiakScraper } from './rzeszowiakScraper';
 import { ISiteScraper } from './types';
 
-export function getScraperByName(siteName: SiteName): ISiteScraper {
+export function makeSiteScraper(siteName: SiteName): ISiteScraper {
 	switch (siteName) {
 		case 'olx':
 			return new OlxScraper();

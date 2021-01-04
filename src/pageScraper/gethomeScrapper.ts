@@ -3,12 +3,7 @@ import { config } from '../config';
 import { DAY_MS } from '../constants';
 import l from '../logger';
 import { SiteName, Announcement } from '../types';
-import {
-	ISiteScraperByHtml,
-	ISiteScraperByObject,
-	ScraperDataType,
-	SiteScraperDebugInfo
-} from './types';
+import { ISiteScraperByObject, ScraperDataType, SiteScraperDebugInfo } from './types';
 
 // export class GethomeScraper implements ISiteScraperHtml {
 // 	_debugInfo: SiteScraperDebugInfo = {
@@ -329,6 +324,7 @@ export class GethomeScraper implements ISiteScraperByObject {
 		const isDone = this.checkIfAdTooOld(adDate);
 		return [formattedDate, isDone];
 	}
+
 	parseAdTime(offerTime: string): Date {
 		const adDate = new Date(offerTime);
 		return adDate;

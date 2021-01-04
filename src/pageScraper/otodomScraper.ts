@@ -38,6 +38,7 @@ export class OtodomScraper implements ISiteScraperByHtml {
 			// 	break;
 			// }
 			announcement.dt = adDate;
+			// @todo: search for better id
 			announcement.id = attribs['data-item-id'];
 			announcement.url = attribs['data-url'];
 			const $adDetails = $ad.find('.offer-item-details');
@@ -79,12 +80,6 @@ export class OtodomScraper implements ISiteScraperByHtml {
 						(description.length > 0 ? '\n' : '') +
 						el.firstChild!.data!.trim();
 				}
-
-				l.silly(
-					el.childNodes?.length,
-					el.childNodes![0].type,
-					el.childNodes![0].data
-				);
 			});
 
 			announcement.description = description;
@@ -94,11 +89,12 @@ export class OtodomScraper implements ISiteScraperByHtml {
 		}
 		return [announcements, isDone];
 	}
+
 	getAdTime($ad: cheerio.Cheerio): [adTime: string, isDone: boolean] {
 		// @ i: not date in ads
 		const currentDate = new Date();
 		return [
-			`~ ${new Date(currentDate.getTime() - 3 * DAY_MS).toLocaleString(
+			`~${new Date(currentDate.getTime() - 3 * DAY_MS).toLocaleString(
 				...config.dateTimeFormatParams
 			)} - ~${currentDate.toLocaleString(...config.dateTimeFormatParams)}`,
 			false

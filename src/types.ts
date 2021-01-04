@@ -2,6 +2,8 @@ import { SiteScraperDebugInfo } from './pageScraper/types';
 
 export type NODE_ENV = 'production' | 'development' | 'test';
 export type EnvPrefix = 'test' | 'dev' | 'prod';
+export type SiteName = 'rzeszowiak' | 'olx' | 'otodom' | 'gethome';
+
 export interface Config {
 	NODE_ENV: NODE_ENV;
 	isDev: boolean;
@@ -28,9 +30,3 @@ export interface Announcement {
 	imgUrl: string;
 	_debugInfo?: SiteScraperDebugInfo;
 }
-
-export type DayAnnouncements = {
-	[key in SiteName]: Announcement[] | null;
-};
-
-export type SiteName = 'rzeszowiak' | 'olx' | 'otodom' | 'gethome';
