@@ -56,6 +56,8 @@ export class OlxScraper implements ISiteScraperByHtml {
 			const imgUrl = $ad.find('.photo-cell > a > img').attr('src')!;
 			announcement.imgUrl = imgUrl;
 
+			announcement.id = $ad.attr('data-id')!;
+
 			// @i: there is no description in ad card, it would require to open details to gen desc.
 			announcement.description = '';
 			this._debugInfo.idx = i;
@@ -136,9 +138,7 @@ export class OlxScraper implements ISiteScraperByHtml {
 		for (let i = 2; i < pagesCount; i++) {
 			pageUrls.push(config.urls[this.serviceName] + '&page=' + i);
 		}
-		l.debug(
-			`${this.serviceName} pages number: ${pageUrls.length} + 1 (first page).`
-		);
+		l.debug(`${this.serviceName} pages number: ${pageUrls.length} + 1 (first page).`);
 
 		return pageUrls;
 	}

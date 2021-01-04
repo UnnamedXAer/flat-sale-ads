@@ -25,9 +25,9 @@ l.info('Program START');
 // 	const browser = await pp.launch(browserLaunchOptions);
 // 	const scraper = new Scraper();
 // 	await scraper.scrapeAnnouncements(browser, [
-// 		// 'olx', //
-// 		// 'rzeszowiak', //
-// 		// 'otodom', //
+// 		'olx', //
+// 		'rzeszowiak', //
+// 		'otodom', //
 // 		'gethome' //
 // 	]);
 // 	await browser.close();
