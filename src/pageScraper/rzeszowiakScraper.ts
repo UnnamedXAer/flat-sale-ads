@@ -10,7 +10,7 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 	scrapperDataType = ScraperDataType.Html;
 
 	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean] {
-		const $ads = $page('.content-center .normalbox');
+		const $ads = $page('#content-center .normalbox');
 		const [pageAds, isDone] = this.parsePageAds($page, $ads);
 		return [pageAds, isDone];
 	}
@@ -32,10 +32,19 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 			}
 			announcement.dt = adDate;
 
-			const $titleLink = $ad.find('.offer-item-title');
-			// @todo: remove index
-			announcement.title = $titleLink.text().trim();
-			announcement.url = $titleLink.attr('href')!;
+			const $titleLink = $ad.find('.normalbox-title-left a');
+			let adTitle = $titleLink.text();
+			adTitle = adTitle.slice(adTitle.indexOf('.') + 1).trim();
+			announcement.title = adTitle;
+
+			const url = 'http://www.rzeszowiak.pl' + $titleLink.attr('href');
+			announcement.url = url;
+
+			const id = announcement.url.slice(url.lastIndexOf('-') + 1);
+			if (/\d/.test(id) === true) {
+				announcement.id = id;
+			}
+
 			let priceText = $ad.find('.normalbox-title-left2 strong').text();
 			priceText = priceText.replace(/[^\d\.,]/gi, '');
 			if (priceText !== +priceText + '') {
@@ -47,7 +56,7 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 			announcement.price = priceText;
 
 			const imgUrl = $ad.find('.normalbox-body-left img').attr('src')!;
-			announcement.imgUrl = imgUrl;
+			announcement.imgUrl = 'http://www.rzeszowiak.pl' + imgUrl;
 
 			const description = $ad.find('.normalbox-body .normalbox-body-right').text();
 			announcement.description = description;
@@ -57,6 +66,7 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 		}
 		return [announcements, isDone];
 	}
+
 	getAdTime($ad: cheerio.Cheerio): [adTime: string, isDone: boolean] {
 		const scrapedDate = $ad.find('.normalbox-more .dodane b').text();
 		const parsedDate = this.parseAdTime(scrapedDate);
