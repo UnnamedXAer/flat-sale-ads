@@ -18,25 +18,28 @@ export interface SiteScraperDebugInfo {
 
 export interface ISiteScraperBase {
 	_debugInfo: SiteScraperDebugInfo;
-	scrapperDataType: ScraperDataType;
+	readonly scrapperDataType: ScraperDataType;
 	serviceName: SiteName;
 	getPageAds(
 		...args: any[]
 	):
 		| [ads: Announcement[], isDone: boolean]
 		| Promise<[ads: Announcement[], isDone: boolean]>;
-	getUrlsToNextPages($page: cheerio.Root): string[];
+	getUrlsToNextPages(arg: cheerio.Root | string): string[];
 }
 
 export interface ISiteScraperByObject extends ISiteScraperBase {
+	readonly scrapperDataType: typeof ScraperDataType.Object;
 	getPageAds(page: Page): Promise<[ads: Announcement[], isDone: boolean]>;
 	getPageDataObject(page: Page): Promise<Object>;
 	getAdTime(offerTime: string): [adTime: string, isDone: boolean];
 	parseAdTime(offerTime: string): Date;
 	checkIfAdTooOld(adDate: Date, ...args: any[]): boolean;
+	getUrlsToNextPages(baseUrl: string): string[];
 }
 
 export interface ISiteScraperByHtml extends ISiteScraperBase {
+	readonly scrapperDataType: ScraperDataType.Html;
 	parsePageAds(
 		$page: cheerio.Root,
 		$ads: cheerio.Cheerio
@@ -45,6 +48,7 @@ export interface ISiteScraperByHtml extends ISiteScraperBase {
 	getAdTime($ad: cheerio.Cheerio): [adTime: string, isDone: boolean];
 	parseAdTime(scrapedTime: string): Date | string;
 	checkIfAdTooOld(adDate: Date, ...args: any[]): boolean;
+	getUrlsToNextPages($page: cheerio.Root): string[];
 }
 
 export type ISiteScraper = ISiteScraperByHtml | ISiteScraperByObject;

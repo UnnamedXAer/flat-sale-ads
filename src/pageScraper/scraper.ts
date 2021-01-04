@@ -95,7 +95,11 @@ export class Scraper implements IScraper {
 			scrapedPagesCount++;
 			pageUrls.shift();
 			if (isDone === false && scrapedPagesCount === 1) {
-				pageUrls.push(...siteScraper.getUrlsToNextPages($currentPage));
+				pageUrls.push(
+					...(siteScraper.scrapperDataType === ScraperDataType.Html
+						? siteScraper.getUrlsToNextPages($currentPage)
+						: siteScraper.getUrlsToNextPages(url))
+				);
 			}
 		} while (isDone === false && pageUrls.length > 0);
 
@@ -110,9 +114,9 @@ export class Scraper implements IScraper {
 		currentPage: Page
 	): Promise<[ads: Announcement[], isDone: boolean]> {
 		if (siteScraper.scrapperDataType === ScraperDataType.Html) {
-			return (siteScraper as ISiteScraperByHtml).getPageAds($currentPage);
+			return siteScraper.getPageAds($currentPage);
 		}
-		return (siteScraper as ISiteScraperByObject).getPageAds(currentPage);
+		return siteScraper.getPageAds(currentPage);
 	}
 
 	private async getPage(

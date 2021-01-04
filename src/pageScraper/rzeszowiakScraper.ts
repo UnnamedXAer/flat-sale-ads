@@ -7,7 +7,7 @@ import { ISiteScraperByHtml, ScraperDataType, SiteScraperDebugInfo } from './typ
 export class RzeszowiakScraper implements ISiteScraperByHtml {
 	_debugInfo: SiteScraperDebugInfo = { idx: -1, url: '' };
 	serviceName: SiteName = 'rzeszowiak';
-	scrapperDataType = ScraperDataType.Html;
+	scrapperDataType: ScraperDataType.Html = ScraperDataType.Html;
 
 	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean] {
 		const $ads = $page('#content-center .normalbox');

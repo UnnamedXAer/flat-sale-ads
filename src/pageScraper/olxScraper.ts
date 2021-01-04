@@ -10,7 +10,7 @@ export class OlxScraper implements ISiteScraperByHtml {
 		url: ''
 	};
 	serviceName: SiteName = 'olx';
-	scrapperDataType = ScraperDataType.Html;
+	scrapperDataType: ScraperDataType.Html = ScraperDataType.Html;
 
 	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean] {
 		const $ads = $page('table#offers_table').find('div.offer-wrapper>table');
@@ -126,7 +126,7 @@ export class OlxScraper implements ISiteScraperByHtml {
 	}
 
 	getUrlsToNextPages($page: cheerio.Root): string[] {
-		const pagesUrls: string[] = [];
+		const pageUrls: string[] = [];
 		// @i: the first page does not have link
 		const pagesCount = $page('div.pager.rel.clr').find(
 			'a.block.br3.brc8.large.tdnone.lheight24'
@@ -134,13 +134,13 @@ export class OlxScraper implements ISiteScraperByHtml {
 		// @i: olx just add &page=num to url so there is no need to read links from the elements
 		// @i: pages starts from 1, skip first page
 		for (let i = 2; i < pagesCount; i++) {
-			pagesUrls.push(config.urls[this.serviceName] + '&page=' + i);
+			pageUrls.push(config.urls[this.serviceName] + '&page=' + i);
 		}
 		l.debug(
-			`${this.serviceName} pages number: ${pagesUrls.length} + 1 (first page).`
+			`${this.serviceName} pages number: ${pageUrls.length} + 1 (first page).`
 		);
 
-		return pagesUrls;
+		return pageUrls;
 	}
 
 	parseAdDateWithMontPrefix(monthPrefix: string, day: string): Date | string {

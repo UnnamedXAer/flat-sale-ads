@@ -10,8 +10,8 @@ export class OtodomScraper implements ISiteScraperByHtml {
 		url: ''
 	};
 	serviceName: SiteName = 'otodom';
-	scrapperDataType = ScraperDataType.Html;
-	
+	scrapperDataType: ScraperDataType.Html = ScraperDataType.Html;
+
 	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean] {
 		const $ads = $page('.col-md-content.section-listing__row-content').find(
 			'article.offer-item'
@@ -100,13 +100,16 @@ export class OtodomScraper implements ISiteScraperByHtml {
 			false
 		];
 	}
+
 	parseAdTime(scrapedTime: string): string | Date {
 		return scrapedTime;
 	}
+
 	checkIfAdTooOld(adDate: Date, ...args: any[]): boolean {
 		// @ i: not date in ads
 		return false;
 	}
+
 	getUrlsToNextPages($page: cheerio.Root): string[] {
 		// @improvement: there is an window.dataLayer object with information about the pages count.
 

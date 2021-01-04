@@ -1,3 +1,4 @@
+import { url } from 'inspector';
 import { Page } from 'puppeteer';
 import { config } from '../config';
 import { DAY_MS } from '../constants';
@@ -244,19 +245,54 @@ export class GethomeScraper implements ISiteScraperByObject {
 		idx: -1,
 		url: ''
 	};
-	scrapperDataType = ScraperDataType.Object;
+	scrapperDataType: ScraperDataType.Object = ScraperDataType.Object;
 	serviceName: SiteName = 'gethome';
+	info = {
+		pageCount: 1
+	};
 
 	async getPageAds(page: Page): Promise<[ads: Announcement[], isDone: boolean]> {
+		const now = Date.now();
 		const adsInfo = await this.getPageAdsInfo(page);
+		this.info.pageCount = adsInfo.pageCount;
+
 		return [adsInfo.ads, adsInfo.isDone];
+	}
+
+	async getPageDataObject(page: Page): Promise<GethomeData['offerList']> {
+		const data: GethomeData = await page.evaluate(
+			() => (window as any).__INITIAL_STATE__
+		);
+		return data.offerList;
 	}
 
 	async getPageAdsInfo(page: Page): Promise<GethomeAdsInfo> {
 		const offerList = await this.getPageDataObject(page);
-		const announcements: Announcement[] = [];
 		const { offers: offersInfo } = offerList;
 		const { offers } = offersInfo;
+
+		const now = Date.now();
+		// @todo: use link from offers
+		const [announcements, isDone] = this.parsePageAds(offers, page.url());
+		l.info(
+			`[${this.serviceName}]->parsePageAds execution time: ${Date.now() - now} ms.`
+		);
+
+		const adsInfo: GethomeAdsInfo = {
+			ads: announcements,
+			pageNum: offersInfo.page,
+			pageCount: offersInfo.pageCount,
+			isDone: isDone
+		} as GethomeAdsInfo;
+
+		return adsInfo;
+	}
+
+	parsePageAds(
+		offers: GethomeOffer[],
+		pageUrl: string
+	): [ads: Announcement[], isDone: boolean] {
+		const announcements: Announcement[] = [];
 		let isDone = false;
 		for (let i = 0, offersCount = offers.length; i < offersCount; i++) {
 			const offer = offers[i];
@@ -289,33 +325,18 @@ export class GethomeScraper implements ISiteScraperByObject {
 						: '') + // @todo: check all market_type options.
 					offer.description,
 				title: offer.name,
-				url: offer.link,
+				url: 'https://gethome.pl/oferta/' + offer.slug,
 				imgUrl: offer.images[0].thumbnail_306x171,
 				price: this.getAdPrice(offer.price.total),
 				id: offer.id,
 				_debugInfo: {
 					idx: i,
-					url: page.url() // @todo: use link from offers
+					url: pageUrl
 				}
 			};
 			announcements.push(announcement);
 		}
-
-		const adsInfo: GethomeAdsInfo = {
-			ads: announcements,
-			pageNum: offersInfo.page,
-			pageCount: offersInfo.pageCount,
-			isDone: isDone
-		} as GethomeAdsInfo;
-
-		return adsInfo;
-	}
-
-	async getPageDataObject(page: Page): Promise<GethomeData['offerList']> {
-		const data: GethomeData = await page.evaluate(
-			() => (window as any).__INITIAL_STATE__
-		);
-		return data.offerList;
+		return [announcements, isDone];
 	}
 
 	getAdTime(offerTime: string): [adTime: string, isDone: boolean] {
@@ -334,11 +355,20 @@ export class GethomeScraper implements ISiteScraperByObject {
 		return '' + offerPrice;
 	}
 
-	getUrlsToNextPages() {
-		return [];
+	getUrlsToNextPages(baseUrl: string): string[] {
+		const pageUrls: string[] = [];
+
+		for (let i = 2; i <= this.info.pageCount; i++) {
+			pageUrls.push(baseUrl + '&page=' + i);
+		}
+
+		l.debug(
+			`${this.serviceName} pages number: ${pageUrls.length} + 1 (first page).`
+		);
+		return pageUrls;
 	}
 
 	checkIfAdTooOld(adDate: Date): boolean {
-		return adDate.getTime() < Date.now() - (DAY_MS + 1000 * 30);
+		return adDate.getTime() < Date.now() - (1 * DAY_MS + 1000 * 30);
 	}
 }
