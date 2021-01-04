@@ -2,7 +2,9 @@ import { SiteScraperDebugInfo } from './pageScraper/types';
 
 export type NODE_ENV = 'production' | 'development' | 'test';
 export type EnvPrefix = 'test' | 'dev' | 'prod';
-export type SiteName = 'rzeszowiak' | 'olx' | 'otodom' | 'gethome';
+
+export const siteNames = ['rzeszowiak', 'olx', 'otodom', 'gethome'] as const;
+export type SiteName = typeof siteNames[number];
 
 export interface Config {
 	NODE_ENV: NODE_ENV;
