@@ -8,8 +8,6 @@ import { sleep } from '../sleep';
 import {
 	IScraper,
 	ISiteScraper,
-	ISiteScraperByHtml,
-	ISiteScraperByObject,
 	ScraperDataType
 } from './types';
 import { ensurePathExists } from '../files';
@@ -22,10 +20,13 @@ export class Scraper implements IScraper {
 		let siteIndex = 0;
 		while (siteIndex < sites.length) {
 			const promises: Promise<void>[] = [];
+			l.info(`About to scrape: "${sites[siteIndex]}"`);
 			promises.push(this.scrapeSiteAnnouncements(browser, sites[siteIndex]));
 			if (++siteIndex < sites.length) {
+				l.info(`About to scrape: "${sites[siteIndex]}"`);
 				promises.push(this.scrapeSiteAnnouncements(browser, sites[siteIndex]));
 			}
+			siteIndex++;
 			// @info: scrape up to two sites at a time.
 			await Promise.all(promises);
 		}
