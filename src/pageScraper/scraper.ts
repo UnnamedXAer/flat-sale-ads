@@ -5,15 +5,12 @@ import { Announcement, SiteName } from '../types';
 import cheerio from 'cheerio';
 import { config } from '../config';
 import { sleep } from '../sleep';
-import {
-	IScraper,
-	ISiteScraper,
-	ScraperDataType
-} from './types';
+import { IScraper, ISiteScraper, ScraperDataType } from './types';
 import { ensurePathExists } from '../files';
 import { makeSiteScraper } from './siteScraperFactory';
 import { formatDateToFileName } from '../formatDate';
 import { writeFile } from 'fs/promises';
+import { timeStart } from '../performance';
 
 export class Scraper implements IScraper {
 	async scrapeAnnouncements(browser: Browser, sites: SiteName[]) {
@@ -152,20 +149,15 @@ export class Scraper implements IScraper {
 		url: string,
 		siteScraper: ISiteScraper
 	): Promise<Page> {
-		const now = Date.now();
+		let timeStop = timeStart();
 		const page = await browser.newPage();
-		l.debug(
-			`[${siteScraper!.serviceName}] browser.newPage execution time: ` +
-				(Date.now() - now)
-		);
+		timeStop(`[${siteScraper!.serviceName}] browser.newPage`);
 
 		try {
-			const now1 = Date.now();
+			let timeStop = timeStart();
 			const response = await page.goto(url);
-			l.debug(
-				`[${siteScraper!.serviceName}] page.goto execution time: ` +
-					(Date.now() - now1)
-			);
+			timeStop(`[${siteScraper!.serviceName}] page.goto "${url}"`);
+			
 			if (!response) {
 				throw Error('Could not get response the page.');
 			}
