@@ -1,16 +1,14 @@
 import path from 'path';
 import { readdir, readFile, stat, writeFile } from 'fs/promises';
-import { Announcement, SiteName, siteNames } from '../types';
+import { Announcement, SiteName } from '../types';
 import l from '../logger';
 import { config } from '../config';
-import { readFileSync } from 'fs';
 import { timeStart } from '../performance';
 import { formatDateToFileName } from '../formatDate';
 import { ensurePathExists } from '../files';
 
 async function readSiteDataFileNames(siteDataPath: string) {
 	const dirNames = await readdir(siteDataPath);
-	l.debug(dirNames);
 	return dirNames;
 }
 
@@ -34,12 +32,6 @@ async function findYoungestFileName(
 			};
 		}
 	}
-
-	l.debug(
-		`Youngest file in "${pathName}" is ${youngest.fileName}, created at: ${new Date(
-			youngest.createTime
-		).toLocaleString(...config.dateTimeFormatParams)}`
-	);
 
 	return youngest;
 }
@@ -88,11 +80,14 @@ export async function analyzeData(siteNames: SiteName[]): Promise<Announcement[]
 	await ensurePathExists(analyzeDatePath);
 	const analyzeDatePathName = path.join(
 		analyzeDatePath,
-		formatDateToFileName() + Date.now() + '.json'
+		formatDateToFileName() + '_' + Date.now() + '.json'
 	);
-	const timeStop = timeStart('save day unique ' + '"' + analyzeDatePathName + '"');
+	const timeStop = timeStart(
+		'Save day unique ads to: ' + '"' + analyzeDatePathName + '"'
+	);
 	await writeFile(analyzeDatePathName, JSON.stringify(dayUniqAds, null, 4));
 	timeStop();
+
 	return dayUniqAds;
 }
 
@@ -100,7 +95,13 @@ export async function getLastSiteAds(siteName: SiteName): Promise<Announcement[]
 	const siteDataPath = getSiteDataPath(siteName);
 	const fileNames = await readSiteDataFileNames(siteDataPath);
 	const youngestFile = await findYoungestFileName(siteDataPath, fileNames);
-
+	l.debug(
+		`Youngest file for "${siteName}" is ${
+			youngestFile.fileName
+		}, created at: ${new Date(youngestFile.createTime).toLocaleString(
+			...config.dateTimeFormatParams
+		)}`
+	);
 	const siteData = getFileData(siteDataPath, youngestFile.fileName);
 	return siteData;
 }
