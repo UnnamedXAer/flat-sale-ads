@@ -22,91 +22,99 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 		const announcements: Announcement[] = [];
 		let isDone = false;
 		for (let i = 0, len = $ads.length; i < len; i++) {
-			const announcement = {} as Announcement;
 			const $ad = $page($ads[i]);
 
-			let [adDate, _isAddTooOld] = this.getAdTime($ad);
+			let [_dt, dt, _isAddTooOld] = this.getAdTime($ad);
 			isDone = _isAddTooOld;
 			if (isDone === true) {
 				break;
 			}
-			announcement.dt = adDate;
 
 			const $titleLink = $ad.find('.normalbox-title-left a');
-			let adTitle = $titleLink.text();
-			adTitle = adTitle.slice(adTitle.indexOf('.') + 1).trim();
-			announcement.title = adTitle;
+			const adTitle = $titleLink.text();
+			const title = adTitle.slice(adTitle.indexOf('.') + 1).trim();
 
 			const url = 'http://www.rzeszowiak.pl' + $titleLink.attr('href');
-			announcement.url = url;
 
-			const id = announcement.url.slice(url.lastIndexOf('-') + 1);
-			if (/\d/.test(id) === true) {
-				announcement.id = id;
+			let id = url.slice(url.lastIndexOf('-') + 1);
+			if (/\d/.test(id) === false) {
+				id = '';
 			}
 
 			let priceText = $ad.find('.normalbox-title-left2 strong').text();
-			priceText = priceText.replace(/[^\d\.,]/gi, '');
-			if (priceText !== +priceText + '') {
-				l.debug(
-					`[Rzeszowiak] Price "${priceText}" is not a number.`,
-					announcement.url
-				);
+			let price = priceText.replace(/[^\d\.,]/gi, '');
+			if (price !== +price + '') {
+				l.debug(`[Rzeszowiak] Price "${price}" is not a number.`, url);
 			}
-			announcement.price = priceText;
 
-			const imgUrl = $ad.find('.normalbox-body-left img').attr('src')!;
-			announcement.imgUrl = 'http://www.rzeszowiak.pl' + imgUrl;
+			const imgUrl =
+				'http://www.rzeszowiak.pl' +
+				$ad.find('.normalbox-body-left img').attr('src')!;
 
-			const description = $ad.find('.normalbox-body .normalbox-body-right').text();
-			announcement.description = description;
-			this._debugInfo.idx = i;
-			announcement._debugInfo = { ...this._debugInfo };
+			const description = $ad.find('.normalbox-body .normalbox-body-right').text().trim();
+
+			const announcement: Announcement = {
+				id,
+				dt,
+				_dt,
+				description,
+				imgUrl,
+				price,
+				title,
+				url,
+				_debugInfo: { ...this._debugInfo, idx: i }
+			};
 			announcements.push(announcement);
 		}
 		return [announcements, isDone];
 	}
 
-	getAdTime($ad: cheerio.Cheerio): [adTime: string, isDone: boolean] {
+	getAdTime(
+		$ad: cheerio.Cheerio
+	): [adDateText: Date, adDateText: string, isDone: boolean] {
 		const scrapedDate = $ad.find('.normalbox-more .dodane b').text();
-		const parsedDate = this.parseAdTime(scrapedDate);
-		let adDate: string;
+		const parsedDate: Date = this.parseAdTime(scrapedDate);
+		let adDateText: string = scrapedDate;
 
-		if (typeof parsedDate === 'object') {
+		if (isFinite(parsedDate.getTime()) === true) {
+			adDateText = parsedDate.toLocaleString(...config.dateTimeFormatParams);
 			if (this.checkIfAdTooOld(parsedDate)) {
-				return [scrapedDate, true];
+				return [parsedDate, adDateText, true];
 			}
-			adDate = parsedDate.toLocaleString(...config.dateTimeFormatParams);
-		} else {
-			adDate = parsedDate;
 		}
-		return [adDate, false];
+		return [parsedDate, adDateText, false];
 	}
 
-	parseAdTime(scrapedTime: string): string | Date {
+	parseAdTime(scrapedTime: string): Date {
 		if (scrapedTime.includes('dziś')) {
 			return this.parseAdTimeWithTodayWord(scrapedTime);
 		}
 		const date = new Date(scrapedTime);
-		return isFinite(date.getTime()) ? date : scrapedTime;
+		return date;
+	}
+
+	parseAdTimeWithTodayWord(scrapedTime: string): Date {
+		const timeArr = scrapedTime.split(',').map((x) => x.trim());
+		if (timeArr.length < 2) {
+			const date = new Date(scrapedTime);
+			l.silly(
+				`[${this.serviceName}] "${scrapedTime}" is in unsupported date format. To date resolvers to:`,
+				date
+			);
+			// @i: most likely 'Invalid Date',
+			// @i: maybe would be better to return "Invalid Date" explicitly to avoid strange results
+			return date;
+		}
+		const [hour, minute] = timeArr[1].split(':').map((x) => x.trim());
+		const date = new Date();
+		date.setHours(parseInt(hour, 10), parseInt(minute, 10));
+		return date;
 	}
 
 	checkIfAdTooOld(parsedDate: Date): boolean {
 		const oldestAllowedDate = Date.now() - (DAY_MS + 1000 * 30);
 		const isTooOld = oldestAllowedDate > parsedDate.getTime();
 		return isTooOld;
-	}
-
-	parseAdTimeWithTodayWord(scrapedTime: string): Date | string {
-		const timeArr = scrapedTime.split(',').map((x) => x.trim());
-		if (timeArr.length < 2) {
-			l.silly(`[${this.serviceName}] Returning default time: "${scrapedTime}"`);
-			return scrapedTime;
-		}
-		const [hour, minute] = timeArr[1].split(':').map((x) => x.trim());
-		const date = new Date();
-		date.setHours(parseInt(hour, 10), parseInt(minute, 10));
-		return isFinite(date.getTime()) ? date : scrapedTime;
 	}
 
 	getUrlsToNextPages($page: cheerio.Root): string[] {

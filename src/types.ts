@@ -25,6 +25,7 @@ export interface Config {
 export interface Announcement {
 	id: string;
 	dt: string;
+	_dt: Date;
 	title: string;
 	price: string;
 	description: string;

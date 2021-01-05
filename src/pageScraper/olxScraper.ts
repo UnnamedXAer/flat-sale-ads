@@ -30,85 +30,141 @@ export class OlxScraper implements ISiteScraperByHtml {
 		const announcements: Announcement[] = [];
 		let isDone = false;
 		for (let i = 0, len = $ads.length; i < len; i++) {
-			const announcement = {} as Announcement;
 			const $ad = $page($ads[i]);
 
-			const [adTime, _isAddTooOld] = this.getAdTime($ad);
+			const [_dt, dt, _isAddTooOld] = this.getAdTime($ad);
 			isDone = _isAddTooOld;
 			if (isDone === true) {
 				break;
 			}
 
-			announcement.dt = adTime;
 			const $titleLink = $ad.find('.title-cell a');
-			announcement.title = $titleLink.text().replace(/[\n]/gi, '').trim();
-			announcement.url = $titleLink.attr('href')!;
+			const title = $titleLink.text().replace(/[\n]/gi, '').trim();
+			const url = $titleLink.attr('href')!;
 			let priceText = $ad.find('.td-price .price>strong').text();
-			priceText = priceText.replace(/[^\d\.,]/gi, '').replace(/,/g, '.');
-			if (isNaN(+priceText)) {
-				l.debug(
-					`[${this.serviceName}] Price "${priceText}" is not a number.`,
-					announcement.url
-				);
+			const price = priceText.replace(/[^\d\.,]/gi, '').replace(/,/g, '.');
+			priceText;
+			if (price !== +price + '') {
+				l.debug(`[${this.serviceName}] Price "${price}" is not a number.`, url);
 			}
-			announcement.price = priceText;
 
 			const imgUrl = $ad.find('.photo-cell > a > img').attr('src')!;
-			announcement.imgUrl = imgUrl;
 
-			announcement.id = $ad.attr('data-id')!;
+			const id = $ad.attr('data-id')!;
 
-			// @i: there is no description in ad card, it would require to open details to gen desc.
-			announcement.description = '';
-			this._debugInfo.idx = i;
-			announcement._debugInfo = { ...this._debugInfo };
+			// @i: there is no description in ad card, it would require to open details to generate description.
+			const description = '';
+
+			const announcement: Announcement = {
+				id,
+				dt,
+				_dt,
+				description,
+				imgUrl,
+				price,
+				title,
+				url,
+				_debugInfo: { ...this._debugInfo, idx: i }
+			};
 			announcements.push(announcement);
 		}
 
 		return [announcements, isDone];
 	}
 
-	getAdTime($ad: cheerio.Cheerio): [adTime: string, isDone: boolean] {
+	getAdTime(
+		$ad: cheerio.Cheerio
+	): [adDateText: Date, adDateText: string, isDone: boolean] {
 		const scrapedDate = $ad
 			.find('.bottom-cell .breadcrumb.x-normal>span > [data-icon*="clock"]')
 			.parent()
 			.text();
-		const parsedDate = this.parseAdTime(scrapedDate);
-		let adDate: string;
+		const isTodayOrYesterday =
+			scrapedDate.includes('dzisiaj') || scrapedDate.includes('wczoraj');
+		const parsedDate: Date = this.parseAdTime(scrapedDate, isTodayOrYesterday);
+		let adDateText: string = scrapedDate;
 
-		if (typeof parsedDate === 'object') {
-			let isTodayOrYesterday = /(dzisiaj|wczoraj)/.test(scrapedDate);
-
-			if (this.checkIfAdTooOld(parsedDate, isTodayOrYesterday) === true) {
-				return [scrapedDate, true];
+		if (isFinite(parsedDate.getTime()) === true) {
+			adDateText = parsedDate.toLocaleString(...config.dateTimeFormatParams);
+			if (this.checkIfAdTooOld(parsedDate, isTodayOrYesterday)) {
+				return [parsedDate, adDateText, true];
 			}
-			adDate = parsedDate.toLocaleString(
-				...(isTodayOrYesterday
-					? config.dateTimeFormatParams
-					: config.dateFormatParams)
-			);
-		} else {
-			// @i: type string means that service was not able to get/parse date.
-			adDate = parsedDate;
 		}
-		return [adDate, false];
+		return [parsedDate, adDateText, false];
 	}
 
-	parseAdTime(scrapedTime: string): string | Date {
+	parseAdTime(scrapedTime: string, isTodayOrYesterday: boolean): Date {
 		const scrapedTimeArr = scrapedTime.split(' ').filter((x) => x !== '');
-		if (scrapedTimeArr.length > 2) {
-			l.silly('1.	returning default time:', scrapedTime);
-			return scrapedTime;
-		}
 
-		if (scrapedTimeArr[0] === 'dzisiaj' || scrapedTimeArr[0] === 'wczoraj') {
+		if (isTodayOrYesterday) {
 			return this.parseAdTimeWithTodayYesterdayWords(
-				scrapedTimeArr[0],
+				scrapedTimeArr[0] as 'dzisiaj' | 'wczoraj',
 				scrapedTimeArr[1]
 			);
 		}
 
 		return this.parseAdDateWithMontPrefix(scrapedTimeArr[1], scrapedTimeArr[0]);
+	}
+
+	parseAdDateWithMontPrefix(monthPrefix: string, day: string): Date {
+		// @i: in this case the "olxTime" will be like 29 gru
+		// @i: so we just need to map the mont prefix to full name
+		monthPrefix = monthPrefix.substr(0, 3); // @i: not sure if all moth are represented as 3 chars
+		const currentDate = new Date();
+		let dayNum = parseInt(day, 10);
+
+		let year = currentDate.getFullYear();
+		const monthNum = this.mapMonthPrefixToMonth(monthPrefix, true) as number;
+		if (monthNum === 11) {
+			if (currentDate.getDate() < dayNum) {
+				year = year - 1;
+			}
+		}
+
+		const adDate = new Date(year, monthNum, dayNum);
+
+		if (isNaN(dayNum) || +day !== dayNum) {
+			// @i: the date object may not be "Invalid Date" but may be set to wrong date
+			l.debug(
+				`The date for "${monthPrefix + ' / ' + day}" may be invalid. Date: `,
+				adDate
+			);
+		}
+
+		return adDate;
+	}
+
+	parseAdTimeWithTodayYesterdayWords(
+		daySynonym: 'dzisiaj' | 'wczoraj',
+		time: string
+	): Date {
+		const timeArr = time.split(':');
+		const hour = parseInt(timeArr[0], 10);
+		const minutes = parseInt(timeArr[1], 10);
+
+		const currentDate = new Date();
+		const adDate = new Date(
+			currentDate.getFullYear(),
+			currentDate.getMonth(),
+			currentDate.getDate() + (daySynonym === 'wczoraj' ? -1 : 0),
+			hour,
+			minutes
+		);
+
+		if (
+			isNaN(hour) ||
+			isNaN(minutes) ||
+			hour !== +timeArr[0] ||
+			minutes !== +timeArr[1]
+		) {
+			// @i: the date object may not be "Invalid Date" but may be set to wrong date
+			l.debug(
+				`The date for "${daySynonym + ' / ' + time}" may be invalid. Date: `,
+				adDate
+			);
+		}
+
+		return adDate;
 	}
 
 	checkIfAdTooOld(parsedDate: Date, isTodayOrYesterday: boolean): boolean {
@@ -125,75 +181,6 @@ export class OlxScraper implements ISiteScraperByHtml {
 			return true;
 		}
 		return false;
-	}
-
-	getUrlsToNextPages($page: cheerio.Root): string[] {
-		const pageUrls: string[] = [];
-		// @i: the first page does not have link
-		const pagesCount = $page('div.pager.rel.clr').find(
-			'a.block.br3.brc8.large.tdnone.lheight24'
-		).length;
-		// @i: olx just add &page=num to url so there is no need to read links from the elements
-		// @i: pages starts from 1, skip first page
-		for (let i = 2; i < pagesCount; i++) {
-			pageUrls.push(config.urls[this.serviceName] + '&page=' + i);
-		}
-		l.debug(`${this.serviceName} pages number: ${pageUrls.length} + 1 (first page).`);
-
-		return pageUrls;
-	}
-
-	parseAdDateWithMontPrefix(monthPrefix: string, day: string): Date | string {
-		// @i: in this case the "olxTime" will be like 29 gru
-		// @i: so we just need to map the mont prefix to full name
-		monthPrefix = monthPrefix.substr(0, 3); // @i: not sure if all moth are represented as 3 chars
-		const currentDate = new Date();
-		let dayNum = parseInt(day, 10);
-
-		if (isNaN(dayNum) || +day !== dayNum) {
-			l.silly('2.	returning default time:', day + ' ' + monthPrefix);
-			return day + ' ' + monthPrefix;
-		}
-
-		let year = currentDate.getFullYear();
-		const monthNum = this.mapMonthPrefixToMonth(monthPrefix, true) as number;
-		if (monthNum === 11) {
-			if (currentDate.getDate() < dayNum) {
-				year = year - 1;
-			}
-		}
-
-		const adDate = new Date(year, monthNum, dayNum);
-		return adDate;
-	}
-
-	parseAdTimeWithTodayYesterdayWords(
-		daySynonym: 'dzisiaj' | 'wczoraj',
-		time: string
-	): Date | string {
-		const timeArr = time.split(':');
-		const hour = parseInt(timeArr[0], 10);
-		const minutes = parseInt(timeArr[1], 10);
-		if (
-			isNaN(hour) ||
-			isNaN(minutes) ||
-			hour !== +timeArr[0] ||
-			minutes !== +timeArr[1]
-		) {
-			l.silly('3.	returning default time:', daySynonym + ' ' + time);
-
-			return daySynonym + ' ' + time;
-		}
-
-		const currentDate = new Date();
-		const adDate = new Date(
-			currentDate.getFullYear(),
-			currentDate.getMonth(),
-			currentDate.getDate() + (daySynonym === 'wczoraj' ? -1 : 0),
-			hour,
-			minutes
-		);
-		return adDate;
 	}
 
 	mapMonthPrefixToMonth(
@@ -229,5 +216,21 @@ export class OlxScraper implements ISiteScraperByHtml {
 			default:
 				throw new Error('Unrecognized month prefix');
 		}
+	}
+
+	getUrlsToNextPages($page: cheerio.Root): string[] {
+		const pageUrls: string[] = [];
+		// @i: the first page does not have link
+		const pagesCount = $page('div.pager.rel.clr').find(
+			'a.block.br3.brc8.large.tdnone.lheight24'
+		).length;
+		// @i: olx just add &page=num to url so there is no need to read links from the elements
+		// @i: pages starts from 1, skip first page
+		for (let i = 2; i < pagesCount; i++) {
+			pageUrls.push(config.urls[this.serviceName] + '&page=' + i);
+		}
+		l.debug(`${this.serviceName} pages number: ${pageUrls.length} + 1 (first page).`);
+
+		return pageUrls;
 	}
 }

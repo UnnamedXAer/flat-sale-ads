@@ -26,36 +26,36 @@ export class OtodomScraper implements ISiteScraperByHtml {
 		const announcements: Announcement[] = [];
 		let isDone = false;
 		for (let i = 0, len = $ads.length; i < len; i++) {
-			const announcement = {} as Announcement;
 			const $ad = $page($ads[i]);
 			const attribs = ($ad[0] as cheerio.TagElement).attribs;
 			if (attribs['data-featured-name'] === 'promo_top_ads') {
 				continue;
 			}
-			let [adDate, _isAddTooOld] = this.getAdTime($ad);
+			let [_dt, dt, _isAddTooOld] = this.getAdTime($ad);
 			// isDone = _isAddTooOld;
 			// if (isDone === true) {
 			// 	break;
 			// }
-			announcement.dt = adDate;
 			// @todo: search for better id
-			announcement.id = attribs['data-item-id'];
-			announcement.url = attribs['data-url'];
+			const id = attribs['data-item-id'];
+			const url = attribs['data-url'];
 			const $adDetails = $ad.find('.offer-item-details');
 
 			const $adTitle = $adDetails.find('H3 .offer-item-title');
-			announcement.title = $adTitle.text().trim();
+			const title = $adTitle.text().trim();
 
 			const imgAttribs = ($ad.find(
 				'figure > a > span.img-cover.lazy'
 			)[0] as cheerio.TagElement).attribs;
-			announcement.imgUrl = imgAttribs['data-src'];
-			let description =
+			const imgUrl = imgAttribs['data-src'];
+			let description = (
 				($adDetails.find('header > p.text-nowrap')[0] as cheerio.TagElement)
-					.childNodes![1].data || '';
+					.childNodes![1].data || ''
+			).trim();
 
 			const $adParams = $adDetails.find('ul.params li');
-
+			let price = '';
+			// @refactor: to for loop
 			$adParams.map((_, el) => {
 				if (el.type === 'text') {
 					return;
@@ -67,14 +67,13 @@ export class OtodomScraper implements ISiteScraperByHtml {
 						description;
 				} else if (el.attribs.class.includes('offer-item-price')) {
 					let priceText = el.firstChild!.data!;
-					priceText = priceText.replace(/[^\d\.,]/gi, '');
-					if (priceText !== +priceText + '') {
+					price = priceText.replace(/[^\d\.,]/gi, '');
+					if (price !== +price + '') {
 						l.debug(
-							`[${this.serviceName}] Price "${priceText}" is not a number.`,
-							announcement.url
+							`[${this.serviceName}] Price "${price}" is not a number.`,
+							url
 						);
 					}
-					announcement.price = priceText;
 				} else {
 					description +=
 						(description.length > 0 ? '\n' : '') +
@@ -82,31 +81,48 @@ export class OtodomScraper implements ISiteScraperByHtml {
 				}
 			});
 
-			announcement.description = description;
-			this._debugInfo.idx = i;
-			announcement._debugInfo = { ...this._debugInfo };
+			const announcement: Announcement = {
+				id,
+				dt,
+				_dt,
+				description,
+				imgUrl,
+				price,
+				title,
+				url,
+				_debugInfo: { ...this._debugInfo, idx: i }
+			};
+
 			announcements.push(announcement);
 		}
 		return [announcements, isDone];
 	}
 
-	getAdTime($ad: cheerio.Cheerio): [adTime: string, isDone: boolean] {
-		// @ i: not date in ads
+	getAdTime(
+		$ad: cheerio.Cheerio
+	): [adDateText: Date, adDateText: string, isDone: boolean] {
 		const currentDate = new Date();
+		// ! @todo:
+		// @thought: mb it would be more useful to return "earliest" date,
+		// @thought: in this case it would be 3 days back.
+		// @thought: it could be used in comparison
+		const adDate = this.parseAdTime('--invalid-date--');
 		return [
+			// @i: we do not have a date in any format in the ad
+			adDate,
 			`~${new Date(currentDate.getTime() - 3 * DAY_MS).toLocaleString(
 				...config.dateTimeFormatParams
 			)} - ~${currentDate.toLocaleString(...config.dateTimeFormatParams)}`,
-			false
+			this.checkIfAdTooOld(adDate)
 		];
 	}
 
-	parseAdTime(scrapedTime: string): string | Date {
-		return scrapedTime;
+	parseAdTime(scrapedTime: string): Date {
+		return new Date(scrapedTime);
 	}
 
-	checkIfAdTooOld(adDate: Date, ...args: any[]): boolean {
-		// @ i: not date in ads
+	checkIfAdTooOld(adDate: Date): boolean {
+		// @i: not date found in the ad
 		return false;
 	}
 

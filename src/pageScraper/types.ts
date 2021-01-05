@@ -32,7 +32,7 @@ export interface ISiteScraperByObject extends ISiteScraperBase {
 	readonly scrapperDataType: typeof ScraperDataType.Object;
 	getPageAds(page: Page): Promise<[ads: Announcement[], isDone: boolean]>;
 	getPageDataObject(page: Page): Promise<Object>;
-	getAdTime(offerTime: string): [adTime: string, isDone: boolean];
+	getAdTime(offerTime: string): [adDateText: Date, adDateText: string, isDone: boolean];
 	parseAdTime(offerTime: string): Date;
 	checkIfAdTooOld(adDate: Date, ...args: any[]): boolean;
 	getUrlsToNextPages(baseUrl: string): string[];
@@ -45,8 +45,10 @@ export interface ISiteScraperByHtml extends ISiteScraperBase {
 		$ads: cheerio.Cheerio
 	): [ads: Announcement[], isDone: boolean];
 	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean];
-	getAdTime($ad: cheerio.Cheerio): [adTime: string, isDone: boolean];
-	parseAdTime(scrapedTime: string): Date | string;
+	getAdTime(
+		$ad: cheerio.Cheerio
+	): [adDateText: Date, adDateText: string, isDone: boolean];
+	parseAdTime(scrapedTime: string, ...args: any[]): Date | string;
 	checkIfAdTooOld(adDate: Date, ...args: any[]): boolean;
 	getUrlsToNextPages($page: cheerio.Root): string[];
 }

@@ -1,4 +1,3 @@
-import { url } from 'inspector';
 import { Page } from 'puppeteer';
 import { config } from '../config';
 import { DAY_MS } from '../constants';
@@ -212,7 +211,14 @@ interface GethomeOffer {
 	deal_type: string;
 	market_type: string;
 	property: {
-		location: Object;
+		location: {
+			path: {
+				name: string;
+				slug: string;
+				type: string;
+			}[];
+			short_name: 'string';
+		};
 		address: string;
 		floor: number;
 		id: string;
@@ -296,42 +302,62 @@ export class GethomeScraper implements ISiteScraperByObject {
 		let isDone = false;
 		for (let i = 0, offersCount = offers.length; i < offersCount; i++) {
 			const offer = offers[i];
-			const [dt, _isDone] = this.getAdTime(offer.created_at);
+			const [_dt, dt, _isDone] = this.getAdTime(offer.created_at);
 			if (_isDone === true) {
 				isDone = true;
 				break;
 			}
+
+			// @improvement: find "stan wykończenia" in offer data.
+			const description =
+				(offer.price.per_sqm
+					? 'Powierzchnia: ' + offer.price.per_sqm + 'm2'
+					: '') +
+				'\nRozmiar: ' +
+				offer.property.size +
+				'\nLokalizacja: ' +
+				(offer.property.address
+					? offer.property.address.trim()
+					: offer.property.location.short_name.trim()) +
+				'\n' +
+				(offer.property.floor ? '\nPiętro: ' + offer.property.floor : '') +
+				(offer.property.room_number
+					? '\nPokoje: ' + offer.property.room_number
+					: '') +
+				'\n\n' +
+				'\nOpis:\n' +
+				offer.description.trim() +
+				(offer.agent
+					? '\n\nAgent: ' +
+					  offer.agent.name.trim() +
+					  ' ' +
+					  offer.agent.last_name.trim()
+					: '') +
+				(offer.market_type.trim()
+					? '\nRynek: ' +
+					  (offer.market_type.trim() === 'aftermarket'
+							? 'wtórny'
+							: 'pierwotny')
+					: ''); // @todo: check all market_type options.
+
+			const title = offer.name.trim();
+			const url = 'https://gethome.pl/oferta/' + offer.slug;
+			const imgUrl = offer.images[0].thumbnail_306x171;
+			const price = this.getAdPrice(offer.price.total);
+			const id = offer.id;
+
 			const announcement: Announcement = {
+				_dt,
 				dt,
-				description:
-					(offer.price.per_sqm ? offer.price.per_sqm + 'm2' : '') +
-					'\nRozmiar: ' +
-					offer.property.size +
-					'\n' +
-					offer.property.location +
-					'\n' +
-					offer.property.address +
-					(offer.property.floor ? '\nPiętro: ' + offer.property.floor : '') +
-					(offer.property.room_number
-						? '\nPokoje: ' + offer.property.room_number
-						: '') +
-					'\n\n' +
-					(offer.agent
-						? '\nAgent: ' + offer.agent.name + ' ' + offer.agent.last_name
-						: '') +
-					(offer.market_type
-						? '\nRynek: ' +
-						  (offer.market_type === 'aftermarket' ? 'wtórny' : 'pierwotny')
-						: '') + // @todo: check all market_type options.
-					offer.description,
-				title: offer.name,
-				url: 'https://gethome.pl/oferta/' + offer.slug,
-				imgUrl: offer.images[0].thumbnail_306x171,
-				price: this.getAdPrice(offer.price.total),
-				id: offer.id,
+				description,
+				title,
+				url,
+				imgUrl,
+				price,
+				id,
 				_debugInfo: {
-					idx: i,
-					url: pageUrl
+					...this._debugInfo,
+					idx: i
 				}
 			};
 			announcements.push(announcement);
@@ -339,11 +365,11 @@ export class GethomeScraper implements ISiteScraperByObject {
 		return [announcements, isDone];
 	}
 
-	getAdTime(offerTime: string): [adTime: string, isDone: boolean] {
+	getAdTime(offerTime: string): [adDate: Date, adDateText: string, isDone: boolean] {
 		const adDate = this.parseAdTime(offerTime);
 		const formattedDate = adDate.toLocaleString(...config.dateTimeFormatParams);
 		const isDone = this.checkIfAdTooOld(adDate);
-		return [formattedDate, isDone];
+		return [adDate, formattedDate, isDone];
 	}
 
 	parseAdTime(offerTime: string): Date {
@@ -362,9 +388,7 @@ export class GethomeScraper implements ISiteScraperByObject {
 			pageUrls.push(baseUrl + '&page=' + i);
 		}
 
-		l.debug(
-			`${this.serviceName} pages number: ${pageUrls.length} + 1 (first page).`
-		);
+		l.debug(`${this.serviceName} pages number: ${pageUrls.length} + 1 (first page).`);
 		return pageUrls;
 	}
 
