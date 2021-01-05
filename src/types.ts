@@ -22,7 +22,8 @@ export interface Config {
 	};
 }
 
-export interface Announcement {
+export interface Offer {
+	site: SiteName;
 	id: string;
 	dt: string;
 	_dt: Date;
@@ -32,4 +33,10 @@ export interface Announcement {
 	url: string;
 	imgUrl: string;
 	_debugInfo?: SiteScraperDebugInfo;
+}
+
+export interface SiteOffers {
+	offers: Offer[];
+	siteName: SiteName;
+	scrapedAt: Date;
 }

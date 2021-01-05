@@ -1,7 +1,7 @@
 import { Browser, Page } from 'puppeteer';
 import path from 'path';
 import l from '../logger';
-import { Announcement, SiteName } from '../types';
+import { Offer, SiteName } from '../types';
 import cheerio from 'cheerio';
 import { config } from '../config';
 import { sleep } from '../sleep';
@@ -41,24 +41,24 @@ export class Scraper implements IScraper {
 		this.validateAnnouncements(todayAnnouncements, siteScraper.serviceName);
 
 		l.info(
-			`The number of today's "${siteScraper.serviceName}" announcements is: `,
+			`The number of today's "${siteScraper.serviceName}" offers is: `,
 			todayAnnouncements.length
 		);
 	}
 
 	private async saveSiteAnnouncements(
 		siteName: SiteName,
-		announcements: Announcement[]
+		offers: Offer[]
 	) {
 		const dirPath = path.resolve(__dirname, '..', '..', 'data', siteName);
 		const pathName = path.join(dirPath, `${formatDateToFileName()}.json`);
-		const text = JSON.stringify(announcements, null, config.isDev ? '\t' : 0);
+		const text = JSON.stringify(offers, null, config.isDev ? '\t' : 0);
 		try {
 			await ensurePathExists(dirPath);
-			l.info(`About to save the ${siteName} announcements to "${pathName}".`);
+			l.info(`About to save the ${siteName} offers to "${pathName}".`);
 			await writeFile(pathName, text);
 		} catch (err) {
-			l.error(`Fail to save the ${siteName} announcements to the file.`, err);
+			l.error(`Fail to save the ${siteName} offers to the file.`, err);
 			throw err;
 		}
 	}
@@ -66,13 +66,13 @@ export class Scraper implements IScraper {
 	private async getSiteAnnouncements(
 		browser: Browser,
 		siteScraper: ISiteScraper
-	): Promise<[Announcement[], Error | null]> {
-		const announcements: Announcement[] = [];
+	): Promise<[Offer[], Error | null]> {
+		const offers: Offer[] = [];
 		const pageUrls: string[] = [config.urls[siteScraper.serviceName]];
 		let isDone = false;
 		let scrapedPagesCount = 0;
 		do {
-			let pageAnnouncements: Announcement[];
+			let pageAnnouncements: Offer[];
 			let currentPage: Page;
 			const url = pageUrls[0];
 
@@ -80,7 +80,7 @@ export class Scraper implements IScraper {
 			try {
 				currentPage = await this.getPage(browser, url, siteScraper);
 			} catch (err) {
-				return [announcements, err];
+				return [offers, err];
 			}
 			const $currentPage: cheerio.Root = await this.getPageContent(currentPage);
 
@@ -89,7 +89,7 @@ export class Scraper implements IScraper {
 				$currentPage,
 				currentPage
 			);
-			announcements.push(...pageAnnouncements);
+			offers.push(...pageAnnouncements);
 			scrapedPagesCount++;
 			pageUrls.shift();
 			if (isDone === false && scrapedPagesCount === 1) {
@@ -103,14 +103,14 @@ export class Scraper implements IScraper {
 
 		l.info(`[${siteScraper.serviceName}] Scraped pages count: ${scrapedPagesCount}.`);
 
-		return [announcements, null];
+		return [offers, null];
 	}
 
 	private async getScraperPageAds(
 		siteScraper: ISiteScraper,
 		$currentPage: cheerio.Root,
 		currentPage: Page
-	): Promise<[ads: Announcement[], isDone: boolean]> {
+	): Promise<[ads: Offer[], isDone: boolean]> {
 		if (siteScraper.scrapperDataType === ScraperDataType.Html) {
 			return siteScraper.getPageAds($currentPage);
 		}
@@ -157,7 +157,7 @@ export class Scraper implements IScraper {
 			let timeStop = timeStart();
 			const response = await page.goto(url);
 			timeStop(`[${siteScraper!.serviceName}] page.goto "${url}"`);
-			
+
 			if (!response) {
 				throw Error('Could not get response the page.');
 			}
@@ -181,11 +181,11 @@ export class Scraper implements IScraper {
 	}
 
 	private validateAnnouncements(
-		announcements: Announcement[],
+		offers: Offer[],
 		siteName: SiteName
-	): Announcement[] {
+	): Offer[] {
 		if (config.isDev) {
-			const withMissingData = announcements
+			const withMissingData = offers
 				.map((x) => {
 					if (
 						x.id === '' ||
@@ -209,11 +209,11 @@ export class Scraper implements IScraper {
 
 			if (withMissingData.length > 0) {
 				l.warn(
-					`[${siteName}] Some of the ads have missing data`,
-					withMissingData
+					`[${siteName}] Some of the ads have missing data`
+					// withMissingData
 				);
 			}
 		}
-		return announcements;
+		return offers;
 	}
 }

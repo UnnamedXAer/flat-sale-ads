@@ -1,9 +1,9 @@
 {
-	"name": "flat-sale-announcements",
+	"name": "flat-sale-offers",
 	"version": "1.0.0",
-	"description": "Local flat sale announcements",
+	"description": "Local flat sale offers",
 	"main": "dist/index.js",
-	"repository": "https://github.com/UnnamedXAer/flat-sale-announcements",
+	"repository": "https://github.com/UnnamedXAer/flat-sale-offers",
 	"author": "UnnamedXAer",
 	"license": "MIT",
 	"private": true,

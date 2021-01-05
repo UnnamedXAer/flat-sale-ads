@@ -1,7 +1,8 @@
 import { config } from '../config';
 import { DAY_MS } from '../constants';
+import globals from '../globals';
 import l from '../logger';
-import { SiteName, Announcement } from '../types';
+import { SiteName, Offer } from '../types';
 import { ISiteScraperByHtml, ScraperDataType, SiteScraperDebugInfo } from './types';
 
 export class RzeszowiakScraper implements ISiteScraperByHtml {
@@ -9,7 +10,7 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 	serviceName: SiteName = 'rzeszowiak';
 	scrapperDataType: ScraperDataType.Html = ScraperDataType.Html;
 
-	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean] {
+	getPageAds($page: cheerio.Root): [ads: Offer[], isDone: boolean] {
 		const $ads = $page('#content-center .normalbox');
 		const [pageAds, isDone] = this.parsePageAds($page, $ads);
 		return [pageAds, isDone];
@@ -18,8 +19,8 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 	parsePageAds(
 		$page: cheerio.Root,
 		$ads: cheerio.Cheerio
-	): [ads: Announcement[], isDone: boolean] {
-		const announcements: Announcement[] = [];
+	): [ads: Offer[], isDone: boolean] {
+		const offers: Offer[] = [];
 		let isDone = false;
 		for (let i = 0, len = $ads.length; i < len; i++) {
 			const $ad = $page($ads[i]);
@@ -51,22 +52,29 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 				'http://www.rzeszowiak.pl' +
 				$ad.find('.normalbox-body-left img').attr('src')!;
 
-			const description = $ad.find('.normalbox-body .normalbox-body-right').text().trim();
+			const description = $ad
+				.find('.normalbox-body .normalbox-body-right')
+				.text()
+				.trim();
 
-			const announcement: Announcement = {
-				id,
-				dt,
+			const offer: Offer = {
+				site: 'rzeszowiak',
 				_dt,
+				dt,
+				title,
+				price,
+				id,
+				url,
 				description,
 				imgUrl,
-				price,
-				title,
-				url,
-				_debugInfo: { ...this._debugInfo, idx: i }
+				_debugInfo: {
+					...this._debugInfo,
+					idx: i
+				}
 			};
-			announcements.push(announcement);
+			offers.push(offer);
 		}
-		return [announcements, isDone];
+		return [offers, isDone];
 	}
 
 	getAdTime(
@@ -96,14 +104,16 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 	parseAdTimeWithTodayWord(scrapedTime: string): Date {
 		const timeArr = scrapedTime.split(',').map((x) => x.trim());
 		if (timeArr.length < 2) {
+			// @i: most likely 'Invalid Date'
 			const date = new Date(scrapedTime);
 			l.silly(
 				`[${this.serviceName}] "${scrapedTime}" is in unsupported date format. To date resolvers to:`,
 				date
 			);
-			// @i: most likely 'Invalid Date',
-			// @i: maybe would be better to return "Invalid Date" explicitly to avoid strange results
-			return date;
+			if (isFinite(date.getTime()) === true) {
+				return date;
+			}
+			return new Date(globals.programStartTime - DAY_MS);
 		}
 		const [hour, minute] = timeArr[1].split(':').map((x) => x.trim());
 		const date = new Date();
@@ -112,7 +122,7 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 	}
 
 	checkIfAdTooOld(parsedDate: Date): boolean {
-		const oldestAllowedDate = Date.now() - (DAY_MS + 1000 * 30);
+		const oldestAllowedDate = globals.programStartTime - (DAY_MS + 1000 * 30);
 		const isTooOld = oldestAllowedDate > parsedDate.getTime();
 		return isTooOld;
 	}

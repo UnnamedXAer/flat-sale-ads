@@ -1,7 +1,8 @@
 import { config } from '../config';
 import { DAY_MS } from '../constants';
+import globals from '../globals';
 import l from '../logger';
-import { SiteName, Announcement } from '../types';
+import { SiteName, Offer } from '../types';
 import { ISiteScraperByHtml, ScraperDataType, SiteScraperDebugInfo } from './types';
 
 export class OlxScraper implements ISiteScraperByHtml {
@@ -12,7 +13,7 @@ export class OlxScraper implements ISiteScraperByHtml {
 	serviceName: SiteName = 'olx';
 	scrapperDataType: ScraperDataType.Html = ScraperDataType.Html;
 
-	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean] {
+	getPageAds($page: cheerio.Root): [ads: Offer[], isDone: boolean] {
 		const $ads = $page('table#offers_table').find('div.offer-wrapper>table');
 		const now = Date.now();
 		const [pageAds, isDone] = this.parsePageAds($page, $ads);
@@ -26,8 +27,8 @@ export class OlxScraper implements ISiteScraperByHtml {
 	parsePageAds(
 		$page: cheerio.Root,
 		$ads: cheerio.Cheerio
-	): [ads: Announcement[], isDone: boolean] {
-		const announcements: Announcement[] = [];
+	): [ads: Offer[], isDone: boolean] {
+		const offers: Offer[] = [];
 		let isDone = false;
 		for (let i = 0, len = $ads.length; i < len; i++) {
 			const $ad = $page($ads[i]);
@@ -55,21 +56,25 @@ export class OlxScraper implements ISiteScraperByHtml {
 			// @i: there is no description in ad card, it would require to open details to generate description.
 			const description = '';
 
-			const announcement: Announcement = {
-				id,
-				dt,
+			const offer: Offer = {
+				site: 'olx',
 				_dt,
+				dt,
+				title,
+				price,
+				id,
+				url,
 				description,
 				imgUrl,
-				price,
-				title,
-				url,
-				_debugInfo: { ...this._debugInfo, idx: i }
+				_debugInfo: {
+					...this._debugInfo,
+					idx: i
+				}
 			};
-			announcements.push(announcement);
+			offers.push(offer);
 		}
 
-		return [announcements, isDone];
+		return [offers, isDone];
 	}
 
 	getAdTime(
@@ -170,7 +175,7 @@ export class OlxScraper implements ISiteScraperByHtml {
 	checkIfAdTooOld(parsedDate: Date, isTodayOrYesterday: boolean): boolean {
 		// @i: now minus 24 hours with some padding (30s) for the program execution
 		// @i: the padding also solves midnight dates.
-		const oldestAllowedDate = Date.now() - (DAY_MS + 1000 * 30);
+		const oldestAllowedDate = globals.programStartTime - (DAY_MS + 1000 * 30);
 		// @info: for "dziś/wczoraj" we got the ad's hour and min therefore we can determine if is older then 24h
 		// @info: for other cases like "29 gru" the time will be 00:00, so some more hours will be included
 		if (

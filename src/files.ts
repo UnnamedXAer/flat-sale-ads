@@ -13,20 +13,3 @@ export async function ensurePathExists(dir: PathLike) {
 
 	return dir;
 }
-
-// export async function saveSiteAnnouncements(
-// 	siteName: SiteName,
-// 	announcements: Announcement[]
-// ) {
-// 	const dirPath = path.resolve(__dirname, '..', 'data', siteName);
-// 	const pathName = path.join(dirPath, `${formatDateToFileName()}.json`);
-// 	const text = JSON.stringify(announcements, null, config.isDev ? '\t' : 0);
-// 	try {
-// 		await ensurePathExists(dirPath);
-// 		l.info(`About to save the ${siteName} announcements to "${pathName}".`);
-// 		await writeFile(pathName, text);
-// 	} catch (err) {
-// 		l.error(`Fail to save the ${siteName} announcements to the file.`, err);
-// 		throw err;
-// 	}
-// }

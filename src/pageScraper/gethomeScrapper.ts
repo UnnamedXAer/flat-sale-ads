@@ -1,8 +1,9 @@
 import { Page } from 'puppeteer';
 import { config } from '../config';
 import { DAY_MS } from '../constants';
+import globals from '../globals';
 import l from '../logger';
-import { SiteName, Announcement } from '../types';
+import { SiteName, Offer } from '../types';
 import { ISiteScraperByObject, ScraperDataType, SiteScraperDebugInfo } from './types';
 
 // export class GethomeScraper implements ISiteScraperHtml {
@@ -11,7 +12,7 @@ import { ISiteScraperByObject, ScraperDataType, SiteScraperDebugInfo } from './t
 // 		url: ''
 // 	};
 // 	serviceName: SiteName = 'gethome';
-// 	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean] {
+// 	getPageAds($page: cheerio.Root): [ads: Offer[], isDone: boolean] {
 // 		const $ads = $page('.css-gidrht > div > a');
 // 		const [pageAds, isDone] = this.parsePageAds($page, $ads);
 // 		return [pageAds, isDone];
@@ -19,11 +20,11 @@ import { ISiteScraperByObject, ScraperDataType, SiteScraperDebugInfo } from './t
 // 	parsePageAds(
 // 		$page: cheerio.Root,
 // 		$ads: cheerio.Cheerio
-// 	): [ads: Announcement[], isDone: boolean] {
-// 		const announcements: Announcement[] = [];
+// 	): [ads: Offer[], isDone: boolean] {
+// 		const offers: Offer[] = [];
 // 		let isDone = false;
 // 		for (let i = 0, len = $ads.length; i < len; i++) {
-// 			const announcement = {} as Announcement;
+// 			const offer = {} as Offer;
 
 // 			const $ad = $page($ads[i]);
 // 			const ad = $ad[0] as cheerio.TagElement;
@@ -34,21 +35,21 @@ import { ISiteScraperByObject, ScraperDataType, SiteScraperDebugInfo } from './t
 // 			}
 
 // 			const attribs = (ad as cheerio.TagElement).attribs;
-// 			announcement.url = 'https://gethome.pl' + attribs.href;
+// 			offer.url = 'https://gethome.pl' + attribs.href;
 
 // 			const idIdx = attribs.href.lastIndexOf('-');
 // 			const id = attribs.href.slice(idIdx + 1, attribs.href.length - 1);
-// 			announcement.id = id;
+// 			offer.id = id;
 
 // 			const title = attribs.href.slice('/oferta/'.length, idIdx);
-// 			announcement.title = title.replace(/-/g, ' ').replace('m2', 'm²');
+// 			offer.title = title.replace(/-/g, ' ').replace('m2', 'm²');
 
 // 			let [adDate, _isAddTooOld] = this.getAdTime($ad);
 // 			// isDone = _isAddTooOld;
 // 			// if (isDone === true) {
 // 			// 	break;
 // 			// }
-// 			announcement.dt = adDate;
+// 			offer.dt = adDate;
 // 			let description = '';
 
 // 			const addElements = ad.childNodes as cheerio.TagElement[];
@@ -113,10 +114,10 @@ import { ISiteScraperByObject, ScraperDataType, SiteScraperDebugInfo } from './t
 // 			if (priceText !== +priceText + '') {
 // 				l.debug(
 // 					`[${this.serviceName}] Price "${priceText}" is not a number.`,
-// 					announcement.url
+// 					offer.url
 // 				);
 // 			}
-// 			announcement.price = priceText;
+// 			offer.price = priceText;
 
 // 			const adLocation = (((detailsElements.childNodes as cheerio.TagElement[])[2]
 // 				.childNodes as cheerio.TagElement[])[0]!
@@ -124,12 +125,12 @@ import { ISiteScraperByObject, ScraperDataType, SiteScraperDebugInfo } from './t
 
 // 			description += '\n' + adLocation;
 
-// 			announcement.description = description;
+// 			offer.description = description;
 // 			this._debugInfo.idx = i;
-// 			announcement._debugInfo = { ...this._debugInfo };
-// 			announcements.push(announcement);
+// 			offer._debugInfo = { ...this._debugInfo };
+// 			offers.push(offer);
 // 		}
-// 		return [announcements, isDone];
+// 		return [offers, isDone];
 // 	}
 
 // 	getAdTime($ad: cheerio.Cheerio): [adTime: string, isDone: boolean] {
@@ -184,8 +185,8 @@ import { ISiteScraperByObject, ScraperDataType, SiteScraperDebugInfo } from './t
 // 	}
 // }
 
-interface GethomeAdsInfo {
-	ads: Announcement[];
+interface GethomeOffersInfo {
+	offers: Offer[];
 	pageNum: number;
 	pageCount: number;
 	isDone: boolean;
@@ -257,12 +258,11 @@ export class GethomeScraper implements ISiteScraperByObject {
 		pageCount: 1
 	};
 
-	async getPageAds(page: Page): Promise<[ads: Announcement[], isDone: boolean]> {
-		const now = Date.now();
+	async getPageAds(page: Page): Promise<[ads: Offer[], isDone: boolean]> {
 		const adsInfo = await this.getPageAdsInfo(page);
 		this.info.pageCount = adsInfo.pageCount;
 
-		return [adsInfo.ads, adsInfo.isDone];
+		return [adsInfo.offers, adsInfo.isDone];
 	}
 
 	async getPageDataObject(page: Page): Promise<GethomeData['offerList']> {
@@ -272,36 +272,36 @@ export class GethomeScraper implements ISiteScraperByObject {
 		return data.offerList;
 	}
 
-	async getPageAdsInfo(page: Page): Promise<GethomeAdsInfo> {
+	async getPageAdsInfo(page: Page): Promise<GethomeOffersInfo> {
 		const offerList = await this.getPageDataObject(page);
 		const { offers: offersInfo } = offerList;
-		const { offers } = offersInfo;
+		const { offers: offersData } = offersInfo;
 
 		const now = Date.now();
 		// @todo: use link from offers
-		const [announcements, isDone] = this.parsePageAds(offers, page.url());
+		const [siteOffers, isDone] = this.parsePageAds(offersData, page.url());
 		l.info(
 			`[${this.serviceName}]->parsePageAds execution time: ${Date.now() - now} ms.`
 		);
 
-		const adsInfo: GethomeAdsInfo = {
-			ads: announcements,
+		const adsInfo: GethomeOffersInfo = {
+			offers: siteOffers,
 			pageNum: offersInfo.page,
 			pageCount: offersInfo.pageCount,
 			isDone: isDone
-		} as GethomeAdsInfo;
+		} as GethomeOffersInfo;
 
 		return adsInfo;
 	}
 
 	parsePageAds(
-		offers: GethomeOffer[],
+		offersData: GethomeOffer[],
 		pageUrl: string
-	): [ads: Announcement[], isDone: boolean] {
-		const announcements: Announcement[] = [];
+	): [ads: Offer[], isDone: boolean] {
+		const offers: Offer[] = [];
 		let isDone = false;
-		for (let i = 0, offersCount = offers.length; i < offersCount; i++) {
-			const offer = offers[i];
+		for (let i = 0, offersCount = offersData.length; i < offersCount; i++) {
+			const offer = offersData[i];
 			const [_dt, dt, _isDone] = this.getAdTime(offer.created_at);
 			if (_isDone === true) {
 				isDone = true;
@@ -346,23 +346,24 @@ export class GethomeScraper implements ISiteScraperByObject {
 			const price = this.getAdPrice(offer.price.total);
 			const id = offer.id;
 
-			const announcement: Announcement = {
+			const siteOffer: Offer = {
+				site: 'gethome',
 				_dt,
 				dt,
-				description,
 				title,
-				url,
-				imgUrl,
 				price,
 				id,
+				url,
+				description,
+				imgUrl,
 				_debugInfo: {
 					...this._debugInfo,
 					idx: i
 				}
 			};
-			announcements.push(announcement);
+			offers.push(siteOffer);
 		}
-		return [announcements, isDone];
+		return [offers, isDone];
 	}
 
 	getAdTime(offerTime: string): [adDate: Date, adDateText: string, isDone: boolean] {
@@ -393,6 +394,6 @@ export class GethomeScraper implements ISiteScraperByObject {
 	}
 
 	checkIfAdTooOld(adDate: Date): boolean {
-		return adDate.getTime() < Date.now() - (1 * DAY_MS + 1000 * 30);
+		return adDate.getTime() < globals.programStartTime - 1 * DAY_MS;
 	}
 }

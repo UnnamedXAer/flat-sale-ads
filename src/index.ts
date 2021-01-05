@@ -2,11 +2,9 @@ require('dotenv').config();
 import pp from 'puppeteer';
 import { config } from './config';
 import { analyzeData } from './dataAnalyzer/uniqueAds';
+import globals from './globals';
 import l, { lTime } from './logger';
 import { Scraper } from './pageScraper/scraper';
-
-const programStartTime = Date.now();
-l.info('Program START');
 
 async function startScraping() {
 	const _config = config;
@@ -38,17 +36,23 @@ async function startAnalyzing() {
 	analyzeData(['gethome', 'olx', 'otodom', 'rzeszowiak']);
 }
 
-const start = startScraping;
-// const start = startAnalyzing;
+const main = async () => {
+	globals.programStartTime = Date.now();
+	l.info('Program START');
 
-start()
+	return startScraping();
+	// return startAnalyzing();
+	throw new Error('Missing Program!')
+};
+
+main()
 	.catch((err) => {
 		l.error(err);
 		l.fatal('Program crashed. Please check the previous console output.');
 		process.exit(1);
 	})
 	.finally(() => {
-		const executionTime = Date.now() - programStartTime;
+		const executionTime = Date.now() - globals.programStartTime;
 		l.info('Total execution time: ', lTime(executionTime));
 		l.info('Program END!');
 	});

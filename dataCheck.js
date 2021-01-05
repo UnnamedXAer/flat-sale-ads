@@ -1,4 +1,4 @@
-const data = require('./data/gethome/2021-01-04-15-05.json');
+const data = require('./data/analyzed/2021-01-05-21-52_1609879929615.json');
 
 const prop = 'url';
 const values = data.map((x) => x[prop]);

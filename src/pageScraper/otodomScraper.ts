@@ -1,7 +1,8 @@
 import { config } from '../config';
 import { DAY_MS } from '../constants';
+import globals from '../globals';
 import l from '../logger';
-import { SiteName, Announcement } from '../types';
+import { SiteName, Offer } from '../types';
 import { ISiteScraperByHtml, ScraperDataType, SiteScraperDebugInfo } from './types';
 
 export class OtodomScraper implements ISiteScraperByHtml {
@@ -12,7 +13,7 @@ export class OtodomScraper implements ISiteScraperByHtml {
 	serviceName: SiteName = 'otodom';
 	scrapperDataType: ScraperDataType.Html = ScraperDataType.Html;
 
-	getPageAds($page: cheerio.Root): [ads: Announcement[], isDone: boolean] {
+	getPageAds($page: cheerio.Root): [ads: Offer[], isDone: boolean] {
 		const $ads = $page('.col-md-content.section-listing__row-content').find(
 			'article.offer-item'
 		);
@@ -22,8 +23,8 @@ export class OtodomScraper implements ISiteScraperByHtml {
 	parsePageAds(
 		$page: cheerio.Root,
 		$ads: cheerio.Cheerio
-	): [ads: Announcement[], isDone: boolean] {
-		const announcements: Announcement[] = [];
+	): [ads: Offer[], isDone: boolean] {
+		const offers: Offer[] = [];
 		let isDone = false;
 		for (let i = 0, len = $ads.length; i < len; i++) {
 			const $ad = $page($ads[i]);
@@ -81,32 +82,35 @@ export class OtodomScraper implements ISiteScraperByHtml {
 				}
 			});
 
-			const announcement: Announcement = {
-				id,
-				dt,
+			const offer: Offer = {
+				site: 'otodom',
 				_dt,
+				dt,
+				title,
+				price,
+				id,
+				url,
 				description,
 				imgUrl,
-				price,
-				title,
-				url,
-				_debugInfo: { ...this._debugInfo, idx: i }
+				_debugInfo: {
+					...this._debugInfo,
+					idx: i
+				}
 			};
 
-			announcements.push(announcement);
+			offers.push(offer);
 		}
-		return [announcements, isDone];
+		return [offers, isDone];
 	}
 
 	getAdTime(
 		$ad: cheerio.Cheerio
 	): [adDateText: Date, adDateText: string, isDone: boolean] {
 		const currentDate = new Date();
-		// ! @todo:
-		// @thought: mb it would be more useful to return "earliest" date,
+		// @thought: it is probably  more useful to return "earliest" date,
 		// @thought: in this case it would be 3 days back.
-		// @thought: it could be used in comparison
-		const adDate = this.parseAdTime('--invalid-date--');
+		// @thought: instead of null, it may have some value in comparison
+		const adDate = this.parseAdTime('workaround missing ad time');
 		return [
 			// @i: we do not have a date in any format in the ad
 			adDate,
@@ -118,12 +122,11 @@ export class OtodomScraper implements ISiteScraperByHtml {
 	}
 
 	parseAdTime(scrapedTime: string): Date {
-		return new Date(scrapedTime);
+		return new Date(new Date(globals.programStartTime - 3 * DAY_MS));
 	}
 
 	checkIfAdTooOld(adDate: Date): boolean {
-		// @i: not date found in the ad
-		return false;
+		return adDate.getTime() > globals.programStartTime - 3 * DAY_MS;
 	}
 
 	getUrlsToNextPages($page: cheerio.Root): string[] {
