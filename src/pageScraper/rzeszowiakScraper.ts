@@ -111,14 +111,29 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 
 	getUrlsToNextPages($page: cheerio.Root): string[] {
 		const pagesUrls: string[] = [];
-		const pagesLinkElements = $page('a.oDnn');
-		const pagesCount = pagesLinkElements.length;
+		const pagesInfo = $page('#oDn > #oDnns').text();
+		const pagesCount = +pagesInfo.split(' z ')[1].trim();
 
-		for (let i = 0; i < pagesCount; i++) {
-			const attr =
-				'http://www.rzeszowiak.pl' +
-				(pagesLinkElements[i] as cheerio.TagElement).attribs['href'];
-			pagesUrls.push(attr);
+		const baseUrl = config.urls.rzeszowiak;
+
+		const staticUrlParts = baseUrl.split(/\d{10,}/);
+		const searchNumbers = baseUrl.slice(
+			staticUrlParts[0].length,
+			baseUrl.indexOf(staticUrlParts[1])
+		);
+		const staticSearchNumbersParts = [
+			searchNumbers.slice(0, 4),
+			searchNumbers.slice(6)
+		];
+
+		for (let i = 2; i <= pagesCount; i++) {
+			pagesUrls.push(
+				staticUrlParts[0] +
+					staticSearchNumbersParts[0] +
+					(i < 10 ? '0' + i : i) +
+					staticSearchNumbersParts[1] +
+					staticUrlParts[1]
+			);
 		}
 
 		l.debug(
