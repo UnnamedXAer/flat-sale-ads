@@ -13,6 +13,7 @@
 		"test": "jest",
 		"prestart": "yarn run build",
 		"start": "node dist/index.js",
+		"start:dist": "node dist/index.js",
 		"start:dev": "nodemon"
 	},
 	"devDependencies": {

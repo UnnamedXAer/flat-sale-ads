@@ -1,7 +1,7 @@
 require('dotenv').config();
 import pp from 'puppeteer';
 import { config } from './config';
-import { analyzeData } from './dataAnalyzer/uniqueAds';
+import { analyzeData } from './dataAnalyzer/uniqueOffers';
 import globals from './globals';
 import l, { lTime } from './logger';
 import { Scraper } from './pageScraper/scraper';

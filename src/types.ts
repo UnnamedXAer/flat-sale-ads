@@ -35,8 +35,15 @@ export interface Offer {
 	_debugInfo?: SiteScraperDebugInfo;
 }
 
-export interface SiteOffers {
+export interface DirectoryOffers {
 	offers: Offer[];
-	siteName: SiteName;
+	directory: DataDirectory;
 	scrapedAt: Date;
+}
+
+export type DataDirectory = SiteName | 'analyzed' | 'visualization';
+
+export interface SimplyFile {
+	createTime: number;
+	fileName: string;
 }
