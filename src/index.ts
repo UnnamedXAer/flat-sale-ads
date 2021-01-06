@@ -5,8 +5,10 @@ import { analyzeData } from './dataAnalyzer/uniqueOffers';
 import globals from './globals';
 import l, { lTime } from './logger';
 import { Scraper } from './pageScraper/scraper';
+import { timeStart } from './performance';
+import { createVisualization } from './visualization/visualization';
 
-async function startScraping() {
+async function start_scrape() {
 	const _config = config;
 	const browserLaunchOptions: pp.LaunchOptions = {
 		headless: true,
@@ -31,20 +33,26 @@ async function startScraping() {
 	await browser.close();
 }
 
-async function startAnalyzing() {
+async function start_analyze() {
 	const _config = config;
 	analyzeData(['gethome', 'olx', 'otodom', 'rzeszowiak']);
 }
-
-const main = async () => {
+async function start_generateVisualization() {
+	const _config = config;
+	createVisualization();
+}
+const main = () => {
+	timeStop = timeStart('main');
 	globals.programStartTime = Date.now();
 	l.info('Program START');
 
-	return startScraping();
-	// return startAnalyzing();
-	throw new Error('Missing Program!')
+	// return start_scrape();
+	// return start_analyze();
+	return start_generateVisualization();
+	throw new Error('Missing Program!');
 };
 
+let timeStop: Function;
 main()
 	.catch((err) => {
 		l.error(err);
@@ -52,6 +60,7 @@ main()
 		process.exit(1);
 	})
 	.finally(() => {
+		timeStop();
 		const executionTime = Date.now() - globals.programStartTime;
 		l.info('Total execution time: ', lTime(executionTime));
 		l.info('Program END!');

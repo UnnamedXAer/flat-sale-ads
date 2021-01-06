@@ -8,4 +8,6 @@ data
 coverage
 
 *.html
+!template.html
+!templateOffer.html
 *.log
