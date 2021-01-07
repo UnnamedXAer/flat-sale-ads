@@ -39,20 +39,36 @@ export async function createVisualization() {
 	timeStop = timeStart(`Generate html of the offers (${offers.length})`);
 	offers.forEach((offer, i) => {
 		const $offer = $offerTemplate.clone();
-		const link = $offer.find(offerClasses.link);
-		link.attr('href', offer.url);
-		const image = $offer.find(offerClasses.image);
-		image.attr('src', offer.imgUrl);
-		const title = $offer.find(offerClasses.title);
-		title.text(offer.title);
-		const price = $offer.find(offerClasses.price);
-		price.text(offer.price);
-		const date = $offer.find(offerClasses.date);
-		date.text(offer.dt);
-		const scrape = $offer.find(offerClasses.scrape);
-		scrape.text('null');
-		const site = $offer.find(offerClasses.site);
-		site.text(offer.site);
+		const $link = $offer.find(offerClasses.link);
+		$link.attr('href', offer.url);
+		const $image = $offer.find(offerClasses.image);
+		$image.attr('src', offer.imgUrl);
+		const $title = $offer.find(offerClasses.title);
+		$title.text(offer.title);
+		const $price = $offer.find(offerClasses.price);
+
+		const priceArr = offer.price.split('.');
+		let price = priceArr[0]
+			.split('')
+			.reverse()
+			.reduce((value, element, idx) => {
+				if (idx === 3 || idx === 6) {
+					return element + ' ' + value;
+				}
+				return element + value;
+			});
+		if (priceArr.length > 1) {
+			price += '.' + priceArr[1];
+		}
+		$price.text(price);
+		const $date = $offer.find(offerClasses.date);
+		$date.text(offer.dt);
+		const $description = $offer.find(offerClasses.description);
+		$description.html(offer.description.replace(/\n/g, '<br />'));
+		const $scrape = $offer.find(offerClasses.scrape);
+		$scrape.text('null');
+		const $site = $offer.find(offerClasses.site);
+		$site.text(offer.site);
 		$offer.appendTo($offerList);
 	});
 	timeStop();

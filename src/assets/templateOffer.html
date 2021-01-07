@@ -1,17 +1,22 @@
 <article class="offer">
-	<a class="offer-link" target="_blank">
-		<div><img class="offer-image" /></div>
-		<div>
+	<div class="offer-head">
+		<div class="offer-image-wrapper">
+			<img class="offer-image" />
+		</div>
+		<a class="offer-link" target="_blank">
 			<h3 class="offer-title"></h3>
 			<div class="offer-details">
 				<p class="offer-date"></p>
 				<p class="offer-price"></p>
 			</div>
-			<p class="offer-description"></p>
-		</div>
-	</a>
-	<footer>
-		<p class="offer-scrape-date"></p>
+		</a>
+	</div>
+	<div class="offer-description-wrapper" >
+		<span onclick="expandDescription(this)"></span>
+		<p class="offer-description"></p>
+	</div>
+	<footer class="offer-footer">
+		<!-- <p class="offer-scrape-date"></p> -->
 		<p class="offer-site"></p>
 	</footer>
 </article>

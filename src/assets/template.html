@@ -9,9 +9,14 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 	<style>
+		* {
+			box-sizing: border-box;
+		}
+
 		body {
 			background-color: #444;
 			color: rgb(236, 236, 236);
+			font: 1rem 'Fira Sans', sans-serif;
 		}
 
 		.header {
@@ -21,6 +26,7 @@
 
 		.main {
 			max-width: 1000px;
+			margin: 0 auto;
 		}
 
 		.offer-list {
@@ -33,26 +39,126 @@
 		.offer {
 			width: 100%;
 			border-bottom: 1px solid rgb(202, 202, 202);
+			padding: 16px 16px 0 16px;
 		}
 
-		.offer>div {
-			flex: 1;
+		.offer-head {
 			display: flex;
-			flex-direction: 1;
+			flex-direction: row;
 		}
 
 		.offer-link {
-			display: block;
+			margin-left: 8px;
 			text-decoration: none;
+			color: inherit;
 			width: 100%;
+			background-color: rgb(73, 73, 73);
+			padding: 16px 16px 16px 16px;
+		}
+
+		.offer-link h3 {
+			margin-block-start: 0.0em;
+			margin-block-end: 0.3em;
+		}
+
+		.offer-link p {
+			margin-block-start: 0em;
+			margin-block-end: 0em;
+		}
+
+		.offer-link:hover {
+			background-color: rgb(77, 77, 77);
+		}
+
+		.offer-price {
+			font-weight: bold;
+			font-size: 1.2em;
+		}
+
+		.offer-price::after {
+			content: " zł";
+		}
+
+		.offer-image-wrapper {
+			display: flex;
+			justify-items: center;
+			align-items: flex-start;
+			width: 150px;
 		}
 
 		.offer-image {
-			width: 100px;
-			height: 100px;
+			min-width: 100px;
+			min-height: 100px;
+			max-width: 150px;
+			max-height: 150px;
 		}
 
-		.offer-details {}
+		.offer-details {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+
+		.offer-description-wrapper {
+			display: flex;
+			flex-direction: row-reverse;
+			align-items: stretch;
+		}
+
+		.offer-description-wrapper>span {
+			width: 32px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-weight: bolder;
+			background-color: rgb(73, 73, 73);
+			margin-block-start: 1em;
+			margin-block-end: 1em;
+			margin-left: 16px;
+		}
+
+		.offer-description-wrapper>span:hover {
+			background-color: rgb(77, 77, 77);
+
+		}
+
+		.offer-description-wrapper>span::after {
+			content: '>';
+			transform: rotate(90deg);
+		}
+
+		.offer-description-wrapper.expanded>span::after {
+			content: '<';
+			transform: rotate(90deg);
+		}
+
+		.offer-description {
+			flex: 1;
+			border-bottom: 1px solid;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			display: -webkit-box;
+			-webkit-line-clamp: 6;
+			-webkit-box-orient: vertical;
+		}
+
+		.expanded>.offer-description {
+			display: initial;
+			-webkit-line-clamp: unset;
+			-webkit-box-orient: unset;
+		}
+
+
+		.offer-footer p {
+			margin-block-start: 0em;
+			margin-block-end: 0.2em;
+		}
+
+		.offer-site {
+			font-style: italic;
+			font-size: 0.9em;
+			text-transform: capitalize;
+		}
 	</style>
 
 </head>
@@ -70,5 +176,10 @@
 		<a href="https://github.com/UnnamedXAer">UnnamedXAer</a>
 	</footer>
 </body>
+<script>
+	function expandDescription(thisEl) {
+		thisEl.parentNode.classList.toggle('expanded');
+	}
+</script>
 
 </html>

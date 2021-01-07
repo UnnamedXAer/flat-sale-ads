@@ -46,10 +46,13 @@ const main = () => {
 	globals.programStartTime = Date.now();
 	l.info('Program START');
 
-	// return start_scrape();
-	// return start_analyze();
-	return start_generateVisualization();
-	throw new Error('Missing Program!');
+	return Promise.all([
+		//
+		// start_scrape(),
+		// start_analyze(),
+		start_generateVisualization()
+		//
+	]);
 };
 
 let timeStop: Function;
