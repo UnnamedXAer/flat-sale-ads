@@ -1,3 +1,4 @@
+import { TLogLevelName } from 'tslog';
 import { SiteScraperDebugInfo } from './pageScraper/types';
 
 export type NODE_ENV = 'production' | 'development' | 'test';
@@ -12,7 +13,7 @@ export interface Config {
 	envPrefix: EnvPrefix;
 	scrapeSiteTimeout: number;
 	startMaximized: boolean;
-	logsLevel: number;
+	logsLevel: TLogLevelName;
 	appTemporaryDataFolder: string;
 	dateTimeFormatParams: [string, Intl.DateTimeFormatOptions];
 	dateFormatParams: [string, Intl.DateTimeFormatOptions];

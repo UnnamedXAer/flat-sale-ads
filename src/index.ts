@@ -35,24 +35,20 @@ async function start_scrape() {
 
 async function start_analyze() {
 	const _config = config;
-	analyzeData(['gethome', 'olx', 'otodom', 'rzeszowiak']);
+	await analyzeData(['gethome', 'olx', 'otodom', 'rzeszowiak']);
 }
 async function start_generateVisualization() {
 	const _config = config;
-	createVisualization();
+	await createVisualization();
 }
-const main = () => {
+const main = async () => {
 	timeStop = timeStart('main');
 	globals.programStartTime = Date.now();
 	l.info('Program START');
 
-	return Promise.all([
-		//
-		// start_scrape(),
-		// start_analyze(),
-		start_generateVisualization()
-		//
-	]);
+	await start_scrape();
+	await start_analyze();
+	await start_generateVisualization();
 };
 
 let timeStop: Function;
