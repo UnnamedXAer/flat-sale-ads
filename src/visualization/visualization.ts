@@ -6,12 +6,14 @@ import {
 	ensurePathExists,
 	getDataDirPath,
 	getDirFiles,
-	getFileData,
+	readOffersFile,
+	mapFileData,
 	sortFilesByDate
 } from '../files';
 import { formatDateToFileName } from '../formatDate';
 import l from '../logger';
 import { timeStart } from '../performance';
+import { OffersInfo } from '../types';
 
 const offerClasses = {
 	link: '.offer-link',
@@ -26,53 +28,20 @@ const offerClasses = {
 
 export async function createVisualization() {
 	let timeStop = timeStart('Read data for the visualization');
-	const offers = await getDataForVisualization();
+	const offersInfo = await getDataForVisualization();
 	timeStop();
 	timeStop = timeStart('Read the html templates');
-	const [pageHtml, offerHtml] = await getTemplates();
+	const [pageHtml, offerTemplateHtml] = await getTemplates();
 	timeStop();
 	timeStop = timeStart('Load html template into the cheerio');
 	const $ = cheerio.load(pageHtml);
 	timeStop();
+	timeStop = timeStart(`Generate html of the offers (${offersInfo?.offers.length})`);
 	const $offerList = $('.offer-list');
-	const $offerTemplate = $(offerHtml);
-	timeStop = timeStart(`Generate html of the offers (${offers.length})`);
-	offers.forEach((offer, i) => {
-		const $offer = $offerTemplate.clone();
-		const $link = $offer.find(offerClasses.link);
-		$link.attr('href', offer.url);
-		const $image = $offer.find(offerClasses.image);
-		$image.attr('src', offer.imgUrl);
-		const $title = $offer.find(offerClasses.title);
-		$title.text(offer.title);
-		const $price = $offer.find(offerClasses.price);
-
-		const priceArr = offer.price.split('.');
-		let price = priceArr[0]
-			.split('')
-			.reverse()
-			.reduce((value, element, idx) => {
-				if (idx === 3 || idx === 6) {
-					return element + ' ' + value;
-				}
-				return element + value;
-			});
-		if (priceArr.length > 1) {
-			price += '.' + priceArr[1];
-		}
-		$price.text(price);
-		const $date = $offer.find(offerClasses.date);
-		$date.text(offer.dt);
-		const $description = $offer.find(offerClasses.description);
-		$description.html(offer.description.replace(/\n/g, '<br />'));
-		const $scrape = $offer.find(offerClasses.scrape);
-		$scrape.text('null');
-		const $site = $offer.find(offerClasses.site);
-		$site.text(offer.site);
-		$offer.appendTo($offerList);
-	});
+	const $offerTemplateHtml = $(offerTemplateHtml);
+	fillOffersList($offerList, $offerTemplateHtml, offersInfo);
 	timeStop();
-	timeStop = timeStart('Retrieve html complete html');
+	timeStop = timeStart('Retrieve the complete html.');
 	const html = $.html();
 	timeStop();
 
@@ -89,20 +58,20 @@ export async function createVisualization() {
 	timeStop();
 }
 
-async function getDataForVisualization() {
-	const [dirFiles, directoryPath] = await getDirFiles('analyzed');
+async function getDataForVisualization(): Promise<OffersInfo | null> {
+	const [dirFiles, directoryPath] = await getDirFiles('all_offers');
 	const files = sortFilesByDate(dirFiles);
 
 	if (dirFiles.length === 0) {
 		l.warn('There is no files with data for the visualization.');
-		return [];
+		return null;
 	}
 
 	const youngestFile = files[files.length - 1];
 
-	const fileData = await getFileData(directoryPath, youngestFile.fileName);
+	const fileData = await readOffersFile(directoryPath, youngestFile.fileName);
 
-	return fileData;
+	return mapFileData(fileData);
 }
 
 async function getTemplates(): Promise<[page: string, offer: string]> {
@@ -110,4 +79,52 @@ async function getTemplates(): Promise<[page: string, offer: string]> {
 	const page = await readFile(path.join(dirPath, 'template.html'), 'utf-8');
 	const offer = await readFile(path.join(dirPath, 'templateOffer.html'), 'utf-8');
 	return [page, offer];
+}
+
+export function fillOffersList(
+	$offerList: cheerio.Cheerio,
+	$offerTemplate: cheerio.Cheerio,
+	offersInfo: OffersInfo | null
+) {
+	if (offersInfo === null || offersInfo.offers.length === 0) {
+		$offerList.html(`<p>There is no data to show 😱</p>`);
+	} else {
+		const offers = offersInfo.offers;
+		offers.forEach((offer) => {
+			const $offer = $offerTemplate.clone();
+			const $link = $offer.find(offerClasses.link);
+			$link.attr('href', offer.url);
+			const $image = $offer.find(offerClasses.image);
+			$image.attr('src', offer.imgUrl);
+			const $title = $offer.find(offerClasses.title);
+			$title.text(offer.title);
+			const $price = $offer.find(offerClasses.price);
+
+			const priceArr = offer.price.split('.');
+			let price = priceArr[0]
+				.split('')
+				.reverse()
+				.reduce((value, element, idx) => {
+					if (idx === 3 || idx === 6) {
+						return element + ' ' + value;
+					}
+					return element + value;
+				});
+			if (priceArr.length > 1) {
+				price += '.' + priceArr[1];
+			}
+			$price.text(price);
+			const $date = $offer.find(offerClasses.date);
+			$date.text(offer.dt);
+			const $description = $offer.find(offerClasses.description);
+			$description.html(offer.description.replace(/\n/g, '<br />'));
+			const $scrape = $offer.find(offerClasses.scrape);
+			$scrape.text('null');
+			const $site = $offer.find(offerClasses.site);
+			$site.text(offer.site);
+			$offer.appendTo($offerList);
+		});
+	}
+
+	return $offerList;
 }

@@ -2,21 +2,27 @@ import { getDataDirLatestOffers } from '../files';
 import l from '../logger';
 import { DataDirectory, Offer } from '../types';
 
-export function compareOffers(uniqueOffer: Offer, currentOffer: Offer) {
+export function assertSameOffers(uniqueOffer: Offer, currentOffer: Offer): boolean {
 	const siteEqual = assertEqualOfferProp(uniqueOffer, currentOffer, 'site');
-	if (assertEqualOfferProp(uniqueOffer, currentOffer, 'title')) {
-		if (
-			siteEqual &&
-			assertEqualOfferProp(uniqueOffer, currentOffer, 'description') === false
-		) {
-			return false;
-		}
-		//true?
-	}
 
 	if (siteEqual && assertEqualOfferProp(uniqueOffer, currentOffer, 'id')) {
 		return true;
 	}
+
+	if (assertEqualOfferProp(uniqueOffer, currentOffer, 'title')) {
+		if (siteEqual) {
+			if (assertEqualOfferProp(uniqueOffer, currentOffer, 'description')) {
+				return true;
+			}
+			return false;
+		}
+		if (assertEqualOfferProp(uniqueOffer, currentOffer, 'price')) {
+			return true;
+		}
+		return false;
+	}
+
+	return false;
 }
 
 export function assertEqualOfferProp(
@@ -26,21 +32,20 @@ export function assertEqualOfferProp(
 ): boolean {
 	let val1 = obj1[prop];
 	let val2 = obj2[prop];
-	if (prop === 'description') {
-		val1 = (val1 as string).slice(0, 150);
+	if (typeof val1 === 'string') {
+		val1 = val1.toLowerCase();
+		val2 = (val2 as string).toLowerCase();
+		if (prop === 'description') {
+			val1 = (val1 as string).slice(0, 150);
 
-		val2 = (val2 as string).slice(0, 150);
+			val2 = (val2 as string).slice(0, 150);
+		}
 	}
 	let output = val1 === val2;
 	if (!val1 && !val2) {
 		output = false;
 	}
 
-	l.silly(
-		`\n${output}\n1. ${val1
-			?.toString()
-			.replace(/\n/g, '|')}\n2. ${val2?.toString().replace(/\n/g, '|')}`
-	);
 
 	return output;
 }
@@ -63,7 +68,7 @@ export async function getOffersUnion(
 	for (let j = 0; j < currentOffers.length; j++) {
 		const currentOffer = currentOffers[j];
 		const idx = offers.findIndex((uniqueOffer) =>
-			compareOffers(uniqueOffer, currentOffer)
+			assertSameOffers(uniqueOffer, currentOffer)
 		);
 
 		l.debug({
@@ -79,7 +84,7 @@ export async function getOffersUnion(
 			offers.push(currentOffer);
 			continue;
 		}
-		// @check if same page compare dates, if same day push it,
+
 		const offer = offers[idx];
 		const differentProps: (keyof Offer)[] = [];
 		const adKeys = (Object.keys(offer) as unknown) as typeof differentProps;
@@ -100,7 +105,8 @@ export async function getOffersUnion(
 		}
 
 		if (currentOfferTime < uniqOfferTime) {
-			// we assume that this is the same offer.
+			// @i: we assume that this is the same offer so we wont to save newer one.
+			// @improvement: check if there is no missing data in fields and do not save if there are in currentOffer.
 			offers[idx] = currentOffer;
 		}
 	}
@@ -108,7 +114,7 @@ export async function getOffersUnion(
 	return offers;
 }
 
-export async function mergeUniqOffers(
+export async function makeOffersUnion(
 	previousOffersUnion: Offer[],
 	dataDirectory: DataDirectory
 ) {

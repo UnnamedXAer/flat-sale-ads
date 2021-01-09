@@ -9,7 +9,6 @@ import { timeStart } from './performance';
 import { createVisualization } from './visualization/visualization';
 
 async function start_scrape() {
-	const _config = config;
 	const browserLaunchOptions: pp.LaunchOptions = {
 		headless: true,
 		timeout: 0,
@@ -17,14 +16,14 @@ async function start_scrape() {
 		args: [],
 		devtools: false
 	};
-	if (_config.startMaximized === true) {
+	if (config.startMaximized === true) {
 		browserLaunchOptions.args!.push('--start-maximized');
 		browserLaunchOptions.headless = false;
 		browserLaunchOptions.devtools = true;
 	}
 	const browser = await pp.launch(browserLaunchOptions);
 	const scraper = new Scraper();
-	await scraper.scrapeAnnouncements(browser, [
+	await scraper.scrapeOffers(browser, [
 		'olx', //
 		'rzeszowiak', //
 		'otodom', //
@@ -34,17 +33,16 @@ async function start_scrape() {
 }
 
 async function start_analyze() {
-	const _config = config;
 	await analyzeData(['gethome', 'olx', 'otodom', 'rzeszowiak']);
 }
 async function start_generateVisualization() {
-	const _config = config;
 	await createVisualization();
 }
 const main = async () => {
 	timeStop = timeStart('main');
 	globals.programStartTime = Date.now();
 	l.info('Program START');
+	const _config = config;
 
 	await start_scrape();
 	await start_analyze();

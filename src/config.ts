@@ -25,7 +25,7 @@ export const createConfig = (process: NodeJS.Process): Config => {
 		startMaximized: process.env.START_BROWSER_MAXIMIZED === 'TRUE',
 		logsLevel:
 			(process.env.LOGS_LEVEL as Config['logsLevel'] | undefined) ||
-			(process.env.NODE_ENV !== 'production' ? 'warn' : 'silly'),
+			(process.env.NODE_ENV === 'production' ? 'warn' : 'silly'),
 		appTemporaryDataFolder: path.join(
 			process.env.LOCALAPPDATA
 				? process.env.LOCALAPPDATA

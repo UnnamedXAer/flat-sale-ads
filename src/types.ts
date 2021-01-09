@@ -6,7 +6,12 @@ export type EnvPrefix = 'test' | 'dev' | 'prod';
 
 export const siteNames = ['rzeszowiak', 'olx', 'otodom', 'gethome'] as const;
 export type SiteName = typeof siteNames[number];
+export type DataDirectory = SiteName | 'analyzed' | 'visualization' | 'all_offers';
 
+export interface SimplyFile {
+	createTime: number;
+	fileName: string;
+}
 export interface Config {
 	NODE_ENV: NODE_ENV;
 	isDev: boolean;
@@ -33,7 +38,20 @@ export interface Offer {
 	description: string;
 	url: string;
 	imgUrl: string;
-	_debugInfo?: SiteScraperDebugInfo;
+	_debugInfo: SiteScraperDebugInfo;
+}
+
+export interface OfferTextFileData {
+	site: SiteName;
+	id: string;
+	dt: string;
+	_dt: string;
+	title: string;
+	price: string;
+	description: string;
+	url: string;
+	imgUrl: string;
+	_debugInfo: SiteScraperDebugInfo;
 }
 
 export interface DirectoryOffers {
@@ -42,9 +60,12 @@ export interface DirectoryOffers {
 	scrapedAt: Date;
 }
 
-export type DataDirectory = SiteName | 'analyzed' | 'visualization';
+export interface OffersInfo {
+	date: Date;
+	offers: Offer[];
+}
 
-export interface SimplyFile {
-	createTime: number;
-	fileName: string;
+export interface ReadTextFileData {
+	date: string;
+	offers: OfferTextFileData[];
 }

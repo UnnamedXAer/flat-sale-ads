@@ -1,7 +1,7 @@
 import { Browser, Page } from 'puppeteer';
 import path from 'path';
 import l from '../logger';
-import { Offer, SiteName } from '../types';
+import { Offer, SiteName, OffersInfo } from '../types';
 import cheerio from 'cheerio';
 import { config } from '../config';
 import { sleep } from '../sleep';
@@ -13,15 +13,15 @@ import { writeFile } from 'fs/promises';
 import { timeStart } from '../performance';
 
 export class Scraper implements IScraper {
-	async scrapeAnnouncements(browser: Browser, sites: SiteName[]) {
+	async scrapeOffers(browser: Browser, sites: SiteName[]) {
 		let siteIndex = 0;
 		while (siteIndex < sites.length) {
 			const promises: Promise<void>[] = [];
 			l.info(`About to scrape: "${sites[siteIndex]}"`);
-			promises.push(this.scrapeSiteAnnouncements(browser, sites[siteIndex]));
+			promises.push(this.scrapeSiteOffers(browser, sites[siteIndex]));
 			if (++siteIndex < sites.length) {
 				l.info(`About to scrape: "${sites[siteIndex]}"`);
-				promises.push(this.scrapeSiteAnnouncements(browser, sites[siteIndex]));
+				promises.push(this.scrapeSiteOffers(browser, sites[siteIndex]));
 			}
 			siteIndex++;
 			// @info: scrape up to two sites at a time.
@@ -29,30 +29,27 @@ export class Scraper implements IScraper {
 		}
 	}
 
-	private async scrapeSiteAnnouncements(browser: Browser, siteName: SiteName) {
+	private async scrapeSiteOffers(browser: Browser, siteName: SiteName) {
 		const siteScraper = makeSiteScraper(siteName);
 		// @todo: handle error
-		const [todayAnnouncements, error] = await this.getSiteAnnouncements(
-			browser,
-			siteScraper
-		);
+		const [todayOffers, error] = await this.getSiteOffers(browser, siteScraper);
 
-		await this.saveSiteAnnouncements(siteScraper.serviceName, todayAnnouncements);
-		this.validateAnnouncements(todayAnnouncements, siteScraper.serviceName);
+		await this.saveSiteOffers(siteScraper.serviceName, {
+			date: new Date(),
+			offers: todayOffers
+		});
+		this.validateOffers(todayOffers, siteScraper.serviceName);
 
 		l.info(
 			`The number of today's "${siteScraper.serviceName}" offers is: `,
-			todayAnnouncements.length
+			todayOffers.length
 		);
 	}
 
-	private async saveSiteAnnouncements(
-		siteName: SiteName,
-		offers: Offer[]
-	) {
+	private async saveSiteOffers(siteName: SiteName, dataToSave: OffersInfo) {
 		const dirPath = path.resolve(__dirname, '..', '..', 'data', siteName);
 		const pathName = path.join(dirPath, `${formatDateToFileName()}.json`);
-		const text = JSON.stringify(offers, null, config.isDev ? '\t' : 0);
+		const text = JSON.stringify(dataToSave, null, config.isDev ? '\t' : 0);
 		try {
 			await ensurePathExists(dirPath);
 			l.info(`About to save the ${siteName} offers to "${pathName}".`);
@@ -63,7 +60,7 @@ export class Scraper implements IScraper {
 		}
 	}
 
-	private async getSiteAnnouncements(
+	private async getSiteOffers(
 		browser: Browser,
 		siteScraper: ISiteScraper
 	): Promise<[Offer[], Error | null]> {
@@ -72,7 +69,7 @@ export class Scraper implements IScraper {
 		let isDone = false;
 		let scrapedPagesCount = 0;
 		do {
-			let pageAnnouncements: Offer[];
+			let pageOffers: Offer[];
 			let currentPage: Page;
 			const url = pageUrls[0];
 
@@ -84,12 +81,12 @@ export class Scraper implements IScraper {
 			}
 			const $currentPage: cheerio.Root = await this.getPageContent(currentPage);
 
-			[pageAnnouncements, isDone] = await this.getScraperPageAds(
+			[pageOffers, isDone] = await this.getScraperPageAds(
 				siteScraper,
 				$currentPage,
 				currentPage
 			);
-			offers.push(...pageAnnouncements);
+			offers.push(...pageOffers);
 			scrapedPagesCount++;
 			pageUrls.shift();
 			if (isDone === false && scrapedPagesCount === 1) {
@@ -180,10 +177,7 @@ export class Scraper implements IScraper {
 		return $page;
 	}
 
-	private validateAnnouncements(
-		offers: Offer[],
-		siteName: SiteName
-	): Offer[] {
+	private validateOffers(offers: Offer[], siteName: SiteName): Offer[] {
 		if (config.isDev) {
 			const withMissingData = offers
 				.map((x) => {

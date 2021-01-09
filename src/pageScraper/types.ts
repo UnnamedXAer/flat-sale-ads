@@ -7,7 +7,7 @@ export enum ScraperDataType {
 }
 
 export interface IScraper {
-	scrapeAnnouncements(browser: Browser, sites: SiteName[]): Promise<void>;
+	scrapeOffers(browser: Browser, sites: SiteName[]): Promise<void>;
 }
 
 export interface SiteScraperDebugInfo {

@@ -1,16 +1,11 @@
 import { PathLike } from 'fs';
 import path from 'path';
-import { access, mkdir, readdir, readFile, stat } from 'fs/promises';
+import { access, mkdir, readdir, readFile, stat, writeFile } from 'fs/promises';
 import l from './logger';
-import {
-	DataDirectory as DataDirectoryName,
-	DirectoryOffers,
-	Offer,
-	SimplyFile,
-	SiteName
-} from './types';
+import { DataDirectory, DirectoryOffers, Offer, OffersInfo, OfferTextFileData, ReadTextFileData, SimplyFile } from './types';
 import { timeStart } from './performance';
 import { config } from './config';
+import { formatDateToFileName } from './formatDate';
 
 export async function ensurePathExists(dir: PathLike) {
 	try {
@@ -25,7 +20,7 @@ export async function ensurePathExists(dir: PathLike) {
 }
 
 export async function getDataDirLatestOffers(
-	dataDirName: DataDirectoryName
+	dataDirName: DataDirectory
 ): Promise<DirectoryOffers | null> {
 	const [files, dataDirPath] = await getDirFiles(dataDirName);
 	if (files.length === 0) {
@@ -41,19 +36,45 @@ export async function getDataDirLatestOffers(
 		)}`
 	);
 
-	const offerList = await getFileData(dataDirPath, youngestFile.fileName);
+	const fileData = await readOffersFile(dataDirPath, youngestFile.fileName);
+
+	const offersInfo = mapFileData(fileData);
 
 	const directoryOffers: DirectoryOffers = {
-		offers: offerList,
-		scrapedAt: new Date(youngestFile.createTime),
+		offers: offersInfo.offers,
+		scrapedAt: offersInfo.date,
 		directory: dataDirName
 	};
 
 	return directoryOffers;
 }
 
+export function mapFileData(fileData: ReadTextFileData): OffersInfo {
+	return {
+		date: new Date(fileData.date),
+		offers: mapOffersDataToOffers(fileData.offers)
+	};
+}
+
+export function mapOffersDataToOffers(offersData: OfferTextFileData[]): Offer[] {
+	return offersData.map((offerData) => {
+		return {
+			_dt: new Date(offerData._dt),
+			dt: offerData.dt,
+			id: offerData.id,
+			title: offerData.title,
+			price: offerData.price,
+			url: offerData.url,
+			site: offerData.site,
+			imgUrl: offerData.imgUrl,
+			description: offerData.description,
+			_debugInfo: { ...offerData._debugInfo }
+		};
+	});
+}
+
 export async function getDirFiles(
-	dataDirName: DataDirectoryName
+	dataDirName: DataDirectory
 ): Promise<[files: SimplyFile[], dataDirPath: string]> {
 	const dataDirPath = getDataDirPath(dataDirName);
 	const dirNames = await readdir(dataDirPath);
@@ -61,7 +82,7 @@ export async function getDirFiles(
 	return [files, dataDirPath];
 }
 
-export function getDataDirPath(siteName: DataDirectoryName): string {
+export function getDataDirPath(siteName: DataDirectory): string {
 	const dataResourcePath = path.join(process.cwd(), 'data', siteName);
 	return dataResourcePath;
 }
@@ -103,12 +124,12 @@ export function sortFilesByDate(files: SimplyFile[]): SimplyFile[] {
 	return files;
 }
 
-export async function getFileData(
+export async function readOffersFile(
 	filePath: string,
 	fileName: string
-): Promise<Array<Offer>> {
+): Promise<ReadTextFileData> {
 	const filePathName = path.join(filePath, fileName);
-	const timeStop = timeStart(`Reading data from: "${filePathName}" (async)`);
+	const timeStop = timeStart(`Reading offers from: "${filePathName}"`);
 	const data = await readFile(filePathName, {
 		encoding: 'utf-8'
 	});
@@ -116,4 +137,20 @@ export async function getFileData(
 	timeStop();
 
 	return fileData;
+}
+
+export async function saveOffersInfo(offers: Offer[], directory: DataDirectory) {
+	const dataPath = path.join(process.cwd(), 'data', directory);
+	await ensurePathExists(dataPath);
+	const dataFilePath = path.join(
+		dataPath,
+		formatDateToFileName() + '_' + Date.now() + '.json'
+	);
+	const timeStop = timeStart('Save offers info to: ' + '"' + dataFilePath + '"');
+	const offersInfo: OffersInfo = {
+		date: new Date(),
+		offers: offers
+	};
+	await writeFile(dataFilePath, JSON.stringify(offersInfo, null, 4));
+	timeStop();
 }
