@@ -44,6 +44,8 @@ const main = async () => {
 	l.info('Program START');
 	const _config = config;
 
+
+	
 	await start_scrape();
 	await start_analyze();
 	await start_generateVisualization();
