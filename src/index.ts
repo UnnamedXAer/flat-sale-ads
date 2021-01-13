@@ -6,6 +6,8 @@ import globals from './globals';
 import l, { lTime } from './logger';
 import { Scraper } from './pageScraper/scraper';
 import { timeStart } from './performance';
+import { MongoRepository, storage } from './repository';
+import { IOffer } from './types';
 import { createVisualization } from './visualization/visualization';
 
 async function start_scrape() {
@@ -43,12 +45,14 @@ const main = async () => {
 	globals.programStartTime = Date.now();
 	l.info('Program START');
 	const _config = config;
+	storage.connect();
+	await doMongo(storage);
 
+	// await start_scrape();
+	// await start_analyze();
+	// await start_generateVisualization();
 
-	
-	await start_scrape();
-	await start_analyze();
-	await start_generateVisualization();
+	await storage.disconnect();
 };
 
 let timeStop: Function;
@@ -64,3 +68,28 @@ main()
 		l.info('Total execution time: ', lTime(executionTime));
 		l.info('Program END!');
 	});
+
+async function doMongo(s: MongoRepository) {
+	const offerTest: IOffer = {
+		id: 'sdfsafdsafsa' + Date.now(),
+		site: 'gethome',
+		dt: new Date().toLocaleString(),
+		_dt: new Date(),
+		imgUrl: 'https://mongoosejs.com/docs/images/mongoose5_62x30_transparent.png',
+		price: '322500',
+		scrapedAt: new Date(),
+		title: 'What is a SchemaType?',
+		url: 'https://mongoosejs.com/docs/schematypes.html',
+		description:
+			'You can think of a Mongoose schema as the configuration object for a Mongoose model. A SchemaType is then a configuration object for an individual property. A SchemaType says what type a given path should have, whether it has any getters/setters, and what values are valid for that path.',
+		_debugInfo: {
+			url: 'https://mongoosejs.com/docs/schematypes.html',
+			idx: 0
+		}
+	};
+
+	await s.create(offerTest);
+
+	const offers = await s.getAll();
+	console.log('\n Offers:', offers);
+}

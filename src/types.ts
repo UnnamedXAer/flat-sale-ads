@@ -12,6 +12,17 @@ export interface SimplyFile {
 	createTime: number;
 	fileName: string;
 }
+
+export interface Logger {
+	silly: (...args: any[]) => void;
+	trace: (...args: any[]) => void;
+	debug: (...args: any[]) => void;
+	info: (...args: any[]) => void;
+	warn: (...args: any[]) => void;
+	error: (...args: any[]) => void;
+	fatal: (...args: any[]) => void;
+}
+
 export interface Config {
 	NODE_ENV: NODE_ENV;
 	isDev: boolean;
@@ -28,9 +39,10 @@ export interface Config {
 	};
 }
 
-export interface Offer {
+export interface IOffer {
 	site: SiteName;
 	id: string;
+	scrapedAt: Date;
 	dt: string;
 	_dt: Date;
 	title: string;
@@ -45,6 +57,7 @@ export interface OfferTextFileData {
 	site: SiteName;
 	id: string;
 	dt: string;
+	scrapedAt: string;
 	_dt: string;
 	title: string;
 	price: string;
@@ -55,14 +68,14 @@ export interface OfferTextFileData {
 }
 
 export interface DirectoryOffers {
-	offers: Offer[];
+	offers: IOffer[];
 	directory: DataDirectory;
 	scrapedAt: Date;
 }
 
 export interface OffersInfo {
 	date: Date;
-	offers: Offer[];
+	offers: IOffer[];
 }
 
 export interface ReadTextFileData {

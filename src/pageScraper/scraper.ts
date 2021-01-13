@@ -1,7 +1,7 @@
 import { Browser, Page } from 'puppeteer';
 import path from 'path';
 import l from '../logger';
-import { Offer, SiteName, OffersInfo } from '../types';
+import { IOffer, SiteName, OffersInfo } from '../types';
 import cheerio from 'cheerio';
 import { config } from '../config';
 import { sleep } from '../sleep';
@@ -63,13 +63,13 @@ export class Scraper implements IScraper {
 	private async getSiteOffers(
 		browser: Browser,
 		siteScraper: ISiteScraper
-	): Promise<[Offer[], Error | null]> {
-		const offers: Offer[] = [];
+	): Promise<[IOffer[], Error | null]> {
+		const offers: IOffer[] = [];
 		const pageUrls: string[] = [config.urls[siteScraper.serviceName]];
 		let isDone = false;
 		let scrapedPagesCount = 0;
 		do {
-			let pageOffers: Offer[];
+			let pageOffers: IOffer[];
 			let currentPage: Page;
 			const url = pageUrls[0];
 
@@ -107,7 +107,7 @@ export class Scraper implements IScraper {
 		siteScraper: ISiteScraper,
 		$currentPage: cheerio.Root,
 		currentPage: Page
-	): Promise<[ads: Offer[], isDone: boolean]> {
+	): Promise<[ads: IOffer[], isDone: boolean]> {
 		if (siteScraper.scrapperDataType === ScraperDataType.Html) {
 			return siteScraper.getPageAds($currentPage);
 		}
@@ -177,7 +177,7 @@ export class Scraper implements IScraper {
 		return $page;
 	}
 
-	private validateOffers(offers: Offer[], siteName: SiteName): Offer[] {
+	private validateOffers(offers: IOffer[], siteName: SiteName): IOffer[] {
 		if (config.isDev) {
 			const withMissingData = offers
 				.map((x) => {

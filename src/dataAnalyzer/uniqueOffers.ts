@@ -1,5 +1,5 @@
 import path from 'path';
-import { Offer, OffersInfo, SiteName } from '../types';
+import { IOffer, OffersInfo, SiteName } from '../types';
 import { timeStart } from '../performance';
 import {
 	ensurePathExists,
@@ -25,11 +25,11 @@ export async function analyzeData(siteNames: SiteName[]) {
 }
 
 export async function filterOutRecurredOffers(
-	previousOffers: Offer[],
-	dayOffers: Offer[]
-): Promise<Offer[]> {
+	previousOffers: IOffer[],
+	dayOffers: IOffer[]
+): Promise<IOffer[]> {
 	const timeStop = timeStart('Filter out today offers that are recurred.');
-	const uniqueNewOffers: Offer[] = [];
+	const uniqueNewOffers: IOffer[] = [];
 	const previousOffersCount = previousOffers.length,
 		dayOffersCount = dayOffers.length;
 
@@ -66,14 +66,14 @@ export async function getAllOffers(): Promise<OffersInfo[]> {
 	return allOffersInfo;
 }
 
-export async function makeUnionOfDayOffers(siteNames: SiteName[]): Promise<Offer[]> {
+export async function makeUnionOfDayOffers(siteNames: SiteName[]): Promise<IOffer[]> {
 	// @improvement: do it only if there is at least one file younger then previous union
 	const dayUniqueOffers = await getDayUniqueSitesOffers(siteNames);
 	return dayUniqueOffers;
 }
 
-async function getDayUniqueSitesOffers(siteNames: SiteName[]): Promise<Offer[]> {
-	let offersUnion: Offer[] = [];
+async function getDayUniqueSitesOffers(siteNames: SiteName[]): Promise<IOffer[]> {
+	let offersUnion: IOffer[] = [];
 	for (let i = 0; i < siteNames.length; i++) {
 		offersUnion = await makeOffersUnion(offersUnion, siteNames[i]);
 	}

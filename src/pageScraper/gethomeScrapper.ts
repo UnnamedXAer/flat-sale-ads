@@ -3,7 +3,7 @@ import { config } from '../config';
 import { DAY_MS } from '../constants';
 import globals from '../globals';
 import l from '../logger';
-import { SiteName, Offer } from '../types';
+import { SiteName, IOffer } from '../types';
 import { ISiteScraperByObject, ScraperDataType, SiteScraperDebugInfo } from './types';
 
 // export class GethomeScraper implements ISiteScraperHtml {
@@ -186,7 +186,7 @@ import { ISiteScraperByObject, ScraperDataType, SiteScraperDebugInfo } from './t
 // }
 
 interface GethomeOffersInfo {
-	offers: Offer[];
+	offers: IOffer[];
 	pageNum: number;
 	pageCount: number;
 	isDone: boolean;
@@ -258,7 +258,7 @@ export class GethomeScraper implements ISiteScraperByObject {
 		pageCount: 1
 	};
 
-	async getPageAds(page: Page): Promise<[ads: Offer[], isDone: boolean]> {
+	async getPageAds(page: Page): Promise<[ads: IOffer[], isDone: boolean]> {
 		const adsInfo = await this.getPageAdsInfo(page);
 		this.info.pageCount = adsInfo.pageCount;
 
@@ -297,8 +297,8 @@ export class GethomeScraper implements ISiteScraperByObject {
 	parsePageAds(
 		offersData: GethomeOffer[],
 		pageUrl: string
-	): [ads: Offer[], isDone: boolean] {
-		const offers: Offer[] = [];
+	): [ads: IOffer[], isDone: boolean] {
+		const offers: IOffer[] = [];
 		let isDone = false;
 		for (let i = 0, offersCount = offersData.length; i < offersCount; i++) {
 			const offer = offersData[i];
@@ -346,10 +346,11 @@ export class GethomeScraper implements ISiteScraperByObject {
 			const price = this.getAdPrice(offer.price.total);
 			const id = offer.id;
 
-			const siteOffer: Offer = {
+			const siteOffer: IOffer = {
 				site: 'gethome',
 				_dt,
 				dt,
+				scrapedAt: new Date(globals.programStartTime),
 				title,
 				price,
 				id,

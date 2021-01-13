@@ -2,7 +2,7 @@ import { config } from '../config';
 import { DAY_MS } from '../constants';
 import globals from '../globals';
 import l from '../logger';
-import { SiteName, Offer } from '../types';
+import { SiteName, IOffer } from '../types';
 import { ISiteScraperByHtml, ScraperDataType, SiteScraperDebugInfo } from './types';
 
 export class OtodomScraper implements ISiteScraperByHtml {
@@ -13,7 +13,7 @@ export class OtodomScraper implements ISiteScraperByHtml {
 	serviceName: SiteName = 'otodom';
 	scrapperDataType: ScraperDataType.Html = ScraperDataType.Html;
 
-	getPageAds($page: cheerio.Root): [ads: Offer[], isDone: boolean] {
+	getPageAds($page: cheerio.Root): [ads: IOffer[], isDone: boolean] {
 		const $ads = $page('.col-md-content.section-listing__row-content').find(
 			'article.offer-item'
 		);
@@ -23,8 +23,8 @@ export class OtodomScraper implements ISiteScraperByHtml {
 	parsePageAds(
 		$page: cheerio.Root,
 		$ads: cheerio.Cheerio
-	): [ads: Offer[], isDone: boolean] {
-		const offers: Offer[] = [];
+	): [ads: IOffer[], isDone: boolean] {
+		const offers: IOffer[] = [];
 		let isDone = false;
 		for (let i = 0, len = $ads.length; i < len; i++) {
 			const $ad = $page($ads[i]);
@@ -82,10 +82,11 @@ export class OtodomScraper implements ISiteScraperByHtml {
 				}
 			});
 
-			const offer: Offer = {
+			const offer: IOffer = {
 				site: 'otodom',
 				_dt,
 				dt,
+				scrapedAt: new Date(globals.programStartTime),
 				title,
 				price,
 				id,

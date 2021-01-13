@@ -2,7 +2,15 @@ import { PathLike } from 'fs';
 import path from 'path';
 import { access, mkdir, readdir, readFile, stat, writeFile } from 'fs/promises';
 import l from './logger';
-import { DataDirectory, DirectoryOffers, Offer, OffersInfo, OfferTextFileData, ReadTextFileData, SimplyFile } from './types';
+import {
+	DataDirectory,
+	DirectoryOffers,
+	IOffer,
+	OffersInfo,
+	OfferTextFileData,
+	ReadTextFileData,
+	SimplyFile
+} from './types';
 import { timeStart } from './performance';
 import { config } from './config';
 import { formatDateToFileName } from './formatDate';
@@ -56,12 +64,13 @@ export function mapFileData(fileData: ReadTextFileData): OffersInfo {
 	};
 }
 
-export function mapOffersDataToOffers(offersData: OfferTextFileData[]): Offer[] {
+export function mapOffersDataToOffers(offersData: OfferTextFileData[]): IOffer[] {
 	return offersData.map((offerData) => {
 		return {
 			_dt: new Date(offerData._dt),
 			dt: offerData.dt,
 			id: offerData.id,
+			scrapedAt: new Date(offerData.scrapedAt),
 			title: offerData.title,
 			price: offerData.price,
 			url: offerData.url,
@@ -139,7 +148,7 @@ export async function readOffersFile(
 	return fileData;
 }
 
-export async function saveOffersInfo(offers: Offer[], directory: DataDirectory) {
+export async function saveOffersInfo(offers: IOffer[], directory: DataDirectory) {
 	const dataPath = path.join(process.cwd(), 'data', directory);
 	await ensurePathExists(dataPath);
 	const dataFilePath = path.join(

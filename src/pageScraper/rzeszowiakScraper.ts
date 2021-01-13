@@ -2,7 +2,7 @@ import { config } from '../config';
 import { DAY_MS } from '../constants';
 import globals from '../globals';
 import l from '../logger';
-import { SiteName, Offer } from '../types';
+import { SiteName, IOffer } from '../types';
 import { ISiteScraperByHtml, ScraperDataType, SiteScraperDebugInfo } from './types';
 
 export class RzeszowiakScraper implements ISiteScraperByHtml {
@@ -10,7 +10,7 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 	serviceName: SiteName = 'rzeszowiak';
 	scrapperDataType: ScraperDataType.Html = ScraperDataType.Html;
 
-	getPageAds($page: cheerio.Root): [ads: Offer[], isDone: boolean] {
+	getPageAds($page: cheerio.Root): [ads: IOffer[], isDone: boolean] {
 		const $ads = $page('#content-center .normalbox');
 		const [pageAds, isDone] = this.parsePageAds($page, $ads);
 		return [pageAds, isDone];
@@ -19,8 +19,8 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 	parsePageAds(
 		$page: cheerio.Root,
 		$ads: cheerio.Cheerio
-	): [ads: Offer[], isDone: boolean] {
-		const offers: Offer[] = [];
+	): [ads: IOffer[], isDone: boolean] {
+		const offers: IOffer[] = [];
 		let isDone = false;
 		for (let i = 0, len = $ads.length; i < len; i++) {
 			const $ad = $page($ads[i]);
@@ -57,10 +57,11 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 				.text()
 				.trim();
 
-			const offer: Offer = {
+			const offer: IOffer = {
 				site: 'rzeszowiak',
 				_dt,
 				dt,
+				scrapedAt: new Date(globals.programStartTime),
 				title,
 				price,
 				id,

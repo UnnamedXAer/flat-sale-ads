@@ -2,7 +2,7 @@ import { config } from '../config';
 import { DAY_MS } from '../constants';
 import globals from '../globals';
 import l from '../logger';
-import { SiteName, Offer } from '../types';
+import { SiteName, IOffer } from '../types';
 import { ISiteScraperByHtml, ScraperDataType, SiteScraperDebugInfo } from './types';
 
 export class OlxScraper implements ISiteScraperByHtml {
@@ -13,7 +13,7 @@ export class OlxScraper implements ISiteScraperByHtml {
 	serviceName: SiteName = 'olx';
 	scrapperDataType: ScraperDataType.Html = ScraperDataType.Html;
 
-	getPageAds($page: cheerio.Root): [ads: Offer[], isDone: boolean] {
+	getPageAds($page: cheerio.Root): [ads: IOffer[], isDone: boolean] {
 		const $ads = $page('table#offers_table').find('div.offer-wrapper>table');
 		const now = Date.now();
 		const [pageAds, isDone] = this.parsePageAds($page, $ads);
@@ -27,8 +27,8 @@ export class OlxScraper implements ISiteScraperByHtml {
 	parsePageAds(
 		$page: cheerio.Root,
 		$ads: cheerio.Cheerio
-	): [ads: Offer[], isDone: boolean] {
-		const offers: Offer[] = [];
+	): [ads: IOffer[], isDone: boolean] {
+		const offers: IOffer[] = [];
 		let isDone = false;
 		for (let i = 0, len = $ads.length; i < len; i++) {
 			const $ad = $page($ads[i]);
@@ -56,10 +56,11 @@ export class OlxScraper implements ISiteScraperByHtml {
 			// @i: there is no description in ad card, it would require to open details to generate description.
 			const description = '';
 
-			const offer: Offer = {
+			const offer: IOffer = {
 				site: 'olx',
 				_dt,
 				dt,
+				scrapedAt: new Date(globals.programStartTime),
 				title,
 				price,
 				id,

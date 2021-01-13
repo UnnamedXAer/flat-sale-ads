@@ -1,8 +1,8 @@
 import { getDataDirLatestOffers } from '../files';
 import l from '../logger';
-import { DataDirectory, Offer } from '../types';
+import { DataDirectory, IOffer } from '../types';
 
-export function assertSameOffers(uniqueOffer: Offer, currentOffer: Offer): boolean {
+export function assertSameOffers(uniqueOffer: IOffer, currentOffer: IOffer): boolean {
 	const siteEqual = assertEqualOfferProp(uniqueOffer, currentOffer, 'site');
 
 	if (siteEqual && assertEqualOfferProp(uniqueOffer, currentOffer, 'id')) {
@@ -26,9 +26,9 @@ export function assertSameOffers(uniqueOffer: Offer, currentOffer: Offer): boole
 }
 
 export function assertEqualOfferProp(
-	obj1: Offer,
-	obj2: Offer,
-	prop: keyof Offer
+	obj1: IOffer,
+	obj2: IOffer,
+	prop: keyof IOffer
 ): boolean {
 	let val1 = obj1[prop];
 	let val2 = obj2[prop];
@@ -53,16 +53,16 @@ export function assertEqualOfferProp(
  * `getOffersUnion` returns new array
  *
  * @export
- * @param {Offer[]} uniqueOffers
- * @param {Offer[]} currentOffers
+ * @param {IOffer[]} uniqueOffers
+ * @param {IOffer[]} currentOffers
  * @param {DataDirectory} dataDirectory
- * @returns {Promise<Offer[]>}
+ * @returns {Promise<IOffer[]>}
  */
 export async function getOffersUnion(
-	uniqueOffers: Offer[],
-	currentOffers: Offer[],
+	uniqueOffers: IOffer[],
+	currentOffers: IOffer[],
 	dataDirectory: DataDirectory
-): Promise<Offer[]> {
+): Promise<IOffer[]> {
 	const offers = [...uniqueOffers];
 
 	for (let j = 0; j < currentOffers.length; j++) {
@@ -86,7 +86,7 @@ export async function getOffersUnion(
 		}
 
 		const offer = offers[idx];
-		const differentProps: (keyof Offer)[] = [];
+		const differentProps: (keyof IOffer)[] = [];
 		const adKeys = (Object.keys(offer) as unknown) as typeof differentProps;
 		adKeys.forEach((prop) => {
 			if (offer[prop] !== currentOffer[prop]) {
@@ -115,7 +115,7 @@ export async function getOffersUnion(
 }
 
 export async function makeOffersUnion(
-	previousOffersUnion: Offer[],
+	previousOffersUnion: IOffer[],
 	dataDirectory: DataDirectory
 ) {
 	const currentOffers = await getDataDirLatestOffers(dataDirectory);
