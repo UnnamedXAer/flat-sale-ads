@@ -39,6 +39,16 @@ export interface Config {
 	};
 }
 
+export interface IRepository {
+	deleteById(id: string): Promise<void>;
+	create(o: IOffer | IOffer[]): Promise<void>;
+	update(o: IOffer | IOffer[]): Promise<void>;
+	getAll(): Promise<IOffer[]>;
+	getById(id: string): Promise<IOffer | null>;
+	connect(): Promise<void>;
+	disconnect(): Promise<void>;
+}
+
 export interface IOffer {
 	site: SiteName;
 	id: string;

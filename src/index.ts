@@ -6,7 +6,7 @@ import globals from './globals';
 import l, { lTime } from './logger';
 import { Scraper } from './pageScraper/scraper';
 import { timeStart } from './performance';
-import { MongoRepository, storage } from './repository';
+import { MongoRepository, storage } from './repository/mongo';
 import { IOffer } from './types';
 import { createVisualization } from './visualization/visualization';
 
@@ -24,7 +24,7 @@ async function start_scrape() {
 		browserLaunchOptions.devtools = true;
 	}
 	const browser = await pp.launch(browserLaunchOptions);
-	const scraper = new Scraper();
+	const scraper = new Scraper(storage);
 	await scraper.scrapeOffers(browser, [
 		'olx', //
 		'rzeszowiak', //
@@ -46,9 +46,9 @@ const main = async () => {
 	l.info('Program START');
 	const _config = config;
 	storage.connect();
-	await doMongo(storage);
+	// await doMongo(storage);
 
-	// await start_scrape();
+	await start_scrape();
 	// await start_analyze();
 	// await start_generateVisualization();
 

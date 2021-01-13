@@ -1,5 +1,5 @@
-import { Schema, Document, model } from 'mongoose';
-import { IOffer, siteNames } from '../types';
+import { Schema, Document } from 'mongoose';
+import { IOffer, siteNames } from '../../types';
 
 export const offerSchema = new Schema<Document<IOffer>>({
 	id: { type: String, required: true },
@@ -11,11 +11,11 @@ export const offerSchema = new Schema<Document<IOffer>>({
 	dt: { type: String, required: true },
 	scrapedAt: { type: Date, required: true },
 	_dt: { type: Date, required: true },
-	title: { type: String, required: true },
-	price: { type: String, required: true },
-	description: { type: String, required: true },
+	title: { type: String },
+	price: { type: String },
+	description: { type: String },
 	url: { type: String, required: true },
-	imgUrl: { type: String, required: true },
+	imgUrl: { type: String },
 	_debugInfo: {
 		idx: { type: Number },
 		url: { type: String }

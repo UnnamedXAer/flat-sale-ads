@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
-import l from '../logger';
-import { IOffer, Logger } from '../types';
+import logger from '../../logger';
+import { IOffer, IRepository, Logger } from '../../types';
 import { IOfferModel, OfferModel } from './model';
 
-export class MongoRepository {
+export class MongoRepository implements IRepository {
 	private offerModel: typeof OfferModel;
 	private l: Logger;
 	private connection: typeof mongoose | null = null;
@@ -15,61 +15,56 @@ export class MongoRepository {
 
 	async deleteById(id: string): Promise<void> {
 		await this.offerModel.deleteOne({ id });
+		this.l.debug(`Offer deleted, id: "${id}"`);
 	}
 
-	private mapOffer(o: IOfferModel): IOffer {
+	private mapOffer(offer: IOfferModel): IOffer {
 		return {
-			url: o.url,
-			_debugInfo: o._debugInfo,
-			_dt: o._dt,
-			description: o.description,
-			dt: o.dt,
-			id: o.id,
-			imgUrl: o.imgUrl,
-			price: o.price,
-			scrapedAt: o.scrapedAt,
-			site: o.site,
-			title: o.title
+			url: offer.url,
+			_debugInfo: offer._debugInfo,
+			_dt: offer._dt,
+			description: offer.description,
+			dt: offer.dt,
+			id: offer.id,
+			imgUrl: offer.imgUrl,
+			price: offer.price,
+			scrapedAt: offer.scrapedAt,
+			site: offer.site,
+			title: offer.title
 		};
 	}
 
-	async create(o: IOffer | IOffer[]): Promise<void> {
-		let offers: IOffer[] | IOffer;
-		if (Array.isArray(o)) {
-			offers = o.map<IOffer>((offer) => ({
-				...offer
-			}));
-		} else {
-			offers = {
-				url: o.url,
-				_debugInfo: o._debugInfo,
-				_dt: o._dt,
-				description: o.description,
-				dt: o.dt,
-				id: o.id,
-				imgUrl: o.imgUrl,
-				price: o.price,
-				scrapedAt: o.scrapedAt,
-				site: o.site,
-				title: o.title
-			};
-		}
+	async create(offers: IOffer | IOffer[]): Promise<void> {
+		const isManyOffers = Array.isArray(offers);
+
 		const _results = await this.offerModel.create(offers);
+		this.l.debug(
+			'Offers saved. Count: ',
+			isManyOffers ? (offers as IOffer[]).length : 1
+		);
+
 		return;
+	}
+
+	async update(): Promise<void> {
+		throw new Error('Method not implemented yet.');
 	}
 
 	async getAll(): Promise<IOffer[]> {
 		const results = await this.offerModel.find({});
 		const users: IOffer[] = results.map(this.mapOffer);
+		this.l.debug('Number of all offers in storage is: ', users.length);
 		return users;
 	}
 
 	async getById(id: string): Promise<IOffer | null> {
-		const o = await this.offerModel.findById(id);
-		if (o === null) {
+		const offer = await this.offerModel.findById(id);
+		if (offer === null) {
+			this.l.debug(`Offer does not exist, id: "${id}"`);
+
 			return null;
 		}
-		return this.mapOffer(o);
+		return this.mapOffer(offer);
 	}
 
 	async connect() {
@@ -91,4 +86,4 @@ export class MongoRepository {
 	}
 }
 
-export const storage = new MongoRepository(l, OfferModel);
+export const storage = new MongoRepository(logger, OfferModel);

@@ -1,18 +1,24 @@
 import { Browser, Page } from 'puppeteer';
 import path from 'path';
 import l from '../logger';
-import { IOffer, SiteName, OffersInfo } from '../types';
+import { IOffer, SiteName, OffersInfo, IRepository } from '../types';
 import cheerio from 'cheerio';
 import { config } from '../config';
 import { sleep } from '../sleep';
 import { IScraper, ISiteScraper, ScraperDataType } from './types';
-import { ensurePathExists } from '../files';
+import { ensurePathExists, saveOffersInfo as saveOffers } from '../files';
 import { makeSiteScraper } from './siteScraperFactory';
 import { formatDateToFileName } from '../formatDate';
 import { writeFile } from 'fs/promises';
 import { timeStart } from '../performance';
 
 export class Scraper implements IScraper {
+	storage: IRepository;
+
+	constructor(storage: IRepository) {
+		this.storage = storage;
+	}
+
 	async scrapeOffers(browser: Browser, sites: SiteName[]) {
 		let siteIndex = 0;
 		while (siteIndex < sites.length) {
@@ -47,17 +53,7 @@ export class Scraper implements IScraper {
 	}
 
 	private async saveSiteOffers(siteName: SiteName, dataToSave: OffersInfo) {
-		const dirPath = path.resolve(__dirname, '..', '..', 'data', siteName);
-		const pathName = path.join(dirPath, `${formatDateToFileName()}.json`);
-		const text = JSON.stringify(dataToSave, null, config.isDev ? '\t' : 0);
-		try {
-			await ensurePathExists(dirPath);
-			l.info(`About to save the ${siteName} offers to "${pathName}".`);
-			await writeFile(pathName, text);
-		} catch (err) {
-			l.error(`Fail to save the ${siteName} offers to the file.`, err);
-			throw err;
-		}
+		this.storage.create(dataToSave.offers);
 	}
 
 	private async getSiteOffers(
