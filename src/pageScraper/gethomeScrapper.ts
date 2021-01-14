@@ -356,11 +356,7 @@ export class GethomeScraper implements ISiteScraperByObject {
 				id,
 				url,
 				description,
-				imgUrl,
-				_debugInfo: {
-					...this._debugInfo,
-					idx: i
-				}
+				imgUrl
 			};
 			offers.push(siteOffer);
 		}

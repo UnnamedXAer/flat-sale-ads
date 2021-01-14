@@ -15,9 +15,5 @@ export const offerSchema = new Schema<Document<IOffer>>({
 	price: { type: String },
 	description: { type: String },
 	url: { type: String, required: true },
-	imgUrl: { type: String },
-	_debugInfo: {
-		idx: { type: Number },
-		url: { type: String }
-	}
+	imgUrl: { type: String }
 });

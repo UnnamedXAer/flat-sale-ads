@@ -82,10 +82,6 @@ async function doMongo(s: MongoRepository) {
 		url: 'https://mongoosejs.com/docs/schematypes.html',
 		description:
 			'You can think of a Mongoose schema as the configuration object for a Mongoose model. A SchemaType is then a configuration object for an individual property. A SchemaType says what type a given path should have, whether it has any getters/setters, and what values are valid for that path.',
-		_debugInfo: {
-			url: 'https://mongoosejs.com/docs/schematypes.html',
-			idx: 0
-		}
 	};
 
 	await s.create(offerTest);

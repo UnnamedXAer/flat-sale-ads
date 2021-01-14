@@ -185,13 +185,7 @@ export class Scraper implements IScraper {
 						x.dt === '' ||
 						x.imgUrl === ''
 					) {
-						return x.id
-							? x.id
-							: x.url
-							? x.url
-							: x.title
-							? x.title
-							: JSON.stringify(x._debugInfo, null, 2);
+						return x.id ? x.id : x.url ? x.url : x.title ? x.title : x;
 					}
 					return null;
 				})

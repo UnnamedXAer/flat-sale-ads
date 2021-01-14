@@ -21,7 +21,6 @@ export class MongoRepository implements IRepository {
 	private mapOffer(offer: IOfferModel): IOffer {
 		return {
 			url: offer.url,
-			_debugInfo: offer._debugInfo,
 			_dt: offer._dt,
 			description: offer.description,
 			dt: offer.dt,

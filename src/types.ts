@@ -1,5 +1,4 @@
 import { TLogLevelName } from 'tslog';
-import { SiteScraperDebugInfo } from './pageScraper/types';
 
 export type NODE_ENV = 'production' | 'development' | 'test';
 export type EnvPrefix = 'test' | 'dev' | 'prod';
@@ -60,7 +59,6 @@ export interface IOffer {
 	description: string;
 	url: string;
 	imgUrl: string;
-	_debugInfo: SiteScraperDebugInfo;
 }
 
 export interface OfferTextFileData {
@@ -74,7 +72,6 @@ export interface OfferTextFileData {
 	description: string;
 	url: string;
 	imgUrl: string;
-	_debugInfo: SiteScraperDebugInfo;
 }
 
 export interface DirectoryOffers {

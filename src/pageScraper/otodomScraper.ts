@@ -92,11 +92,7 @@ export class OtodomScraper implements ISiteScraperByHtml {
 				id,
 				url,
 				description,
-				imgUrl,
-				_debugInfo: {
-					...this._debugInfo,
-					idx: i
-				}
+				imgUrl
 			};
 
 			offers.push(offer);

@@ -76,8 +76,7 @@ export function mapOffersDataToOffers(offersData: OfferTextFileData[]): IOffer[]
 			url: offerData.url,
 			site: offerData.site,
 			imgUrl: offerData.imgUrl,
-			description: offerData.description,
-			_debugInfo: { ...offerData._debugInfo }
+			description: offerData.description
 		};
 	});
 }
