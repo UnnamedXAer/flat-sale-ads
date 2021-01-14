@@ -43,7 +43,7 @@ export interface IRepository {
 	saveNewOffers(o: IOffer[], date: Date): Promise<void>;
 	getNewOffers(): Promise<IOffersInfo | null>;
 	saveTmpOffers(o: IOffer[], date: Date): Promise<void>;
-	getTmpOffers(): Promise<IOffersInfo | null>;
+	getTmpOffers(): Promise<IOffersInfo[]>;
 	deleteTmpOffers(): Promise<void>;
 	connect(): Promise<void>;
 	disconnect(): Promise<void>;

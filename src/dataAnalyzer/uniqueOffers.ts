@@ -4,22 +4,27 @@ import { timeStart } from '../performance';
 import { ensurePathExists, getDirFiles, mapFileData, readOffersFile } from '../files';
 import { assertSameOffers } from './compareOffers';
 import l from '../logger';
+import globals from '../globals';
 
 export async function analyzeData(storage: IRepository) {
 	const timeStop = timeStart('Analyzing data');
-	const newOffersInfo = await storage.getTmpOffers();
+	const newOffersInfos = await storage.getTmpOffers();
 
-	if (newOffersInfo === null) {
-		l.warn('There was no new offers - analyzing data stopped.');
+	if (newOffersInfos.length === 0) {
+		l.warn('There are no new offers to filter.');
 		return;
 	}
 
 	const allOffers = await storage.getAllOffers();
-	const newFilteredOffers = await filterOutRecurredOffers(
-		allOffers,
-		newOffersInfo.offerList
-	);
-	await storage.saveNewOffers(newFilteredOffers, newOffersInfo.date);
+	const newFilteredOffers = (
+		await Promise.all(
+			newOffersInfos.map((newOffersInfo) =>
+				filterOutRecurredOffers(allOffers, newOffersInfo.offerList)
+			)
+		)
+	).flat(1);
+
+	await storage.saveNewOffers(newFilteredOffers, new Date(globals.programStartTime));
 	await storage.deleteTmpOffers();
 	timeStop();
 }

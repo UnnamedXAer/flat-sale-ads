@@ -51,11 +51,8 @@ const main = async () => {
 		console.log('offers', offers);
 	})();
 
-	await start_scrape();
-	const offersInfo = await storage.getTmpOffers();
-	console.log('\n\nOffers Info:\n');
-	console.log(offersInfo);
-	await start_analyze();
+	// await start_scrape();
+	// await start_analyze();
 	await start_generateVisualization();
 
 	await storage.disconnect();

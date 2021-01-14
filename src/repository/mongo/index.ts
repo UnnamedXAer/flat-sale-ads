@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import logger from '../../logger';
-import { IOffer, IOffersInfo, IRepository, Logger } from '../../types';
+import { IOffer, IOffersInfo, IRepository, Logger, siteNames } from '../../types';
 import { IOffersInfoDocument, OfferModel, TemporaryOfferModel } from './model';
 
 interface MongoModels {
@@ -41,7 +41,7 @@ export class MongoRepository implements IRepository {
 	}
 
 	async getNewOffers(): Promise<IOffersInfo | null> {
-		const offersInfo = await this.models.tmpOffers.findOne().sort({ created_at: -1 });
+		const offersInfo = await this.models.allOffers.findOne().sort({ created_at: -1 });
 
 		if (offersInfo === null) {
 			this.l.debug('There are no [new] offers.');
@@ -55,14 +55,12 @@ export class MongoRepository implements IRepository {
 		return this.mapOffersInfo(offersInfo);
 	}
 
-	async saveNewOffers(offers: IOffer | IOffer[], date: Date): Promise<void> {
-		const isManyOffers = Array.isArray(offers);
-
-		const _results = await this.models.allOffers.create(offers);
-		this.l.debug(
-			'Offers saved. Count: ',
-			isManyOffers ? (offers as IOffer[]).length : 1
-		);
+	async saveNewOffers(offers: IOffer[], date: Date): Promise<void> {
+		const _results = await this.models.allOffers.create<IOffersInfo>({
+			date,
+			offerList: offers
+		});
+		this.l.debug('Offers saved. Count: ', offers.length);
 
 		return;
 	}
@@ -86,29 +84,26 @@ export class MongoRepository implements IRepository {
 		return;
 	}
 
-	async getTmpOffers(): Promise<IOffersInfo | null> {
-		const offersInfo = await this.models.tmpOffers.find({}).sort({ created_at: -1 });
-		throw new Error('tmp offers are not merged into one "IOffersInfo".');
+	async getTmpOffers(): Promise<IOffersInfo[]> {
+		const offersInfos = await this.models.tmpOffers.find({}).sort({ created_at: -1 });
+
 		// @todo: merge offers for all sites into one list ore return them as list od offers infos.
-		if (offersInfo.length === 0) {
+		if (offersInfos.length === 0) {
 			this.l.debug('There are no [temporary] offers infos.');
-			return null;
+			return [];
 		}
 
 		this.l.debug(
 			'Number of temporary offers infos in storage is: ',
-			offersInfo.length
+			offersInfos.length
 		);
-		if (offersInfo.length > 1) {
+		if (offersInfos.length != siteNames.length) {
 			this.l.warn(
-				'Number of temporary offers infos in storage is is more then one- > returning the newest "offers info". _id:',
-				offersInfo[0]._id,
-				'offers info date:',
-				offersInfo[0].date
+				'Number of temporary offers infos in storage is different than number of sites.'
 			);
 		}
 
-		return this.mapOffersInfo(offersInfo[0]);
+		return offersInfos.map((oi) => this.mapOffersInfo(oi));
 	}
 
 	async deleteTmpOffers(): Promise<void> {
