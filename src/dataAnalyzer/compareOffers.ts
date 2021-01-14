@@ -5,7 +5,7 @@ import { DataDirectory, IOffer } from '../types';
 export function assertSameOffers(uniqueOffer: IOffer, currentOffer: IOffer): boolean {
 	const siteEqual = assertEqualOfferProp(uniqueOffer, currentOffer, 'site');
 
-	if (siteEqual && assertEqualOfferProp(uniqueOffer, currentOffer, 'id')) {
+	if (siteEqual && assertEqualOfferProp(uniqueOffer, currentOffer, 'offerId')) {
 		return true;
 	}
 
@@ -76,7 +76,7 @@ export async function getOffersUnion(
 			title: currentOffer.title,
 			_dt: currentOffer._dt,
 			dt: currentOffer.dt,
-			id: currentOffer.id,
+			id: currentOffer.offerId,
 			price: currentOffer.price
 		});
 

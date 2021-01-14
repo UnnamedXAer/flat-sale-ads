@@ -6,8 +6,7 @@ import globals from './globals';
 import l, { lTime } from './logger';
 import { Scraper } from './pageScraper/scraper';
 import { timeStart } from './performance';
-import { MongoRepository, storage } from './repository/mongo';
-import { IOffer } from './types';
+import { storage } from './repository/mongo';
 import { createVisualization } from './visualization/visualization';
 
 async function start_scrape() {
@@ -24,7 +23,7 @@ async function start_scrape() {
 		browserLaunchOptions.devtools = true;
 	}
 	const browser = await pp.launch(browserLaunchOptions);
-	const scraper = new Scraper(storage);
+	const scraper = new Scraper(storage, globals.programStartTime);
 	await scraper.scrapeOffers(browser, [
 		'olx', //
 		'rzeszowiak', //
@@ -35,10 +34,10 @@ async function start_scrape() {
 }
 
 async function start_analyze() {
-	await analyzeData(['gethome', 'olx', 'otodom', 'rzeszowiak']);
+	await analyzeData(storage);
 }
 async function start_generateVisualization() {
-	await createVisualization();
+	await createVisualization(storage);
 }
 const main = async () => {
 	timeStop = timeStart('main');
@@ -46,11 +45,18 @@ const main = async () => {
 	l.info('Program START');
 	const _config = config;
 	storage.connect();
-	// await doMongo(storage);
+
+	await (async () => {
+		const offers = await storage.getAllOffers();
+		console.log('offers', offers);
+	})();
 
 	await start_scrape();
-	// await start_analyze();
-	// await start_generateVisualization();
+	const offersInfo = await storage.getTmpOffers();
+	console.log('\n\nOffers Info:\n');
+	console.log(offersInfo);
+	await start_analyze();
+	await start_generateVisualization();
 
 	await storage.disconnect();
 };
@@ -68,24 +74,3 @@ main()
 		l.info('Total execution time: ', lTime(executionTime));
 		l.info('Program END!');
 	});
-
-async function doMongo(s: MongoRepository) {
-	const offerTest: IOffer = {
-		id: 'sdfsafdsafsa' + Date.now(),
-		site: 'gethome',
-		dt: new Date().toLocaleString(),
-		_dt: new Date(),
-		imgUrl: 'https://mongoosejs.com/docs/images/mongoose5_62x30_transparent.png',
-		price: '322500',
-		scrapedAt: new Date(),
-		title: 'What is a SchemaType?',
-		url: 'https://mongoosejs.com/docs/schematypes.html',
-		description:
-			'You can think of a Mongoose schema as the configuration object for a Mongoose model. A SchemaType is then a configuration object for an individual property. A SchemaType says what type a given path should have, whether it has any getters/setters, and what values are valid for that path.',
-	};
-
-	await s.create(offerTest);
-
-	const offers = await s.getAll();
-	console.log('\n Offers:', offers);
-}

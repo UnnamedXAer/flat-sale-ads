@@ -39,13 +39,11 @@ export interface Config {
 }
 
 export interface IRepository {
-	deleteById(id: string): Promise<void>;
-	saveOffers(o: IOffer | IOffer[]): Promise<void>;
-	update(o: IOffer | IOffer[]): Promise<void>;
-	getAll(): Promise<IOffer[]>;
-	getById(id: string): Promise<IOffer | null>;
-	saveTmpOffers(o: IOffer[]): Promise<void>;
-	getTmpOffers(): Promise<IOffer[]>;
+	getAllOffers(): Promise<IOffer[]>;
+	saveNewOffers(o: IOffer[], date: Date): Promise<void>;
+	getNewOffers(): Promise<IOffersInfo | null>;
+	saveTmpOffers(o: IOffer[], date: Date): Promise<void>;
+	getTmpOffers(): Promise<IOffersInfo | null>;
 	deleteTmpOffers(): Promise<void>;
 	connect(): Promise<void>;
 	disconnect(): Promise<void>;
@@ -53,7 +51,7 @@ export interface IRepository {
 
 export interface IOffer {
 	site: SiteName;
-	id: string;
+	offerId: string;
 	scrapedAt: Date;
 	dt: string;
 	_dt: Date;

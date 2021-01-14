@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import logger from '../../logger';
-import { IOffer, IRepository, Logger } from '../../types';
-import { IOfferModel, OfferModel, TemporaryOfferModel } from './model';
+import { IOffer, IOffersInfo, IRepository, Logger } from '../../types';
+import { IOffersInfoDocument, OfferModel, TemporaryOfferModel } from './model';
 
 interface MongoModels {
-	offer: typeof OfferModel;
-	tmpOffer: typeof TemporaryOfferModel;
+	allOffers: typeof OfferModel;
+	tmpOffers: typeof TemporaryOfferModel;
 }
 
 export class MongoRepository implements IRepository {
@@ -18,18 +18,13 @@ export class MongoRepository implements IRepository {
 		this.l = logger;
 	}
 
-	async deleteById(id: string): Promise<void> {
-		await this.models.offer.deleteOne({ id });
-		this.l.debug(`Offer deleted, id: "${id}"`);
-	}
-
-	private mapOffer(offer: IOfferModel): IOffer {
+	private mapOffer(offer: IOffer): IOffer {
 		return {
 			url: offer.url,
 			_dt: offer._dt,
 			description: offer.description,
 			dt: offer.dt,
-			id: offer.id,
+			offerId: offer.offerId,
 			imgUrl: offer.imgUrl,
 			price: offer.price,
 			scrapedAt: offer.scrapedAt,
@@ -38,10 +33,32 @@ export class MongoRepository implements IRepository {
 		};
 	}
 
-	async saveOffers(offers: IOffer | IOffer[]): Promise<void> {
+	private mapOffersInfo(offersInfo: IOffersInfoDocument): IOffersInfo {
+		return {
+			date: offersInfo.date,
+			offerList: offersInfo.offerList.map(this.mapOffer)
+		};
+	}
+
+	async getNewOffers(): Promise<IOffersInfo | null> {
+		const offersInfo = await this.models.tmpOffers.findOne().sort({ created_at: -1 });
+
+		if (offersInfo === null) {
+			this.l.debug('There are no [new] offers.');
+			return null;
+		}
+
+		this.l.debug(
+			`Number of new offers in storage is: ${offersInfo.offerList.length}, scraped at: ${offersInfo.date}`
+		);
+
+		return this.mapOffersInfo(offersInfo);
+	}
+
+	async saveNewOffers(offers: IOffer | IOffer[], date: Date): Promise<void> {
 		const isManyOffers = Array.isArray(offers);
 
-		const _results = await this.models.offer.create(offers);
+		const _results = await this.models.allOffers.create(offers);
 		this.l.debug(
 			'Offers saved. Count: ',
 			isManyOffers ? (offers as IOffer[]).length : 1
@@ -50,44 +67,52 @@ export class MongoRepository implements IRepository {
 		return;
 	}
 
-	async update(): Promise<void> {
-		throw new Error('Method not implemented yet.');
+	async getAllOffers(): Promise<IOffer[]> {
+		const results = await this.models.allOffers.find({});
+		const offers = results.flatMap((oI: IOffersInfoDocument) =>
+			oI.offerList.map(this.mapOffer)
+		);
+		this.l.debug('Number of all offers in storage is: ', offers.length);
+		return offers;
 	}
 
-	async getAll(): Promise<IOffer[]> {
-		const results = await this.models.offer.find({});
-		const users: IOffer[] = results.map(this.mapOffer);
-		this.l.debug('Number of all offers in storage is: ', users.length);
-		return users;
-	}
-
-	async getById(id: string): Promise<IOffer | null> {
-		const offer = await this.models.offer.findById(id);
-		if (offer === null) {
-			this.l.debug(`Offer does not exist, id: "${id}"`);
-
-			return null;
-		}
-		return this.mapOffer(offer);
-	}
-
-	async saveTmpOffers(offers: IOffer[]): Promise<void> {
-		const _results = await this.models.tmpOffer.create(offers);
+	async saveTmpOffers(offers: IOffer[], date: Date): Promise<void> {
+		const _results = await this.models.tmpOffers.create<IOffersInfo>({
+			date: date,
+			offerList: offers
+		});
 		this.l.debug(`Temporary offers saved. count: ${offers.length}`);
 
 		return;
 	}
 
-	async getTmpOffers(): Promise<IOffer[]> {
-		const offers = await this.models.tmpOffer.find({}); //.sort({ created_at: -1 });
+	async getTmpOffers(): Promise<IOffersInfo | null> {
+		const offersInfo = await this.models.tmpOffers.find({}).sort({ created_at: -1 });
+		throw new Error('tmp offers are not merged into one "IOffersInfo".');
+		// @todo: merge offers for all sites into one list ore return them as list od offers infos.
+		if (offersInfo.length === 0) {
+			this.l.debug('There are no [temporary] offers infos.');
+			return null;
+		}
 
-		this.l.debug('Number of temporary offers in storage is: ', offers.length);
+		this.l.debug(
+			'Number of temporary offers infos in storage is: ',
+			offersInfo.length
+		);
+		if (offersInfo.length > 1) {
+			this.l.warn(
+				'Number of temporary offers infos in storage is is more then one- > returning the newest "offers info". _id:',
+				offersInfo[0]._id,
+				'offers info date:',
+				offersInfo[0].date
+			);
+		}
 
-		return offers.map(this.mapOffer);
+		return this.mapOffersInfo(offersInfo[0]);
 	}
 
 	async deleteTmpOffers(): Promise<void> {
-		const _results = await this.models.tmpOffer.remove({});
+		const _results = await this.models.tmpOffers.remove({});
 		this.l.debug(`Temporary offers removed.`);
 		return;
 	}
@@ -112,6 +137,6 @@ export class MongoRepository implements IRepository {
 }
 
 export const storage = new MongoRepository(logger, {
-	offer: OfferModel,
-	tmpOffer: TemporaryOfferModel
+	allOffers: OfferModel,
+	tmpOffers: TemporaryOfferModel
 });

@@ -353,7 +353,7 @@ export class GethomeScraper implements ISiteScraperByObject {
 				scrapedAt: new Date(globals.programStartTime),
 				title,
 				price,
-				id,
+				offerId: id,
 				url,
 				description,
 				imgUrl

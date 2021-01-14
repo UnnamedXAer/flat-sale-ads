@@ -1,8 +1,8 @@
-import { Schema, Document } from 'mongoose';
-import { IOffer, siteNames } from '../../types';
+import { Schema, Document, Model } from 'mongoose';
+import { IOffer, IOffersInfo, siteNames } from '../../types';
 
-export const offerSchema = new Schema<Document<IOffer>>({
-	id: { type: String, required: true },
+const offerSchema = new Schema<Document<IOffer>, Model<Document<IOffer>>>({
+	offerId: { type: String, required: true },
 	site: {
 		type: String,
 		required: true,
@@ -18,3 +18,10 @@ export const offerSchema = new Schema<Document<IOffer>>({
 	imgUrl: { type: String }
 });
 
+export const offersInfoSchema = new Schema<
+	Document<IOffersInfo>,
+	Model<Document<IOffersInfo>>
+>({
+	date: { type: String, required: true },
+	offerList: { type: [offerSchema], required: true, _id: false }
+});

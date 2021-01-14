@@ -13,7 +13,7 @@ import {
 import { formatDateToFileName } from '../formatDate';
 import l from '../logger';
 import { timeStart } from '../performance';
-import { IOffersInfo } from '../types';
+import { IOffersInfo, IRepository } from '../types';
 
 const offerClasses = {
 	link: '.offer-link',
@@ -26,9 +26,9 @@ const offerClasses = {
 	site: '.offer-site'
 } as const;
 
-export async function createVisualization() {
+export async function createVisualization(storage: IRepository) {
 	let timeStop = timeStart('Read data for the visualization');
-	const offersInfo = await getDataForVisualization();
+	const offersInfo = await getDataForVisualization(storage);
 	timeStop();
 	timeStop = timeStart('Read the html templates');
 	const [pageHtml, offerTemplateHtml] = await getTemplates();
@@ -58,20 +58,24 @@ export async function createVisualization() {
 	timeStop();
 }
 
-async function getDataForVisualization(): Promise<IOffersInfo | null> {
-	const [dirFiles, directoryPath] = await getDirFiles('all_offers');
-	const files = sortFilesByDate(dirFiles);
+async function getDataForVisualization(
+	storage: IRepository
+): Promise<IOffersInfo | null> {
+	// const [dirFiles, directoryPath] = await getDirFiles('all_offers');
+	// const files = sortFilesByDate(dirFiles);
 
-	if (dirFiles.length === 0) {
-		l.warn('There is no files with data for the visualization.');
-		return null;
-	}
+	// if (dirFiles.length === 0) {
+	// 	l.warn('There is no files with data for the visualization.');
+	// 	return null;
+	// }
 
-	const youngestFile = files[files.length - 1];
+	// const youngestFile = files[files.length - 1];
 
-	const fileData = await readOffersFile(directoryPath, youngestFile.fileName);
+	// const fileData = await readOffersFile(directoryPath, youngestFile.fileName);
 
-	return mapFileData(fileData);
+	// return mapFileData(fileData);
+	const offersInfo = await storage.getNewOffers();
+	return offersInfo
 }
 
 async function getTemplates(): Promise<[page: string, offer: string]> {

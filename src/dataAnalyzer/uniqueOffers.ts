@@ -1,26 +1,26 @@
 import path from 'path';
-import { IOffer, IOffersInfo, SiteName } from '../types';
+import { IOffer, IOffersInfo, IRepository } from '../types';
 import { timeStart } from '../performance';
-import {
-	ensurePathExists,
-	getDirFiles,
-	mapFileData,
-	readOffersFile,
-	saveOffersInfo
-} from '../files';
-import { assertSameOffers, makeOffersUnion } from './compareOffers';
+import { ensurePathExists, getDirFiles, mapFileData, readOffersFile } from '../files';
+import { assertSameOffers } from './compareOffers';
+import l from '../logger';
 
-export async function analyzeData(siteNames: SiteName[]) {
+export async function analyzeData(storage: IRepository) {
 	const timeStop = timeStart('Analyzing data');
-	const dayOffers = await makeUnionOfDayOffers(siteNames);
-	await saveOffersInfo(dayOffers, 'analyzed');
+	const newOffersInfo = await storage.getTmpOffers();
 
-	const allOffers = await getAllOffers();
-	const newOffers = await filterOutRecurredOffers(
-		allOffers.flatMap((x) => x.offerList),
-		dayOffers
+	if (newOffersInfo === null) {
+		l.warn('There was no new offers - analyzing data stopped.');
+		return;
+	}
+
+	const allOffers = await storage.getAllOffers();
+	const newFilteredOffers = await filterOutRecurredOffers(
+		allOffers,
+		newOffersInfo.offerList
 	);
-	await saveOffersInfo(newOffers, 'all_offers');
+	await storage.saveNewOffers(newFilteredOffers, newOffersInfo.date);
+	await storage.deleteTmpOffers();
 	timeStop();
 }
 
@@ -66,17 +66,17 @@ export async function getAllOffers(): Promise<IOffersInfo[]> {
 	return allOffersInfo;
 }
 
-export async function makeUnionOfDayOffers(siteNames: SiteName[]): Promise<IOffer[]> {
-	// @improvement: do it only if there is at least one file younger then previous union
-	const dayUniqueOffers = await getDayUniqueSitesOffers(siteNames);
-	return dayUniqueOffers;
-}
+// export async function makeUnionOfDayOffers(siteNames: SiteName[]): Promise<IOffer[]> {
+// 	// @improvement: do it only if there is at least one file younger then previous union
+// 	const dayUniqueOffers = await getDayUniqueSitesOffers(siteNames);
+// 	return dayUniqueOffers;
+// }
 
-async function getDayUniqueSitesOffers(siteNames: SiteName[]): Promise<IOffer[]> {
-	let offersUnion: IOffer[] = [];
-	for (let i = 0; i < siteNames.length; i++) {
-		offersUnion = await makeOffersUnion(offersUnion, siteNames[i]);
-	}
+// async function getDayUniqueSitesOffers(siteNames: SiteName[]): Promise<IOffer[]> {
+// 	let offersUnion: IOffer[] = [];
+// 	for (let i = 0; i < siteNames.length; i++) {
+// 		offersUnion = await makeOffersUnion(offersUnion, siteNames[i]);
+// 	}
 
-	return offersUnion;
-}
+// 	return offersUnion;
+// }

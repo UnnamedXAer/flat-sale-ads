@@ -1,6 +1,6 @@
 import { Browser, Page } from 'puppeteer';
 import l from '../logger';
-import { IOffer, SiteName, IOffersInfo, IRepository } from '../types';
+import { IOffer, SiteName, IRepository } from '../types';
 import cheerio from 'cheerio';
 import { config } from '../config';
 import { sleep } from '../sleep';
@@ -10,9 +10,11 @@ import { timeStart } from '../performance';
 
 export class Scraper implements IScraper {
 	storage: IRepository;
+	programStartTime: number;
 
-	constructor(storage: IRepository) {
+	constructor(storage: IRepository, programStartTime: number) {
 		this.storage = storage;
+		this.programStartTime = programStartTime;
 	}
 
 	async scrapeOffers(browser: Browser, sites: SiteName[]) {
@@ -27,6 +29,7 @@ export class Scraper implements IScraper {
 			}
 			siteIndex++;
 			// @info: scrape up to two sites at a time.
+			// @todo: check what happens if one of them fails.
 			await Promise.all(promises);
 		}
 	}
@@ -36,8 +39,14 @@ export class Scraper implements IScraper {
 		// @todo: handle error
 		const [todayOffers, error] = await this.getSiteOffers(browser, siteScraper);
 
-		await this.saveSiteOffers(siteScraper.serviceName, todayOffers);
 		this.validateOffers(todayOffers, siteScraper.serviceName);
+		try {
+			await this.saveSiteOffers(siteScraper.serviceName, todayOffers);
+		}
+		catch (err) {
+			l.error(err);
+			throw err;
+		}
 
 		l.info(
 			`The number of today's "${siteScraper.serviceName}" offers is: `,
@@ -46,7 +55,7 @@ export class Scraper implements IScraper {
 	}
 
 	private async saveSiteOffers(siteName: SiteName, dataToSave: IOffer[]) {
-		await this.storage.saveTmpOffers(dataToSave);
+		await this.storage.saveTmpOffers(dataToSave, new Date(this.programStartTime));
 	}
 
 	private async getSiteOffers(
@@ -171,14 +180,14 @@ export class Scraper implements IScraper {
 			const withMissingData = offers
 				.map((x) => {
 					if (
-						x.id === '' ||
+						x.offerId === '' ||
 						x.title === '' ||
 						x.price === '' ||
 						x.url === '' ||
 						x.dt === '' ||
 						x.imgUrl === ''
 					) {
-						return x.id ? x.id : x.url ? x.url : x.title ? x.title : x;
+						return x.offerId ? x.offerId : x.url ? x.url : x.title ? x.title : x;
 					}
 					return null;
 				})

@@ -69,7 +69,7 @@ export function mapOffersDataToOffers(offersData: OfferTextFileData[]): IOffer[]
 		return {
 			_dt: new Date(offerData._dt),
 			dt: offerData.dt,
-			id: offerData.id,
+			offerId: offerData.id,
 			scrapedAt: new Date(offerData.scrapedAt),
 			title: offerData.title,
 			price: offerData.price,

@@ -64,7 +64,7 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 				scrapedAt: new Date(globals.programStartTime),
 				title,
 				price,
-				id,
+				offerId: id,
 				url,
 				description,
 				imgUrl
