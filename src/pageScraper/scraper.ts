@@ -1,15 +1,11 @@
 import { Browser, Page } from 'puppeteer';
-import path from 'path';
 import l from '../logger';
-import { IOffer, SiteName, OffersInfo, IRepository } from '../types';
+import { IOffer, SiteName, IOffersInfo, IRepository } from '../types';
 import cheerio from 'cheerio';
 import { config } from '../config';
 import { sleep } from '../sleep';
 import { IScraper, ISiteScraper, ScraperDataType } from './types';
-import { ensurePathExists, saveOffersInfo as saveOffers } from '../files';
 import { makeSiteScraper } from './siteScraperFactory';
-import { formatDateToFileName } from '../formatDate';
-import { writeFile } from 'fs/promises';
 import { timeStart } from '../performance';
 
 export class Scraper implements IScraper {
@@ -40,10 +36,7 @@ export class Scraper implements IScraper {
 		// @todo: handle error
 		const [todayOffers, error] = await this.getSiteOffers(browser, siteScraper);
 
-		await this.saveSiteOffers(siteScraper.serviceName, {
-			date: new Date(),
-			offers: todayOffers
-		});
+		await this.saveSiteOffers(siteScraper.serviceName, todayOffers);
 		this.validateOffers(todayOffers, siteScraper.serviceName);
 
 		l.info(
@@ -52,8 +45,8 @@ export class Scraper implements IScraper {
 		);
 	}
 
-	private async saveSiteOffers(siteName: SiteName, dataToSave: OffersInfo) {
-		this.storage.create(dataToSave.offers);
+	private async saveSiteOffers(siteName: SiteName, dataToSave: IOffer[]) {
+		await this.storage.saveTmpOffers(dataToSave);
 	}
 
 	private async getSiteOffers(

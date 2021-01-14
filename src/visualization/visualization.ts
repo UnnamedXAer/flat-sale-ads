@@ -13,7 +13,7 @@ import {
 import { formatDateToFileName } from '../formatDate';
 import l from '../logger';
 import { timeStart } from '../performance';
-import { OffersInfo } from '../types';
+import { IOffersInfo } from '../types';
 
 const offerClasses = {
 	link: '.offer-link',
@@ -36,7 +36,7 @@ export async function createVisualization() {
 	timeStop = timeStart('Load html template into the cheerio');
 	const $ = cheerio.load(pageHtml);
 	timeStop();
-	timeStop = timeStart(`Generate html of the offers (${offersInfo?.offers.length})`);
+	timeStop = timeStart(`Generate html of the offers (${offersInfo?.offerList.length})`);
 	const $offerList = $('.offer-list');
 	const $offerTemplateHtml = $(offerTemplateHtml);
 	fillOffersList($offerList, $offerTemplateHtml, offersInfo);
@@ -58,7 +58,7 @@ export async function createVisualization() {
 	timeStop();
 }
 
-async function getDataForVisualization(): Promise<OffersInfo | null> {
+async function getDataForVisualization(): Promise<IOffersInfo | null> {
 	const [dirFiles, directoryPath] = await getDirFiles('all_offers');
 	const files = sortFilesByDate(dirFiles);
 
@@ -84,12 +84,12 @@ async function getTemplates(): Promise<[page: string, offer: string]> {
 export function fillOffersList(
 	$offerList: cheerio.Cheerio,
 	$offerTemplate: cheerio.Cheerio,
-	offersInfo: OffersInfo | null
+	offersInfo: IOffersInfo | null
 ) {
-	if (offersInfo === null || offersInfo.offers.length === 0) {
+	if (offersInfo === null || offersInfo.offerList.length === 0) {
 		$offerList.html(`<p>There is no data to show 😱</p>`);
 	} else {
-		const offers = offersInfo.offers;
+		const offers = offersInfo.offerList;
 		offers.forEach((offer) => {
 			const $offer = $offerTemplate.clone();
 			const $link = $offer.find(offerClasses.link);

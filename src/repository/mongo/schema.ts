@@ -17,3 +17,4 @@ export const offerSchema = new Schema<Document<IOffer>>({
 	url: { type: String, required: true },
 	imgUrl: { type: String }
 });
+

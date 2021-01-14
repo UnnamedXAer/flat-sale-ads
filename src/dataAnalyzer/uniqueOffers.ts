@@ -1,5 +1,5 @@
 import path from 'path';
-import { IOffer, OffersInfo, SiteName } from '../types';
+import { IOffer, IOffersInfo, SiteName } from '../types';
 import { timeStart } from '../performance';
 import {
 	ensurePathExists,
@@ -17,7 +17,7 @@ export async function analyzeData(siteNames: SiteName[]) {
 
 	const allOffers = await getAllOffers();
 	const newOffers = await filterOutRecurredOffers(
-		allOffers.flatMap((x) => x.offers),
+		allOffers.flatMap((x) => x.offerList),
 		dayOffers
 	);
 	await saveOffersInfo(newOffers, 'all_offers');
@@ -49,14 +49,14 @@ export async function filterOutRecurredOffers(
 	return uniqueNewOffers;
 }
 
-export async function getAllOffers(): Promise<OffersInfo[]> {
+export async function getAllOffers(): Promise<IOffersInfo[]> {
 	const timeStop = timeStart('Read all previous offers.');
 	const allOffersPath = path.join(process.cwd(), 'data', 'all_offers');
 	await ensurePathExists(allOffersPath);
 
 	const [files] = await getDirFiles('all_offers');
 
-	const allOffersInfo: OffersInfo[] = [];
+	const allOffersInfo: IOffersInfo[] = [];
 
 	for (let i = 0; i < files.length; i++) {
 		const fileData = await readOffersFile(allOffersPath, files[i].fileName);

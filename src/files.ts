@@ -6,7 +6,7 @@ import {
 	DataDirectory,
 	DirectoryOffers,
 	IOffer,
-	OffersInfo,
+	IOffersInfo,
 	OfferTextFileData,
 	ReadTextFileData,
 	SimplyFile
@@ -49,7 +49,7 @@ export async function getDataDirLatestOffers(
 	const offersInfo = mapFileData(fileData);
 
 	const directoryOffers: DirectoryOffers = {
-		offers: offersInfo.offers,
+		offers: offersInfo.offerList,
 		scrapedAt: offersInfo.date,
 		directory: dataDirName
 	};
@@ -57,10 +57,10 @@ export async function getDataDirLatestOffers(
 	return directoryOffers;
 }
 
-export function mapFileData(fileData: ReadTextFileData): OffersInfo {
+export function mapFileData(fileData: ReadTextFileData): IOffersInfo {
 	return {
 		date: new Date(fileData.date),
-		offers: mapOffersDataToOffers(fileData.offers)
+		offerList: mapOffersDataToOffers(fileData.offers)
 	};
 }
 
@@ -155,9 +155,9 @@ export async function saveOffersInfo(offers: IOffer[], directory: DataDirectory)
 		formatDateToFileName() + '_' + Date.now() + '.json'
 	);
 	const timeStop = timeStart('Save offers info to: ' + '"' + dataFilePath + '"');
-	const offersInfo: OffersInfo = {
+	const offersInfo: IOffersInfo = {
 		date: new Date(),
-		offers: offers
+		offerList: offers
 	};
 	await writeFile(dataFilePath, JSON.stringify(offersInfo, null, 4));
 	timeStop();

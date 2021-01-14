@@ -40,10 +40,13 @@ export interface Config {
 
 export interface IRepository {
 	deleteById(id: string): Promise<void>;
-	create(o: IOffer | IOffer[]): Promise<void>;
+	saveOffers(o: IOffer | IOffer[]): Promise<void>;
 	update(o: IOffer | IOffer[]): Promise<void>;
 	getAll(): Promise<IOffer[]>;
 	getById(id: string): Promise<IOffer | null>;
+	saveTmpOffers(o: IOffer[]): Promise<void>;
+	getTmpOffers(): Promise<IOffer[]>;
+	deleteTmpOffers(): Promise<void>;
 	connect(): Promise<void>;
 	disconnect(): Promise<void>;
 }
@@ -80,9 +83,9 @@ export interface DirectoryOffers {
 	scrapedAt: Date;
 }
 
-export interface OffersInfo {
+export interface IOffersInfo {
 	date: Date;
-	offers: IOffer[];
+	offerList: IOffer[];
 }
 
 export interface ReadTextFileData {
