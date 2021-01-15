@@ -14,7 +14,7 @@ export async function analyzeData(storage: IRepository) {
 		l.warn('There are no new offers to filter.');
 		return;
 	}
-
+	
 	const allOffers = await storage.getAllOffers();
 	const newFilteredOffers = (
 		await Promise.all(

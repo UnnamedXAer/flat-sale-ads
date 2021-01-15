@@ -44,12 +44,7 @@ const main = async () => {
 	globals.programStartTime = Date.now();
 	l.info('Program START');
 	const _config = config;
-	storage.connect();
-
-	await (async () => {
-		const offers = await storage.getAllOffers();
-		console.log('offers', offers);
-	})();
+	storage.connect(process.env.MONGO_URI as string);
 
 	// await start_scrape();
 	// await start_analyze();
@@ -70,4 +65,5 @@ main()
 		const executionTime = Date.now() - globals.programStartTime;
 		l.info('Total execution time: ', lTime(executionTime));
 		l.info('Program END!');
+		// process.exit(0);
 	});

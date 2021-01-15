@@ -22,6 +22,6 @@ export const offersInfoSchema = new Schema<
 	Document<IOffersInfo>,
 	Model<Document<IOffersInfo>>
 >({
-	date: { type: String, required: true },
+	date: { type: Date, required: true },
 	offerList: { type: [offerSchema], required: true, _id: false }
 });

@@ -2,21 +2,14 @@ import cheerio from 'cheerio';
 import { readFile, writeFile } from 'fs/promises';
 import { config } from '../config';
 import path from 'path';
-import {
-	ensurePathExists,
-	getDataDirPath,
-	getDirFiles,
-	readOffersFile,
-	mapFileData,
-	sortFilesByDate
-} from '../files';
+import { ensurePathExists, getDataDirPath } from '../files';
 import { formatDateToFileName } from '../formatDate';
-import l from '../logger';
 import { timeStart } from '../performance';
 import { IOffersInfo, IRepository } from '../types';
 
 const offerClasses = {
 	link: '.offer-link',
+	index: '.offer-index',
 	image: '.offer-image',
 	title: '.offer-title',
 	price: '.offer-price',
@@ -27,40 +20,48 @@ const offerClasses = {
 } as const;
 
 export async function createVisualization(storage: IRepository) {
-	let timeStop = timeStart('Read data for the visualization');
 	const offersInfo = await getDataForVisualization(storage);
-	timeStop();
-	timeStop = timeStart('Read the html templates');
 	const [pageHtml, offerTemplateHtml] = await getTemplates();
-	timeStop();
-	timeStop = timeStart('Load html template into the cheerio');
-	const $ = cheerio.load(pageHtml);
-	timeStop();
-	timeStop = timeStart(`Generate html of the offers (${offersInfo?.offerList.length})`);
-	const $offerList = $('.offer-list');
-	const $offerTemplateHtml = $(offerTemplateHtml);
-	fillOffersList($offerList, $offerTemplateHtml, offersInfo);
-	timeStop();
-	timeStop = timeStart('Retrieve the complete html.');
-	const html = $.html();
-	timeStop();
-
+	const html = generateOffersPageHtml(pageHtml, offerTemplateHtml, offersInfo);
 	const visualizationPath = getDataDirPath('visualization');
 	const fileName =
 		'vis_' + formatDateToFileName() + (config.isDev ? Date.now() : '') + '.html';
 	await ensurePathExists(visualizationPath);
 	const filePath = path.join(visualizationPath, fileName);
-	timeStop = timeStart(`Save html to: "${filePath}".`);
 	await writeFile(filePath, html);
-	timeStop();
-	timeStop = timeStart('Open visualization in the  default browser.');
+
+	openVisualization(filePath);
+}
+
+function openVisualization(filePath: string) {
+	let timeStop = timeStart('Open visualization in the  default browser.');
 	require('child_process').spawn('explorer', [filePath]);
 	timeStop();
+}
+
+function generateOffersPageHtml(
+	pageHtml: string,
+	offerTemplateHtml: string,
+	offersInfo: IOffersInfo | null
+) {
+	let timeStop = timeStart(
+		`Generate html of the offers (cnt: ${offersInfo?.offerList.length})`
+	);
+	const $ = cheerio.load(pageHtml);
+	$('.offer-list-count').text(offersInfo?.offerList.length + ' offers');
+	const $offerList = $('.offer-list');
+	const $offerTemplateHtml = $(offerTemplateHtml);
+	fillOffersList($offerList, $offerTemplateHtml, offersInfo);
+	const html = $.html();
+	timeStop();
+	return html;
 }
 
 async function getDataForVisualization(
 	storage: IRepository
 ): Promise<IOffersInfo | null> {
+	let timeStop = timeStart('Read data for the visualization');
+
 	// const [dirFiles, directoryPath] = await getDirFiles('all_offers');
 	// const files = sortFilesByDate(dirFiles);
 
@@ -75,13 +76,16 @@ async function getDataForVisualization(
 
 	// return mapFileData(fileData);
 	const offersInfo = await storage.getNewOffers();
-	return offersInfo
+	timeStop();
+	return offersInfo;
 }
 
 async function getTemplates(): Promise<[page: string, offer: string]> {
+	const timeStop = timeStart('Read the html templates');
 	const dirPath = path.join(process.cwd(), 'src', 'assets');
 	const page = await readFile(path.join(dirPath, 'template.html'), 'utf-8');
 	const offer = await readFile(path.join(dirPath, 'templateOffer.html'), 'utf-8');
+	timeStop();
 	return [page, offer];
 }
 
@@ -94,8 +98,10 @@ export function fillOffersList(
 		$offerList.html(`<p>There is no data to show 😱</p>`);
 	} else {
 		const offers = offersInfo.offerList;
-		offers.forEach((offer) => {
+		offers.forEach((offer, idx) => {
 			const $offer = $offerTemplate.clone();
+			const $idx = $offer.find(offerClasses.index);
+			$idx.text(idx + 1 + '.');
 			const $link = $offer.find(offerClasses.link);
 			$link.attr('href', offer.url);
 			const $image = $offer.find(offerClasses.image);
