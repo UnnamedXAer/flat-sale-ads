@@ -1,4 +1,5 @@
 require('dotenv').config();
+import { ConnectOptions } from 'mongoose';
 import pp from 'puppeteer';
 import { config } from './config';
 import { analyzeData } from './dataAnalyzer/uniqueOffers';
@@ -44,7 +45,13 @@ const main = async () => {
 	globals.programStartTime = Date.now();
 	l.info('Program START');
 	const _config = config;
-	storage.connect(process.env.MONGO_URI as string);
+	const connectOptions:ConnectOptions = {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useFindAndModify: false,
+		useCreateIndex: true
+	};
+	storage.connect(process.env.MONGO_URI as string, connectOptions);
 
 	// await start_scrape();
 	// await start_analyze();
