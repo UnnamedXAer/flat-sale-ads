@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { ConnectOptions } from 'mongoose';
 import logger from '../../logger';
 import { IOffer, IOffersInfo, IRepository, Logger, siteNames } from '../../types';
 import { IOffersInfoDocument, OfferModel, TemporaryOfferModel } from './model';
@@ -134,14 +134,9 @@ export class MongoRepository implements IRepository {
 		return;
 	}
 
-	async connect(uri: string) {
+	async connect(uri: string, options?: ConnectOptions) {
 		this.l.info('Connecting to mongodb...');
-		this.connection = await mongoose.connect(uri, {
-			useNewUrlParser: true,
-			useUnifiedTopology: true,
-			useFindAndModify: false,
-			useCreateIndex: true
-		});
+		this.connection = await mongoose.connect(uri, options);
 		this.l.info('Successfully connected to mongodb.');
 	}
 

@@ -45,7 +45,7 @@ export interface IRepository {
 	saveTmpOffers(o: IOffer[], date: Date): Promise<void>;
 	getTmpOffers(): Promise<IOffersInfo[]>;
 	deleteTmpOffers(): Promise<void>;
-	connect(uri: string): Promise<void>;
+	connect(uri: string, options?: { [key: string]: string }): Promise<void>;
 	disconnect(): Promise<void>;
 }
 
