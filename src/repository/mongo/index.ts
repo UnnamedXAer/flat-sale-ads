@@ -3,7 +3,7 @@ import logger from '../../logger';
 import { IOffer, IOffersInfo, IRepository, Logger, siteNames } from '../../types';
 import { IOffersInfoDocument, OfferModel, TemporaryOfferModel } from './model';
 
-interface MongoModels {
+export interface MongoModels {
 	allOffers: typeof OfferModel;
 	tmpOffers: typeof TemporaryOfferModel;
 }

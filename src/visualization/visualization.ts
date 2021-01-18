@@ -1,5 +1,5 @@
 import cheerio from 'cheerio';
-import { readFile, writeFile } from 'fs/promises';
+import fsPromises from 'fs/promises';
 import { config } from '../config';
 import path from 'path';
 import { ensurePathExists, getDataDirPath } from '../files';
@@ -28,18 +28,18 @@ export async function createVisualization(storage: IRepository) {
 		'vis_' + formatDateToFileName() + (config.isDev ? Date.now() : '') + '.html';
 	await ensurePathExists(visualizationPath);
 	const filePath = path.join(visualizationPath, fileName);
-	await writeFile(filePath, html);
+	await fsPromises.writeFile(filePath, html);
 
 	openVisualization(filePath);
 }
 
-function openVisualization(filePath: string) {
+export function openVisualization(filePath: string) {
 	let timeStop = timeStart('Open visualization in the  default browser.');
 	require('child_process').spawn('explorer', [filePath]);
 	timeStop();
 }
 
-function generateOffersPageHtml(
+export function generateOffersPageHtml(
 	pageHtml: string,
 	offerTemplateHtml: string,
 	offersInfo: IOffersInfo | null
@@ -57,7 +57,7 @@ function generateOffersPageHtml(
 	return html;
 }
 
-async function getDataForVisualization(
+export async function getDataForVisualization(
 	storage: IRepository
 ): Promise<IOffersInfo | null> {
 	let timeStop = timeStart('Read data for the visualization');
@@ -80,11 +80,13 @@ async function getDataForVisualization(
 	return offersInfo;
 }
 
-async function getTemplates(): Promise<[page: string, offer: string]> {
+export async function getTemplates(): Promise<[page: string, offer: string]> {
 	const timeStop = timeStart('Read the html templates');
 	const dirPath = path.join(process.cwd(), 'src', 'assets');
-	const page = await readFile(path.join(dirPath, 'template.html'), 'utf-8');
-	const offer = await readFile(path.join(dirPath, 'templateOffer.html'), 'utf-8');
+	const [page, offer] = await Promise.all([
+		fsPromises.readFile(path.join(dirPath, 'template.html'), 'utf-8'),
+		fsPromises.readFile(path.join(dirPath, 'templateOffer.html'), 'utf-8')
+	]);
 	timeStop();
 	return [page, offer];
 }

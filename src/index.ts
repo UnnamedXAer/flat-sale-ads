@@ -53,8 +53,8 @@ const main = async () => {
 	};
 	storage.connect(process.env.MONGO_URI as string, connectOptions);
 
-	// await start_scrape();
-	// await start_analyze();
+	await start_scrape();
+	await start_analyze();
 	await start_generateVisualization();
 
 	await storage.disconnect();

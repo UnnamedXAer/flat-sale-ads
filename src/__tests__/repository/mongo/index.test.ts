@@ -1,10 +1,10 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import { config } from '../../../config';
 import { l } from '../../../__mocks__/logger';
 import { MongoRepository } from '../../../repository/mongo';
 import { OfferModel, TemporaryOfferModel } from '../../../repository/mongo/model';
-import { IOffer, IOffersInfo, siteNames } from '../../../types';
+import { IOffer, IOffersInfo } from '../../../types';
 import { ConnectOptions } from 'mongoose';
+import { mockOffersListInfos } from '../../../__mocks__/data';
 
 let mongoServer: MongoMemoryServer;
 const storage = new MongoRepository(l, {
@@ -18,7 +18,9 @@ beforeAll(async () => {
 		// options for mongoose 4.11.3 and above
 		autoReconnect: true,
 		reconnectTries: Number.MAX_VALUE,
-		reconnectInterval: 1000
+		reconnectInterval: 1000,
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
 	};
 	await storage.connect(uri, mongooseOpts);
 });
@@ -56,7 +58,7 @@ describe('test mongo repository', () => {
 		test('should delete all temporary offers', async () => {
 			await storage.deleteTmpOffers();
 
-			expect(await TemporaryOfferModel.count()).toBe(0);
+			expect(await TemporaryOfferModel.countDocuments()).toBe(0);
 		});
 
 		test('should read temporary offers info', async () => {
@@ -115,66 +117,3 @@ describe('test mongo repository', () => {
 	});
 });
 
-const mockOffersListInfos: IOffersInfo[] = siteNames.map((site, siteIdx) => {
-	const date = new Date();
-	const offerList: IOffer[] = new Array(5).fill(1).map((_, i) => ({
-		_dt: date,
-		dt: date.toLocaleString(...config.dateTimeFormatParams),
-		offerId: process.hrtime.bigint().toString() + i,
-		price: [
-			siteIdx.toString(),
-			process.hrtime.bigint().toString().substr(-5, 2),
-			i,
-			'00'
-		].join(''),
-		scrapedAt: date,
-		site: site,
-		title: `The offer #${i + 1}`,
-		description: `The offer #${i + 1}. Size: ${10 * (i + 1) + siteIdx * 1.5}`,
-		url: 'https://jestjs.io',
-		imgUrl: 'https://docs.mongodb.com/images/mongodb-logo.png'
-	}));
-	return {
-		date: date,
-		offerList
-	};
-});
-
-// [
-// 	{
-// 		_dt: new Date(),
-// 		dt: new Date().toLocaleString(...config.dateTimeFormatParams),
-// 		offerId: process.hrtime.bigint().toString(),
-// 		price: process.hrtime.bigint().toString().slice(-6),
-// 		scrapedAt: new Date(),
-// 		site: 'gethome',
-// 		title: 'The first',
-// 		description: 'The first offer.',
-// 		url: 'https://jestjs.io',
-// 		imgUrl: 'https://docs.mongodb.com/images/mongodb-logo.png'
-// 	},
-// 	{
-// 		_dt: new Date(),
-// 		dt: new Date().toLocaleString(...config.dateTimeFormatParams),
-// 		offerId: process.hrtime.bigint().toString(),
-// 		price: process.hrtime.bigint().toString().slice(-6),
-// 		scrapedAt: new Date(),
-// 		site: 'gethome',
-// 		title: 'The second',
-// 		description: 'The second offer.',
-// 		url: 'https://jestjs.io',
-// 		imgUrl: 'https://docs.mongodb.com/images/mongodb-logo.png'
-// 	},
-// 	{
-// 		_dt: new Date(),
-// 		dt: new Date().toLocaleString(...config.dateTimeFormatParams),
-// 		offerId: process.hrtime.bigint().toString(),
-// 		price: process.hrtime.bigint().toString().slice(-6),
-// 		scrapedAt: new Date(),
-// 		site: 'gethome',
-// 		title: 'The third',
-// 		description: 'The third offer.',
-// 		url: 'https://jestjs.io',
-// 		imgUrl: 'https://docs.mongodb.com/images/mongodb-logo.png'
-// 	}
-// ]
