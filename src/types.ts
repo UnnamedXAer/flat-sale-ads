@@ -3,7 +3,7 @@ import { TLogLevelName } from 'tslog';
 export type NODE_ENV = 'production' | 'development' | 'test';
 export type EnvPrefix = 'test' | 'dev' | 'prod';
 
-export const siteNames = ['rzeszowiak', 'olx', 'otodom', 'gethome'] as const;
+export const siteNames = ['rzeszowiakAgencje', 'rzeszowiak', 'olx', 'otodom', 'gethome'] as const;
 export type SiteName = typeof siteNames[number];
 export type DataDirectory = SiteName | 'analyzed' | 'visualization' | 'all_offers';
 
