@@ -29,7 +29,7 @@
 				"TS_NODE_PROJECT": "./tsconfig.json",
 				"TS_NODE_LOG_ERROR": "true",
 				"TS_NODE_PRETTY": "true",
-				"NODE_ENV": "development"
+				"NODE_ENV": "test"
 			},
 			"args": [
 				"${workspaceFolder}/src/index.ts"

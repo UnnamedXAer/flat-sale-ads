@@ -75,7 +75,7 @@ export class MongoRepository implements IRepository {
 			date,
 			offerList: offers
 		});
-		this.l.debug('Offers saved. Count: ', offers.length);
+		this.l.debug('Offers saved. count: ', offers.length);
 
 		return;
 	}
@@ -118,7 +118,7 @@ export class MongoRepository implements IRepository {
 		);
 		if (offersInfoDocs.length != siteNames.length) {
 			this.l.warn(
-				'Number of temporary offers infos in storage is different than number of sites.'
+				`Number of temporary offers infos in storage (${offersInfoDocs.length}) is different than number of sites (${siteNames.length}).`
 			);
 		}
 
@@ -130,7 +130,7 @@ export class MongoRepository implements IRepository {
 
 	async deleteTmpOffers(): Promise<void> {
 		const _results = await this.models.tmpOffers.deleteMany({});
-		this.l.debug(`Temporary offers removed.`);
+		this.l.debug(`Temporary offers removed. count: `, _results.deletedCount);
 		return;
 	}
 
