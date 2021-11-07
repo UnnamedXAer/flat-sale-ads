@@ -28,6 +28,7 @@ export interface Config {
 	envPrefix: EnvPrefix;
 	scrapeSiteTimeout: number;
 	startMaximized: boolean;
+	skipVisualization: boolean;
 	logsLevel: TLogLevelName;
 	appTemporaryDataFolder: string;
 	dateTimeFormatParams: [string, Intl.DateTimeFormatOptions];

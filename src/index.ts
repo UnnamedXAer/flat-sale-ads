@@ -37,15 +37,18 @@ async function start_scrape() {
 async function start_analyze() {
 	await analyzeData(storage);
 }
+
 async function start_generateVisualization() {
-	await createVisualization(storage);
+	if (!config.skipVisualization) {
+		await createVisualization(storage);
+	}
 }
 const main = async () => {
 	timeStop = timeStart('main');
 	globals.programStartTime = Date.now();
 	l.info('Program START');
 	const _config = config;
-	const connectOptions:ConnectOptions = {
+	const connectOptions: ConnectOptions = {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useFindAndModify: false,
