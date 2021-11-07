@@ -43,9 +43,16 @@ export const createConfig = (process: NodeJS.Process): Config => {
 			}
 		],
 		urls: {
+			// price = 100k-400k
+			// category = sell
+			// ordered by create date
+			// last 3 days
+			rzeszowiakAgencje:
+				process.env.URL_RZESZOWIAK_AGENCJE ||
+				'http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-agencje-2580011252?min=100000&max=400000&r=mieszkania',
 			rzeszowiak:
 				process.env.URL_RZESZOWIAK ||
-				'http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-agencje-2580011252?r=mieszkania',
+				'http://www.rzeszowiak.pl/Nieruchomosci-3070011252?min=100000&max=400000&r=mieszkania',
 
 			// location = Rzeszów +10km
 			// price = 100k-400k

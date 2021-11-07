@@ -27,6 +27,7 @@ async function start_scrape() {
 	const scraper = new Scraper(storage, globals.programStartTime);
 	await scraper.scrapeOffers(browser, [
 		'olx', //
+		'rzeszowiakAgencje', //
 		'rzeszowiak', //
 		'otodom', //
 		'gethome' //

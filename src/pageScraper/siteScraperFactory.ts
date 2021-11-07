@@ -10,6 +10,7 @@ export function makeSiteScraper(siteName: SiteName): ISiteScraper {
 	switch (siteName) {
 		case 'olx':
 			return new OlxScraper();
+		case 'rzeszowiakAgencje':
 		case 'rzeszowiak':
 			return new RzeszowiakScraper();
 		case 'otodom':
