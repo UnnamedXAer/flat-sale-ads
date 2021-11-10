@@ -1,4 +1,5 @@
 import mongoose, { ConnectOptions } from 'mongoose';
+import { globals } from '../../global';
 import logger from '../../logger';
 import { IOffer, IOffersInfo, IRepository, Logger, siteNames } from '../../types';
 import { IOffersInfoDocument, OfferModel, TemporaryOfferModel } from './model';
@@ -140,7 +141,11 @@ export class MongoRepository implements IRepository {
 		this.l.info('Successfully connected to mongodb.');
 	}
 
-	async disconnect() {
+	async disconnect(force?: boolean) {
+		if (!force && globals.SERVER_UP) {
+			this.l.info('Disconnecting prevented due to server being up!');
+			return;
+		}
 		if (this.connection !== null) {
 			this.connection.disconnect();
 			this.l.info('Disconnected from mongodb');
@@ -152,3 +157,22 @@ export const storage = new MongoRepository(logger, {
 	allOffers: OfferModel,
 	tmpOffers: TemporaryOfferModel
 });
+
+export const createStorage = () => {
+	return new MongoRepository(logger, {
+		allOffers: OfferModel,
+		tmpOffers: TemporaryOfferModel
+	});
+};
+export const connectToStorage = () => {
+	const connectOptions = {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useFindAndModify: false,
+		useCreateIndex: true
+	};
+	return storage.connect(
+		process.env.MONGO_URI as string,
+		connectOptions as ConnectOptions
+	);
+};

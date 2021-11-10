@@ -17,7 +17,7 @@ import l from './logger';
  * @param {string} label
  * @returns {Function} timerStop - function to stop the timer and log it with label
  */
-export const timeStart = (label: string = ''): Function => {
+export const timeStart = (label: string = ''): TimeStop => {
 	const startTime = process.hrtime.bigint();
 	return (stopLabel: string = label) => {
 		let executionTime = Number(process.hrtime.bigint() - startTime);
@@ -32,3 +32,5 @@ export const timeStart = (label: string = ''): Function => {
 		l.debug(stopLabel, `- execution time: ${executionTime} ${executionTimeUnit}`);
 	};
 };
+
+export type TimeStop = (label?: string) => void;
