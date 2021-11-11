@@ -20,7 +20,7 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Launch Program",
+			"name": "Launch Scraper",
 			"runtimeArgs": [
 				"-r",
 				"ts-node/register",
@@ -33,6 +33,25 @@
 			},
 			"args": [
 				"${workspaceFolder}/src/index.ts"
+			],
+			"console": "integratedTerminal"
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch Server",
+			"runtimeArgs": [
+				"-r",
+				"ts-node/register",
+			],
+			"env": {
+				"TS_NODE_PROJECT": "./tsconfig.json",
+				"TS_NODE_LOG_ERROR": "true",
+				"TS_NODE_PRETTY": "true",
+				"NODE_ENV": "test"
+			},
+			"args": [
+				"${workspaceFolder}/src/server.ts"
 			],
 			"console": "integratedTerminal"
 		}
