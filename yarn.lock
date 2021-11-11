@@ -4839,10 +4839,10 @@ ts-node@^9.1.1:
     source-map-support "^0.5.17"
     yn "3.1.1"
 
-tslog@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.npmjs.org/tslog/-/tslog-3.0.3.tgz"
-  integrity sha512-7T4f/Z8ADOLpPfbFivAtyCDyTtLjJdD2HTnCBjOX9fsDAOK0Gn10DCa5Y5Y/d1gnWc5mNuzYpKk5mND7S0Vq8Q==
+tslog@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/tslog/-/tslog-3.2.2.tgz#5bbaa1fab685c4273e59b38064227321a69a0694"
+  integrity sha512-8dwb1cYpj3/w/MZTrSkPrdlA44loUodGT8N6ULMojqV4YByVM7ynhvVs9JwcIYxhhHf4bz1C5O3NKIPehnGp/w==
   dependencies:
     source-map-support "^0.5.19"
 
