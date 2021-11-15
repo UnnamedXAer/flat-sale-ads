@@ -5,7 +5,6 @@ import http from 'http';
 import cors from 'cors';
 import { main } from './scraper';
 import { connectToStorage, createStorage } from './repository/mongo';
-import { globals } from './global';
 import { ScrapeEmitter } from './ScrapeEmitter';
 import l from './logger';
 import { inspect } from 'util';
@@ -14,7 +13,6 @@ import { onError, PORT, serverListenHandler } from './serverSupport';
 const storage = createStorage();
 
 const scrapeEmitter = new ScrapeEmitter();
-
 
 const app = express();
 const server = http.createServer(app);
@@ -67,6 +65,17 @@ app.get('/exec', async (req, res) => {
 	}
 });
 
+app.get('/drop-all', async (req, res) => {
+	l.info('about to drop all offers');
+	try {
+		await Promise.all([storage.deleteTmpOffers(), storage.deleteAllOffers()]);
+		res.send('done');
+	} catch (err) {
+		l.info('drop all offers: error: %v', err);
+		res.status(500).send(err);
+	}
+});
+
 function subscribeToScraper(req: Request, res: Response) {
 	scrapeEmitter.subscribe(res);
 
@@ -81,13 +90,11 @@ function subscribeToScraper(req: Request, res: Response) {
 connectToStorage()
 	.then(() => {
 		server.listen(PORT);
-		server.on('listening', serverListenHandler)
+		server.on('listening', serverListenHandler);
 	})
 	.catch((err) => {
 		l.info('server could not run due to storage connection error: %v', err);
 	});
-
-
 
 server.on('error', onError);
 
@@ -114,5 +121,3 @@ process.on('exit', () => {
 });
 
 l.info('exit handlers set.');
-
-

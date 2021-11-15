@@ -131,7 +131,13 @@ export class MongoRepository implements IRepository {
 
 	async deleteTmpOffers(): Promise<void> {
 		const _results = await this.models.tmpOffers.deleteMany({});
-		this.l.debug(`Temporary offers removed. count: `, _results.deletedCount);
+		this.l.debug(`"Temporary Offers" removed all. count: `, _results.deletedCount);
+		return;
+	}
+
+	async deleteAllOffers(): Promise<void> {
+		const _results = await this.models.allOffers.deleteMany({});
+		this.l.debug(`"All Offers" removed all. count: `, _results.deletedCount);
 		return;
 	}
 
