@@ -7,8 +7,12 @@ import { ISiteScraperByHtml, ScraperDataType, SiteScraperDebugInfo } from './typ
 
 export class RzeszowiakScraper implements ISiteScraperByHtml {
 	_debugInfo: SiteScraperDebugInfo = { idx: -1, url: '' };
-	serviceName: SiteName = 'rzeszowiak';
+	serviceName: Extract<SiteName, 'rzeszowiak' | 'rzeszowiakAgencje'> = 'rzeszowiak';
 	scrapperDataType: ScraperDataType.Html = ScraperDataType.Html;
+
+	constructor(siteName: Extract<SiteName, 'rzeszowiak' | 'rzeszowiakAgencje'>) {
+		this.serviceName = siteName;
+	}
 
 	getPageAds($page: cheerio.Root): [ads: IOffer[], isDone: boolean] {
 		const $ads = $page('#content-center .normalbox');
