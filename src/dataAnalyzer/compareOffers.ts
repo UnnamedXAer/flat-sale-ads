@@ -3,6 +3,9 @@ import l from '../logger';
 import { DataDirectory, IOffer } from '../types';
 
 export function assertSameOffers(uniqueOffer: IOffer, currentOffer: IOffer): boolean {
+	if (assertEqualOfferProp(uniqueOffer, currentOffer, 'url')) {
+		return true;
+	}
 	const siteEqual = assertEqualOfferProp(uniqueOffer, currentOffer, 'site');
 
 	if (siteEqual && assertEqualOfferProp(uniqueOffer, currentOffer, 'offerId')) {
@@ -39,13 +42,15 @@ export function assertEqualOfferProp(
 			val1 = (val1 as string).slice(0, 150);
 
 			val2 = (val2 as string).slice(0, 150);
+		} else if (prop === 'url') {
+			val1 += obj1['price'];
+			val2 += obj2['price'];
 		}
 	}
 	let output = val1 === val2;
 	if (!val1 && !val2) {
 		output = false;
 	}
-
 
 	return output;
 }
@@ -87,7 +92,7 @@ export async function getOffersUnion(
 
 		const offer = offers[idx];
 		const differentProps: (keyof IOffer)[] = [];
-		const adKeys = (Object.keys(offer) as unknown) as typeof differentProps;
+		const adKeys = Object.keys(offer) as unknown as typeof differentProps;
 		adKeys.forEach((prop) => {
 			if (offer[prop] !== currentOffer[prop]) {
 				differentProps.push(prop);
