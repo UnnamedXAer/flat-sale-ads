@@ -1,5 +1,5 @@
 require('dotenv').config();
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import debug from 'debug';
 import http from 'http';
 import cors from 'cors';
@@ -18,6 +18,7 @@ const app = express();
 const server = http.createServer(app);
 
 app.use(cors({}));
+app.use(express.json({ limit: '50mb' }));
 
 app.use((req, _, next) => {
 	l.info(
@@ -28,11 +29,46 @@ app.use((req, _, next) => {
 	next();
 });
 
+app.use(function errorMiddleware(
+	err: Error,
+	req: Request,
+	res: Response,
+	_next: NextFunction
+) {
+	const env = process.env.NODE_ENV;
+	const status =
+		(res.statusCode && res.statusCode >= 400 ? res.statusCode : void 0) || 500;
+	const message =
+		env === 'production' && status === 500 ? 'Something went wrong' : err.message;
+	const data = {};
+
+	const logData = {
+		hostname: req.hostname,
+		url: req.url,
+		message: err.message,
+		resStatusCode: res.statusCode,
+		env: env
+	};
+	if (status >= 500) {
+		Object.assign(logData, { stack: err.stack });
+		l.error('[%s] %s %o', req.method, req.url, JSON.stringify(logData));
+	} else {
+		l.warn('[%s] %s %O', req.method, req.url, JSON.stringify(logData));
+	}
+
+	const resObj = {
+		message,
+		status,
+		...data
+	};
+	res.status(status).send(resObj);
+});
+
 app.get('/', (req, res) => {
 	res.send({ bla: 'bla bla' });
 });
 
-app.get('/data', async (req, res) => {
+app.get('/data', async (req, res, next) => {
 	if (isScraping) {
 		l.debug('scraping, subscribe with request to wait for new data');
 		subscribeToScraper(req, res);
@@ -42,7 +78,8 @@ app.get('/data', async (req, res) => {
 		const data = await storage.getNewOffers();
 		res.send(data);
 	} catch (err) {
-		res.status(500).send(err);
+		res.status(500);
+		next(err);
 	}
 });
 
@@ -65,14 +102,15 @@ app.get('/exec', async (req, res) => {
 	}
 });
 
-app.get('/drop-all', async (req, res) => {
+app.get('/drop-all', async (req, res, next) => {
 	l.info('about to drop all offers');
 	try {
 		await Promise.all([storage.deleteTmpOffers(), storage.deleteAllOffers()]);
 		res.send('done');
 	} catch (err) {
 		l.info('drop all offers: error: %v', err);
-		res.status(500).send(err);
+		res.status(500);
+		next(err);
 	}
 });
 
