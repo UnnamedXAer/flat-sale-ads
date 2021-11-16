@@ -1,9 +1,8 @@
-import { getDataDirLatestOffers } from '../files';
-import l from '../logger';
-import { DataDirectory, IOffer } from '../types';
+import { IOffer } from '../types';
 
 export function assertSameOffers(uniqueOffer: IOffer, currentOffer: IOffer): boolean {
-	if (assertEqualOfferProp(uniqueOffer, currentOffer, 'url')) {
+	const priceEqual = assertEqualOfferProp(uniqueOffer, currentOffer, 'price');
+	if (assertEqualOfferProp(uniqueOffer, currentOffer, 'url') && priceEqual) {
 		return true;
 	}
 	const siteEqual = assertEqualOfferProp(uniqueOffer, currentOffer, 'site');
@@ -13,16 +12,12 @@ export function assertSameOffers(uniqueOffer: IOffer, currentOffer: IOffer): boo
 	}
 
 	if (assertEqualOfferProp(uniqueOffer, currentOffer, 'title')) {
-		if (siteEqual) {
-			if (assertEqualOfferProp(uniqueOffer, currentOffer, 'description')) {
-				return true;
-			}
-			return false;
-		}
-		if (assertEqualOfferProp(uniqueOffer, currentOffer, 'price')) {
+		if (priceEqual) {
 			return true;
 		}
-		return false;
+		if (siteEqual && assertEqualOfferProp(uniqueOffer, currentOffer, 'description')) {
+			return true;
+		}
 	}
 
 	return false;
@@ -42,96 +37,91 @@ export function assertEqualOfferProp(
 			val1 = (val1 as string).slice(0, 150);
 
 			val2 = (val2 as string).slice(0, 150);
-		} else if (prop === 'url') {
-			val1 += obj1['price'];
-			val2 += obj2['price'];
 		}
 	}
-	let output = val1 === val2;
-	if (!val1 && !val2) {
-		output = false;
-	}
+	let output = val1 === val2 && !!val1;
 
 	return output;
 }
-/**
- * `getOffersUnion` returns new array
- *
- * @export
- * @param {IOffer[]} uniqueOffers
- * @param {IOffer[]} currentOffers
- * @param {DataDirectory} dataDirectory
- * @returns {Promise<IOffer[]>}
- */
-export async function getOffersUnion(
-	uniqueOffers: IOffer[],
-	currentOffers: IOffer[],
-	dataDirectory: DataDirectory
-): Promise<IOffer[]> {
-	const offers = [...uniqueOffers];
 
-	for (let j = 0; j < currentOffers.length; j++) {
-		const currentOffer = currentOffers[j];
-		const idx = offers.findIndex((uniqueOffer) =>
-			assertSameOffers(uniqueOffer, currentOffer)
-		);
+// /**
+//  * `getOffersUnion` returns new array
+//  *
+//  * @export
+//  * @param {IOffer[]} uniqueOffers
+//  * @param {IOffer[]} currentOffers
+//  * @param {DataDirectory} dataDirectory
+//  * @returns {Promise<IOffer[]>}
+//  */
+// export async function getOffersUnion(
+// 	uniqueOffers: IOffer[],
+// 	currentOffers: IOffer[],
+// 	dataDirectory: DataDirectory
+// ): Promise<IOffer[]> {
+// 	const offers = [...uniqueOffers];
 
-		l.debug({
-			dataDirectory: dataDirectory,
-			title: currentOffer.title,
-			_dt: currentOffer._dt,
-			dt: currentOffer.dt,
-			id: currentOffer.offerId,
-			price: currentOffer.price
-		});
+// 	for (let j = 0; j < currentOffers.length; j++) {
+// 		const currentOffer = currentOffers[j];
+// 		const idx = offers.findIndex((uniqueOffer) =>
+// 			assertSameOffers(uniqueOffer, currentOffer)
+// 		);
 
-		if (idx === -1) {
-			offers.push(currentOffer);
-			continue;
-		}
+// 		l.debug({
+// 			dataDirectory: dataDirectory,
+// 			title: currentOffer.title,
+// 			_dt: currentOffer._dt,
+// 			dt: currentOffer.dt,
+// 			id: currentOffer.offerId,
+// 			price: currentOffer.price
+// 		});
 
-		const offer = offers[idx];
-		const differentProps: (keyof IOffer)[] = [];
-		const adKeys = Object.keys(offer) as unknown as typeof differentProps;
-		adKeys.forEach((prop) => {
-			if (offer[prop] !== currentOffer[prop]) {
-				differentProps.push(prop);
-			}
-		});
+// 		if (idx === -1) {
+// 			offers.push(currentOffer);
+// 			continue;
+// 		}
 
-		const currentOfferTime = new Date(currentOffer._dt).getTime();
-		if (isFinite(currentOfferTime) === false) {
-			break;
-		}
+// 		const offer = offers[idx];
+// 		const differentProps: (keyof IOffer)[] = [];
+// 		const adKeys = Object.keys(offer) as unknown as typeof differentProps;
+// 		adKeys.forEach((prop) => {
+// 			if (offer[prop] !== currentOffer[prop]) {
+// 				differentProps.push(prop);
+// 			}
+// 		});
 
-		const uniqOfferTime = new Date(currentOffer._dt).getTime();
-		if (isFinite(uniqOfferTime) === false) {
-			break;
-		}
+// 		const currentOfferTime = new Date(currentOffer._dt).getTime();
+// 		if (isFinite(currentOfferTime) === false) {
+// 			break;
+// 		}
 
-		if (currentOfferTime < uniqOfferTime) {
-			// @i: we assume that this is the same offer so we wont to save newer one.
-			// @improvement: check if there is no missing data in fields and do not save if there are in currentOffer.
-			offers[idx] = currentOffer;
-		}
-	}
+// 		const uniqOfferTime = new Date(currentOffer._dt).getTime();
+// 		if (isFinite(uniqOfferTime) === false) {
+// 			break;
+// 		}
 
-	return offers;
-}
+// 		if (currentOfferTime < uniqOfferTime) {
+// 			// @i: we assume that this is the same offer so we wont to save newer one.
+// 			// @improvement: check if there is no missing data in fields and do not save if there are in currentOffer.
+// 			offers[idx] = currentOffer; // shouldn't it be uniqOffer?
+// 		}
+// 	}
 
-export async function makeOffersUnion(
-	previousOffersUnion: IOffer[],
-	dataDirectory: DataDirectory
-) {
-	const currentOffers = await getDataDirLatestOffers(dataDirectory);
-	if (currentOffers === null) {
-		return previousOffersUnion;
-	}
-	const currentOffersList = currentOffers.offers;
-	const offersUnion = await getOffersUnion(
-		previousOffersUnion,
-		currentOffersList,
-		dataDirectory
-	);
-	return offersUnion;
-}
+// 	return offers;
+// }
+
+// export async function makeOffersUnion(
+// 	previousOffersUnion: IOffer[],
+// 	dataDirectory: DataDirectory
+// ) {
+// 	const currentOffers = await getDataDirLatestOffers(dataDirectory);
+// 	if (currentOffers === null) {
+// 		return previousOffersUnion;
+// 	}
+// 	const currentOffersList = currentOffers.offers;
+// 	const offersUnion = await getOffersUnion(
+// 		previousOffersUnion,
+// 		currentOffersList,
+// 		dataDirectory
+// 	);
+// 	return offersUnion;
+// }
