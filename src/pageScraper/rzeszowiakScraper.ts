@@ -62,7 +62,7 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 				.trim();
 
 			const offer: IOffer = {
-				site: 'rzeszowiak',
+				site: this.serviceName, // 'rzeszowiak',
 				_dt,
 				dt,
 				scrapedAt: new Date(globals.programStartTime),
