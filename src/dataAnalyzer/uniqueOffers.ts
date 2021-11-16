@@ -41,6 +41,7 @@ export async function filterOutRecurredOffers(
 	for (let i = 0; i < dayOffersCount; i++) {
 		const newOffer = dayOffers[i];
 		let j = 0;
+		// @TODO: if they are same offers in dayOffers they will not be filtered if in prev offers there is no such offer :()
 		for (; j < previousOffersCount; j++) {
 			if (assertSameOffers(previousOffers[j], newOffer)) {
 				break;
