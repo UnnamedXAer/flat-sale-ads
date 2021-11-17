@@ -126,10 +126,20 @@ describe('compare', () => {
 		expect(areSame).toBe(true);
 	});
 
-	it.only('filter out recurred offers', async () => {
+	it('filter out recurred offers', async () => {
 		const prevOffers = data.reverse().slice(0, 2);
 		const newOffers = data;
-		const unique = await filterOutRecurredOffers(prevOffers, newOffers);
-		expect(unique).toHaveLength(2);
+
+		const expectedTitles = [
+			'Wyjątkowy Taras Na Dachu, 2 Pokoje',
+			'-1Wyjątkowy Taras Na Dachu, 2 Pokoje'
+		];
+
+		const got = await filterOutRecurredOffers(prevOffers, newOffers);
+
+		const gotTitles = got.map((x) => x.title);
+		const expectedNumberOfUniqueOffers = expectedTitles.length
+		expect(got).toHaveLength(expectedNumberOfUniqueOffers);
+		expect(gotTitles).toEqual(expectedTitles);
 	});
 });
