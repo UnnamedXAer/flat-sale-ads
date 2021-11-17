@@ -14,7 +14,7 @@ export async function analyzeData(storage: IRepository) {
 		l.warn('There are no new offers to filter.');
 		return;
 	}
-	
+
 	const allOffers = await storage.getAllOffers();
 	const newFilteredOffers = (
 		await Promise.all(
@@ -38,18 +38,22 @@ export async function filterOutRecurredOffers(
 	const previousOffersCount = previousOffers.length,
 		dayOffersCount = dayOffers.length;
 
-	for (let i = 0; i < dayOffersCount; i++) {
+	mainLoop: for (let i = 0; i < dayOffersCount; i++) {
 		const newOffer = dayOffers[i];
-		let j = 0;
-		// @TODO: if they are same offers in dayOffers they will not be filtered if in prev offers there is no such offer :()
-		for (; j < previousOffersCount; j++) {
-			if (assertSameOffers(previousOffers[j], newOffer)) {
-				break;
+
+		for (let k = uniqueNewOffers.length - 1; k >= 0; k--) {
+			if (assertSameOffers(uniqueNewOffers[k], newOffer)) {
+				continue mainLoop;
 			}
 		}
-		if (j === previousOffersCount) {
-			uniqueNewOffers.push(newOffer);
+
+		let j = 0;
+		for (; j < previousOffersCount; j++) {
+			if (assertSameOffers(previousOffers[j], newOffer)) {
+				continue mainLoop;
+			}
 		}
+		uniqueNewOffers.push(newOffer);
 	}
 	timeStop();
 	return uniqueNewOffers;
