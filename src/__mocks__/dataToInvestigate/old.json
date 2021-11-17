@@ -1,0 +1,2295 @@
+{
+	"_id": {
+		"$oid": "6195760a33b3ec001a0502d7"
+	},
+	"date": {
+		"$date": {
+			"$numberLong": "1637185013215"
+		}
+	},
+	"offerList": [
+		{
+			"url": "http://www.rzeszowiak.pl/witam-serdecznie-oferuje-na-sprzedaz-mieszkanie-wlasnosciowe-na-13122379",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637182436077"
+				}
+			},
+			"description": "Witam serdecznie.  Oferuje na sprzedaż mieszkanie własnościowe na ulicy Paderewskiego. Świetne pod inwestycje!  Okolice Millenium Hall, w pobliżu szkoła, żłobek, przedszkole, wszystko w zasięgu kilku minut. Praktycznie samo centrum handlowe ulicy Rejtana, duży parking, przystanki MPK.  Mieszkanie znajduje się na drugim pietrze, cztero piętrowego bloku.  Częściowo do remontu, ale do zamieszkania.  Mieszkanie dwustronne. Metraż: 61,63m2  Składa się z: 4 niezależnych pokoi, jasnej kuchni, łazienki, osobnej toalety, przedpokoju, balkonu oraz piwnicy.  Okna PCV, parkiet, płytki.  Cena: 360 000 do negocjacji.  W razie zainteresowania proszę o kontakt telefoniczny: 668 066 537  Sprzedaż bez pośredników.",
+			"dt": "17 listopada 2021, 20:53",
+			"offerId": "13122379",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13122379_0.jpg?re=2109265954",
+			"price": "360000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Na sprzedaż mieszkanie ul. Paderewskiego  61,63m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/sprzedam-mieszkanie-trzypokojowe-polozone-na-trzecim-pietrze-w-13122207",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637175536084"
+				}
+			},
+			"description": "Sprzedam mieszkanie trzypokojowe położone na trzecim piętrze w niskim bloku przy ul.Kolbego. Mieszkanie składa się z: -salonu z wyjściem na balkon -dwóch samodzielnych pokoi -jasnej kuchni -łazienki -wc -przedpokoju Do mieszkania przynależy piwnica. W mieszkaniu wymienione drzwi wejściowe i wewnętrzne, okna pcv, panele podłogowe.  W kuchni zabudowa na wymiar. Łazienka i wc w płytkach. W przedpokoju szafy w zabudowie. Mieszkanie przestronne, idealne dla rodziny. Termin wyprowadzki do uzgodnienia. Osiedle młode bardzo dobrze skomunikowane z centrum z pełną infrastrukturą, przedszkole, szkoła, centrum handlowe, Kościół, ok.2 km Wyższa Uczelnia WSIZ, niedaleko ok 3km do specjalnej strefy ekonomicznej. Godne polecenia!",
+			"dt": "17 listopada 2021, 18:58",
+			"offerId": "13122207",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13122207_0.jpg?re=848817004",
+			"price": "375000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Sprzedam przestronne mieszkanie na Baranówce IV"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/do-sprzedazy-mieszkanie-o-pow59-1m-usytuowane-na-parterze-13122062",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637163536086"
+				}
+			},
+			"description": "Do sprzedaży mieszkanie o pow.59,1m usytuowane na parterze kamienicy w ścisłym centrum.  Składa się z : - przedpokoju, -trzech pokoi (jeden z pokoi przechodni) -salonu połączonego z aneksem kuchennym, -łazienki z wc.  W mieszkaniu została wymieniona instalacja elektryczna, gazowa i wodno-kanalizacyjna, nowe okna pcv, drzwi zewnętrzne antywłamaniowe, podłogi w panelach. Przedpokój w płytkach podłogowych. Wysokość pomieszczeń: 2,80m. Do mieszkania przynależy garaż wolno-stojący, murowany (15,80m2) i piwnica (15,50m2). Mieszkanie bezczynszowe.  Cicha i spokojna okolica z dostępem do pełnej infrastruktury! ZAPRASZAMY NA PREZENTACJE ! tel: 508 763 872",
+			"dt": "17 listopada 2021, 15:38",
+			"offerId": "13122062",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13122062_0.jpg?re=737166775",
+			"price": "385000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "59m rej ul.SŁOWACKIEGO mieszkanie z garażem"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/cztery-nowoczesne-domy-w-zabudowie-blizniaczej-na-osiedlu-13051534",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637162576796"
+				}
+			},
+			"description": "CZTERY NOWOCZESNE DOMY W ZABUDOWIE BLIŹNIACZEJ na osiedlu Drabinianka  Powierzchnia domu: 88,51m2 Powierzchnia działek: 220 – 294 m2  Oferujemy Państwu II etap naszego osiedla w dzielnicy Drabinianka - 4 budynki jednorodzinne w zabudowie bliźniaczej. W tej inwestycji odnajdziecie Państwo nietuzinkową architekturę połączoną z doskonałą lokalizacją. Miejsce zapewnia szybki dojazd do nowopowstającej szkoły, przystanku autobusowego i sklepów, a zarazem spokój i przyjazną atmosferę. Budynki spełniają najnowsze warunki techniczne (WT 2021), co daje Państwu gwarancje ich energooszczędności i pozwoli zaoszczędzić na kosztach ogrzewania. Rozkład pomieszczeń został zaprojektowany z dbałością o funkcjonalność, oferując nabywcom komfort w codziennym użytkowaniu.  Co nas wyróżnia:  •        Autorski projekt architektoniczny z wygodnym układem pomieszczeń i elewacją budynku o wysokim standardzie  •        Lokalizacja: bliskość szkoły, przystanku autobusowego, terenów zielonych i rekreacyjnych  •        Energooszczędne budynki ogrzewane piecem gazowym, przygotowane pod montaż instalacji fotowoltaicznej  •        Przestronne poddasze o funkcjonalnej powierzchni 16m2  •        Żelbetowy strop poddasza zapewniający większą trwałość i wygodę użytkowania  •        Wysoka jakość zastosowanych materiałów  •        Duży ogródek na własnej działce  •        5 letnia rękojmia   Układ pomieszczeń:  PARTER:  •        Wiatrołap – 4,19m2",
+			"dt": "17 listopada 2021, 15:22",
+			"offerId": "13051534",
+			"imgUrl": "http://www.rzeszowiak.pl/img/wsp/mini/l_no.gif?re=113206123",
+			"price": "389000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Alternatywa dla mieszkania, dom z ogrodem"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/sprzedam-mieszkanie-w-centrum-rzeszowa-w-okolicy-ulicy-13122047",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637162396797"
+				}
+			},
+			"description": "Sprzedam mieszkanie  w centrum Rzeszowa w okolicy ulicy  Poniatowskiego . Powierzchnia to 34,5m2 położone w centrum w dwupiętrowym budynku na 2 piętrze. Blok z cegły niskie budownictwo cicha i spokojna okolica.  Mieszkanie składa się z; -przedpokoju -dużego pokoju -sypialni  -kuchni -łazienki z wc  Mieszkanie o orientacji południowej.  Stałe opłaty utrzymania nieruchomości tj.czynsz miesięczny to 370zł (w tym zimna i ciepła woda i ogrzewanie miejskie +fundusz remontowy +śmieci,koszty zarządu).  Nieruchomość posiada KW ,pełna własność. Mieszkanie posiada piwnicę . Do większego odświeżenia. Do zamieszkania od 01.01.2022 roku.  Mieszkanie posiada ogólnodostępne miejsca parkingowe.Pełna własność z Księgą Wieczystą. Godne polecenia!!!",
+			"dt": "17 listopada 2021, 15:19",
+			"offerId": "13122047",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13122047_0.jpg?re=2058180440",
+			"price": "299000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Sprzedam przytulne miszkankow centrum!!!"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/sprzedam-dwupokojowe-mieszkanie-o-pow-47-39-m2-zlokalizowane-13121678",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637153696798"
+				}
+			},
+			"description": "Sprzedam dwupokojowe mieszkanie o pow. 47,39 m2 zlokalizowane w Rzeszowie przy ulicy Boruty - Spiechowicza, os. Andersa. Mieszkanie usytuowane jest na I piętrze w czteropiętrowym bloku.  Świetna lokalizacja tuż nieopodal ścisłego centrum.  W najbliższym sąsiedztwie znajdują się sklepy spożywcze, hotel, supermarkety, galeria handlowa Nowy Świat, park Sybiraków, uczelnia WSiZ a także przedszkole i szkoła podstawowa oraz liczne przystanki komunikacji publicznej. Mieszkanie składa się z: - pokoju, - pokoju, - kuchni z oknem, - korytarza, - łazienki z WC. Do mieszkania przynależy piwnica o pow, 3,16m2. Jest możliwość zakupu mieszkania z pełnym umeblowaniem i wyposażeniem (dla Inwestorów pod wynajem). Cena do negocjacji. Zapraszam do obejrzenia",
+			"dt": "17 listopada 2021, 12:54",
+			"offerId": "13121678",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121678_0.jpg?re=1384138244",
+			"price": "340000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "RZESZÓW - 2 pokoje, 1 piętro, ul. Spiechowicza"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/sprzedam-atrakcyjne-mieszkanie-polozone-na-osiedlu-projektant-na-13119828",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637153456799"
+				}
+			},
+			"description": "Sprzedam atrakcyjne mieszkanie położone na osiedlu Projektant na ulicy Krynickiej 6.  Mieszkanie o powierzchni 44m2 zlokalizowane na 2 piętrze (środkowe) w bloku 4 piętrowym z cegły.  Mieszkanie składa się z przedpokoju, kuchni, łazienki, dwóch oddzielnych pokoi i balkonu. Przynależy również do niego piwnica (4.20 m2).  Mieszkanie sprzedaję z wyposażeniem i umeblowaniem, tj. zabudowa kuchenna wraz ze sprzętem AGD (lodówka, kuchenka, zmywarka) w salonie komplet wypoczynkowy z ławą, biurkiem, szafą wnękową w pokoju zabudowa biurka i łóżka.  Niski czynsz ok.276zł z wodą. Ogrzewane piecem dwufunkcyjnym kondensacyjnym z zamkniętą komora spalania. Tanie w utrzymaniu. Pełna własność z gruntem.  Ogłoszenie prywatne bez pośredników.",
+			"dt": "17 listopada 2021, 12:50",
+			"offerId": "13119828",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13119828_0.jpg?re=90628475",
+			"price": "380000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 2 pokoje, kuchnia, balkon, piwnica na o"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/do-sprzedania-mieszkanie-w-stanie-developerskim-na-osiedlu-13121918",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637153396800"
+				}
+			},
+			"description": "Do sprzedania mieszkanie w stanie developerskim na osiedlu Projektant w ratach 🏢 Mieszkanie dwupokojowe o powierzchni użytkowej 42,38m2 ,położone na I piętrze budynku 6-piętrowym. Posiada ładny duży 14m2 balkon, oraz przyporządkowana piwnicę.. Termin oddania mieszkania to marzec/kwiecień 2023r. 🚗 Do mieszaknia przynależne miejsce parkingowe w garażu podziemnym w cenie 30tys zł.",
+			"dt": "17 listopada 2021, 12:49",
+			"offerId": "13121918",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121918_0.jpg?re=1840910317",
+			"price": "298000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Okazja w ratach"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/dzien-dobry-nowe-mieszkanie-do-sprzedaniabez-zadnych-prowizjitransakcja-13121774",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637148716801"
+				}
+			},
+			"description": "Dzień Dobry :) NOWE Mieszkanie DO SPRZEDANIA BEZ ŻADNYCH PROWIZJI Transakcja BEZPOŚREDNIO z WŁAŚCICIELEM  - Capital Towers Podwisłocze 31 Rzeszów - Nowoczesny Budynek przy Centrum Miasta - Kameralne Mieszkanko 30m2 - Komfortowo Umeblowany Pokój Dzienny z TV LCD - Przytulna Strefa Sypialniana - Funkcjonalna Kuchnia z Nowym Wyposażeniem AGD + Zmywarka - Umeblowanie na Wymiar - Przyjemna Łazienka z Prysznicem - Balkon ok 3m2 - Opłaty Administracyjne 150 zł/mc - Rekuperacja - Piętro 5 z 6 - Nowoczesna Winda - Monitoring - Wysokie Okna Zachód - Gotowa Inwestycja pod Wynajem - Pełna Własność - Bez Obciążeń (czysta KW)  Z przyjemnością przedstawiam Państwu bardzo ładne, nowoczesne i jeszcze nigdy nie zamieszkałe 2 pokojowe mieszkanie o powierzchni 30m2 w Rzeszowie w Prestiżowym Budynku Capital Towers na 5 piętrze z windą. Budynek wybudowany równolegle do rzeki Wisłok. W najbliższej okolicy ul. Rejtana, Kopisto, Podwisłocze - Nowe Miasto, Uniwersytet Rzeszowski oraz Wyższa Szkoła Prawa i Administracji i Galeria Millennium Hall. Do rynku kilka minut spacerkiem. Miejsce z wszystkimi atrakcjami miasta oraz ścieżkami rowerowymi. Kilka minut do terenów rekreacyjnych nad rzeką Wisłok (urządzenia do ćwiczeń, grill-palenisko, wypożyczalnia łódek i kajaków) Bliskość przystanków komunikacji miejskiej zapewnia szybki dostęp dowolnego miejsca w mieście MPK 6, 11, 13, 17, 26, 27, 32, 34.  Nieruchomość jest wolna od wszelkich wad prawnych i fizycznych, które ograniczałyby przydatność Nieruchomości",
+			"dt": "17 listopada 2021, 11:31",
+			"offerId": "13121774",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121774_0.jpg?re=1991737759",
+			"price": "398000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Do Sprzedania BEZ PROWIZJI Mieszkanie 30m2 TV Balk"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/pilne-obnizka-ceny-do-sprzedania-mieszkanie-w-13121551",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637144096802"
+				}
+			},
+			"description": "Pilne!!! obniżka ceny !!! Do sprzedania mieszkanie w Rzeszowie przy ul. Wyspiańskiego. Do centrum 10 minut spacerkiem. Mieszkanie jest 4 pokojowe( cztery niezależne pokoje), kuchnia, łazienka, toaleta. Mieszkanie posiada balkon i piwnicę. W czynszu ciepła woda. ogrzewanie miejskie. na gaz tylko kuchenka. Kontakt: 666140444  Mieszkanie świetne jako inwestycja. DO Negocjacji.     Oferta od osoby prywatnej, Agencjom dziękuję.",
+			"dt": "17 listopada 2021, 10:14",
+			"offerId": "13121551",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121551_0.jpg?re=1501292198",
+			"price": "369000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "mieszkanie Wyspiańskiego 60m2 4 pokoje"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-58m2-|-dwa-pokoje-salon-13121357",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637140196803"
+				}
+			},
+			"description": "Mieszkanie ok 58m2 | Dwa pokoje + salon | Balkon | II piętro | Blok z windą.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 57,83m2, usytuowane na II piętrze w niskim bloku z windą, m. Kielanówka (działka znajduje się bardzo blisko granicy m. Rzeszów).  Mieszkanie nr 42 w budynku nr 1 - 57,83m2, składa się z:  -salonu - 14,98m2 -kuchni - 9,83m2 -sypialni 1 - 7,28m2 -sypialni 2 - 12,40m2 -łazienki - 5,43m2 -przedpokoju -7,91m2  Do mieszkania przynależy balkon o powierzchni 5,44m2.   W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:09",
+			"offerId": "13121357",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121357_0.jpg?re=1041510514",
+			"price": "364329",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Nowe mieszkania na Osiedlu Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-49m2-|-dwa-pokoje-salon-13121355",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637140196803"
+				}
+			},
+			"description": "Mieszkanie ok 49m2 | Dwa pokoje + salon | Okno w kuchni | Balkon 8,29m2 | II piętro | Blok z windą.   Do sprzedania mieszkanie 3-pokojowe o powierzchni 48,49m2, usytuowane na II piętrze w niskim bloku z windą, m. Kielanówka (działa znajduje się bardzo blisko granicy m. Rzeszów).  Mieszkanie nr 32 w budynku nr 1 - 48,49m2, składa się:  ✅Salon z aneksem kuchennym - 17,54m2, ✅Sypialnia 1 - 9,82m2, ✅Sypialnia 2 - 7,93m2, ✅Łazienka – 4,28m2, ✅Przedpokój – 8,92m2,   Do mieszkania przynależy balkon – 8,29m2.   W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok.  Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:09",
+			"offerId": "13121355",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121355_0.jpg?re=1200552388",
+			"price": "315185",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe,do 50m2, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-58m2-|-dwa-pokoje-salon-13121354",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637140196804"
+				}
+			},
+			"description": "Mieszkanie ok 58m2 | Dwa pokoje + salon | Balkon 5,19m2 | I piętro | Blok z windą.   Do sprzedania mieszkanie 3-pokojowe o powierzchni 57,83m2, usytuowane na I pietrze w bloku z windą, m. Kielanówka (działka znajduje się bardzo blisko m. Rzeszów).  Mieszkanie nr 28 w budynku nr 1 - 57,83m2, składa się:  ✅Salon - 14,98m2, ✅Kuchnia - 9,83m2, ✅Sypialnia 1 - 7,28m2, ✅Sypialnia 2 - 12,40m2, ✅Łazienka – 5,43m2, ✅Przedpokój – 7,91m2,  Do mieszkania przynależy balkon – 5,19m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok.  Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:09",
+			"offerId": "13121354",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121354_0.jpg?re=772871753",
+			"price": "364329",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Piękne 3-pokojowe mieszkanie, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-47-13m2-|-dwa-pokoje-salon-|-13121349",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637140136805"
+				}
+			},
+			"description": "Mieszkanie 47,13m2 | Dwa pokoje + salon | Balkon 5,39m2 | I piętro | Blok z windą.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 47,13m2, usytuowane na I piętrze w niskim bloku z windą, m. Kielanówka (działka znajduje się bardzo blisko granicy m. Rzeszów).  Mieszkanie nr 21 w budynku nr 1 - 47,13m2, składa się z:  -salonu - 13,27m2 -kuchni - 6,01m2 -sypialni 1 - 7,66m2 -sypialni 2 - 9,66m2 -łazienki - 4,03m2 -przedpokoju - 6,50m2  Do mieszkania przynależy balkon o powierzchni 5,39m2.   W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:08",
+			"offerId": "13121349",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121349_0.jpg?re=1663990654",
+			"price": "306345",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Trzy pokoje| Balkon, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-48-92m2-|-trzy-pokoje-|-okno-w-13121350",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637140136806"
+				}
+			},
+			"description": "Mieszkanie 48,92m2 | Trzy pokoje | Okno w aneksie kuchennym | Balkon 7,87m2 | II piętro | Blok z windą.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 48,92m2, usytuowane na II piętrze w niskim bloku z windą, m. Kielanówka (działka znajduje się bardzo blisko granicy m. Rzeszów).  Mieszkanie nr 40 w budynku nr 1 - 48,92m2, składa się z:  -salon z aneksem kuchennym - 17,51m2, -sypialni 1 - 9,82m2, -sypialni 2 - 8,05m2, -łazienki - 4,39m2, -przedpokoju -9,15m2.  Do mieszkania przynależy balkon o powierzchni 7,87m2.   W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:08",
+			"offerId": "13121350",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121350_0.jpg?re=1554139716",
+			"price": "317980",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Trzy pokoje, Balkon 7,87m2, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-47-13m2-|-dwa-pokoje-salon-|-13121351",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637140136807"
+				}
+			},
+			"description": "Mieszkanie 47,13m2 | Dwa pokoje + salon | IV piętro | Blok z windą | Osiedle Natura Park.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 47,13m2, usytuowane na IV piętrze w niskim bloku z windą, m. Kielanówka (usytuowane bardzo blisko granicy Rzeszowa).  Mieszkanie nr 62 w budynku nr 1, składa się z:  -salonu - 13,27m2 -kuchni - 6,01m2 -sypialni 1 - 7,66m2 -sypialni 2 - 9,66m2 -łazienki - 4,03m2 -przedpokoju - 6,50m2  Do mieszkania przynależy balkon o powierzchni 5,73m2.   Na Osiedlu Natura Park możesz korzystać z uroków przyrody już po wyjściu z mieszkania każdego dnia.  Zobacz więcej na naszej stronie: osiedlenaturapark. pl  Zapraszamy do biura sprzedaży:  Dakar Development Sp. z o.o.  ul. Kilińskiego 6,  35-005 Rzeszów  +48 532 514 555   Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:08",
+			"offerId": "13121351",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121351_0.jpg?re=1609381825",
+			"price": "306345",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe, balkon, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-49m2-|-dwa-pokoje-salon-13121337",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139956808"
+				}
+			},
+			"description": "Mieszkanie ok 49m2 | Dwa pokoje + salon | Balkon 7,89m2 | III piętro | Blok z windą.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 48,73m2, usytuowane na III piętrze w niskim bloku z windą, m. Kielanówka (zlokalizowane bardzo blisko granicy Rzeszowa).  Mieszkanie nr 53 w budynku nr 1, składa się z:  -salonu z aneksem kuchennym - 17,58m2 -sypialni 1 - 8,05m2 -sypialni 2 - 9,74m2 -łazienki - 4,38m2 -przedpokoju - 8,98m2  Do mieszkania przynależy balkon o powierzchni 7,89m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Zobacz więcej na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu do biura sprzedaży: Dakar Development sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:05",
+			"offerId": "13121337",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121337_0.jpg?re=556628810",
+			"price": "316745",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie dla rodziny na Osiedlu Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-47m2-|-dwa-pokoje-salon-13121334",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139956810"
+				}
+			},
+			"description": "Mieszkanie ok 47m2 | Dwa pokoje + salon | Balkon 7,84m2 | Parter | Niski blok.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 46,60m2, usytuowane na parterze w niskim bloku z windą, m. Kielanówka(działka zlokalizowana bardzo blisko granicy Rzeszowa).  Mieszkanie nr 3 w budynku nr 1 - 46,60m2, składa się z:  -salonu z aneksem kuchennym - 17,54m2 -sypialni 1 - 7,93m2 -sypialni 2 - 7,93m2 -łazienki - 4,28m2 -przedpokoju - 8,92m2  Do mieszkania przynależy balkon o powierzchni 7,84m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Zobacz więcej na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu do biura sprzedaży: Dakar Development sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:05",
+			"offerId": "13121334",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121334_0.jpg?re=1474414627",
+			"price": "302900",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe na Osiedlu Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-47-13m2-|-dwa-pokoje-salon-|-13121335",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139956811"
+				}
+			},
+			"description": "Mieszkanie 47,13m2 | Dwa pokoje + salon | Taras 20,42m2 | Niski blok.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 47,13m2, usytuowane na parterze w niskim bloku z windą, m. Kielanówka(bardzo blisko granicy Rzeszowa).  Mieszkanie nr 7 w budynku nr 1, składa się z:  -salonu - 13,27m2 -kuchni - 6,01m2 -sypialni 1 - 7,66m2 -sypialni 2 - 9,66m2 -łazienki - 4,03m2 -przedpokoju -6,50m2 Do mieszkania przynależy taras o powierzchni 20,42m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Zobacz więcej na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu do biura sprzedaży: Dakar Development sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:05",
+			"offerId": "13121335",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121335_0.jpg?re=1007591636",
+			"price": "306345",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe z dużym tarasem, Staroniwska"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-49m2-|-dwa-pokoje-salon-13121340",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139956812"
+				}
+			},
+			"description": "Mieszkanie ok 49m2 | Dwa pokoje + salon | W kuchni okno | III piętro | Blok z winda.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 48,92m2, usytuowane na III piętrze w niskim bloku z windą, m. Kielanówka (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 54 w budynku nr 1, składa się z:  -salonu z aneksem kuchennym - 17,51m2 -sypialni 1 - 9,82m2 -sypialni 2 - 8,05m2 -łazienki - 4,39m2 -przedpokoju - 9,15m2  Do mieszkania przynależy balkon o powierzchni 7,88m2.  Zobacz więcej szczegółów: https://osiedlenaturapark. pl  Zapraszamy do kontaktu i biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:05",
+			"offerId": "13121340",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121340_0.jpg?re=443370220",
+			"price": "317980",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Dwustronne mieszkanie 48,92m2, ul. Staroniwska"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-49m2-|-dwa-pokoje-salon-13121336",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139956813"
+				}
+			},
+			"description": "Mieszkanie ok 49m2 | Dwa pokoje + salon | Okno w kuchni | Balkon 7,84m2 | Parter | Niski blok.   Do sprzedania mieszkanie 3-pokojowe o powierzchni 48,92m2, usytuowane na parterze w  m. Kielanówka (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 12 w budynku nr 1 - 48,92m2, składa się z:  -salonu z aneksem kuchennym - 17,51m2 -sypialni 1 - 9,82m2 -sypialni 2 - 8,05m2 -łazienki - 4,39m2 -przedpokoju - 9,15m2  Do mieszkania przynależy balkon o powierzchni 7,84m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok.  Więcej szczegółów na naszej stronie: osiedlenaturapark. pl 0 Zapraszamy do kontaktu i do biura sprzedaży:  Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:05",
+			"offerId": "13121336",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121336_0.jpg?re=1366781390",
+			"price": "317980",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-48m2-|-dwa-pokoje-salon-13121333",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139840013"
+				}
+			},
+			"description": "Mieszkanie ok 48m2 | Dwa pokoje + salon | Balkon | III piętro | Blok z windą | Odległość do centrum Rzeszowa - ok 6km.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 47,13m2, usytuowane na III piętrze w niskim bloku z windą, m. Kielanówka (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 49 w budynku nr 1, składa się z:  -salonu - 13,27m2 -kuchni - 6,01m2 -sypialni 1 - 7,66m2 -sypialni 2 - 9,66m2 -łazienki - 4,03m2 -przedpokoju - 6,50m2  Do mieszkania przynależy balkon o powierzchni 5,39m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.  Więcej szczegółów na stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:04",
+			"offerId": "13121333",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121333_0.jpg?re=410156610",
+			"price": "306345",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe, balkon, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-58m2-|-dwa-pokoje-salon-13121332",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139840014"
+				}
+			},
+			"description": "Mieszkanie ok 58m2 | Dwa pokoje + salon | Balkon | Niski blok | Dojazd samochodem do centrum Rzeszowa - zaledwie 15 min.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 57,83m2, usytuowane na parterze w Kielanówce (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 14 w budynku nr 1 - 57,83m2, składa się z:  -salonu - 14,98m2 -kuchni - 9,83m2 -sypialni 1 - 7,28m2 -sypialni 2 - 12,40m2 -łazienki - 5,43m2 -przedpokoju - 7,91m2  Do mieszkania przynależy balkon o powierzchni 5,44m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską oraz łatwy dostęp do drogi ekspresowej.  Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok.  Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:04",
+			"offerId": "13121332",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121332_0.jpg?re=1567999116",
+			"price": "364329",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe - 57,83m2Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/wstrzymanemieszkanie-o-pow-49-m2-pietro-44-na-13121207",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637138760015"
+				}
+			},
+			"description": "wstrzymaneMieszkanie o pow. 49 M2, piętro 4/4 na ul.Mikołajczyka.Trzy osobne pokoje, jasna osobna kuchnia, łazienka razem z wc, przedpokój, balkon, piwnica. Mieszkanie dwustronne. Czynsz 450 zł plus prąd i gaz.Brak piecyka gazowego, ogrzewanie oraz ciepła woda z sieci miejskiej.Mieszkanie znajduję się w bardzo dobrej lokalizacji- w najbliższym sąsiedztwie Galeria Rzeszów, Galeria Nowy Świat, Uczelnia WSIiZ, Park Sybiraków, Przystanki autobusowe . W pobliżu znajdują się: szkoła, sklepy, siłownia, przychodnia, apteka, stomatolog, fryzjer, tereny zielone, autobusy MPK, przedszkole, poczta, restauracja, szpital. Cena 300 000 zł do neg        Tel 504 170 940",
+			"dt": "17 listopada 2021, 08:46",
+			"offerId": "13121207",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121207_0.jpg?re=1292918040",
+			"price": "300000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mikołajczyka 3 pokoje, piętro 4/4"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/wstrzymanemieszkanie-o-pow-2430m2-pietro-24-w-bloku-13121184",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637138700016"
+				}
+			},
+			"description": "WSTRZYMANEMieszkanie o pow. 24.30m2, piętro 2/4 w bloku z 2019 roku.Mieszkanie urządzono w modnym skandynawskim stylu.Do lokalu przynależy duży balkon oraz komórka lokatorska.  tel 504 170 940",
+			"dt": "17 listopada 2021, 08:45",
+			"offerId": "13121184",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121184_0.jpg?re=80712473",
+			"price": "249000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Staromieście kawalerka z 2019 roku, piętro 2/4."
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-z-miejscem-postojowymmieszkanie-o-pow-2130-m2-13121224",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137320016"
+				}
+			},
+			"description": "MIESZKANIE Z MIEJSCEM POSTOJOWYM!!!!!!!!!!!!  Mieszkanie o pow. 21.30 m2, piętro 3/6 w bloku z windą z 2008 roku na oś. Staromieście. Salon z aneksem kuchennym z wyjściem na duży balkon. Mieszkanie jednostronne. Czynsz 250 zł plus prąd i gaz. Mieszkanie sprzedawane z komórka lokatorską i miejscem postojowym w garażu podziemnym. Ciche spokojne osiedle, w pobliżu przystanek, sklepy, usługi itp. Cena 225 000 zł mieszkanie plus 29 000 zł miejsce postojowe z komórką lokatorską.   TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:22",
+			"offerId": "13121224",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121224_0.jpg?re=551164971",
+			"price": "225000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Zabłocie kawalerka, winda, nowy blok"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-50m2-ul-dabrowskiego-pietro-210-trzy-13121221",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137260017"
+				}
+			},
+			"description": "Mieszkanie o pow. 50m2,ul. Dąbrowskiego, piętro 2/10. Trzy pokoje osobne, jasna osobna kuchnia, łazienka razem z wc, przedpokój, balkon- loggia, piwnica. Mieszkanie do remontu. Okna pcv. Mieszkanie dwustronne wschód – zachód. Czynsz ok. 450 zł/mies w tym zimna woda, śmiecie, ogrzewanie, winda, fundusz remontowy. MIESZKANIE wolne od zaraz. CENA 343 000 ZŁ DO NEG.   TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:21",
+			"offerId": "13121221",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121221_0.jpg?re=156723882",
+			"price": "343000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "ul. Dąbrowskiego 3 pokoje, 2 piętro, 50 m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-37-50m2-na-ul-paderewskiego-pietro-13121222",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137260018"
+				}
+			},
+			"description": "Mieszkanie o pow. 37,50m2 na ul. Paderewskiego, piętro 1/4 w  z 2016 rok. Salon z aneksem kuchennym, sypialnia, łazienka razem z wc, przedpokój, balkon, piwnica.Mieszkanie komfortowo wykończone, jednostronne wschodnie. Czynsz ok. 320 zł/mc w tym zimna i ciepła woda, ogrzewanie, śmieci, fundusz remontowy. Blok ogrodzony z bramą na pilota, dużo miejsc parkingowych. Cena 399 000 zł   TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:21",
+			"offerId": "13121222",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121222_0.jpg?re=807780120",
+			"price": "399000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Paderewskiego  2 pokoje, 41 m2, parter"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-50m2-pietro-210-trzy-pokoje-13121215",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137200019"
+				}
+			},
+			"description": "Mieszkanie o pow. 50m2, piętro 2/10. Trzy pokoje osobne, jasna osobna kuchnia, łazienka razem z wc, przedpokój, balkon- loggia, piwnica. Mieszkanie do remontu. Okna pcv. Mieszkanie dwustronne wschód – zachód. Czynsz ok. 450 zł/mies w tym zimna woda, śmiecie, ogrzewanie, winda, fundusz remontowy. MIESZKANIE wolne od zaraz. CENA 343 000 ZŁ DO NEG.   TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:20",
+			"offerId": "13121215",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121215_0.jpg?re=688997657",
+			"price": "343000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Dąbrowskiego 3 pokoje, piętro 2/10, 50m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-58m2-w-stanie-developerskim-na-13121212",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137140019"
+				}
+			},
+			"description": "Mieszkanie o pow. 58M2 w stanie DEVELOPERSKIM na parterze z ogródkiem i tarasem,w zabudowie szeregowej na oś. Słocina. Trzy pokoje, salon z aneksem , 2 sypialnie, miejsze na garderobę i spiżarkę.Dwa miejsca postojowe,piękne widoki na las. Mieszkanie dostępne od zaraz. Cena 366 000 zł do neg.   TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:19",
+			"offerId": "13121212",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121212_0.jpg?re=2089370719",
+			"price": "366000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "oś.Słocina 3 pokoje, parter, ogródek"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-32-m2-na-os-baranowka-13121208",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137140030"
+				}
+			},
+			"description": "Mieszkanie o pow. 32 m2 na oś. Baranówka IV - ul. Raginisa na wysokim parterze w bloku z 2006 roku. Salon z aneksem kuchennym, łazienka z oknem, przedpokój, balkon, piwnica. Na podłodze płytki, ściany gładzone. W kuchni meble na wymiar plus AGD. W przedpokoju szafa w zabudowie. Mieszkanie jednostronne południowo-zachodnie. Czynsz 330 zł/mc w tym zimna i ciepła woda, śmieci, fundusz remontowy, ogrzewanie. Mieszkanie wolne od zaraz. Cena 280 000 zł do negocjacji    TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:19",
+			"offerId": "13121208",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121208_0.jpg?re=1851783292",
+			"price": "280000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Raginisa kawalerka , parter/4,  32 m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-przy-ulicy-rejtana-o-powierzchni-31-5-m2-13121209",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137140031"
+				}
+			},
+			"description": "Mieszkanie przy ulicy Rejtana o powierzchni 31,5 m2 , PIĘTRO 3/10. Mieszkanie składa się z: - 1 pokoju ( 20 m2), - kuchni jasnej (ok 5 m2), - łazienki (ok 5 m2), - balkonu. Wyposażenie: Kuchnia umeblowana: lodówka, kuchnia gazowa, mikrofalówka. Łazienka z WC, wanną, umywalką, pralką. Pokój w pełni umeblowany: wersalka, sofa rozkładana, stół z krzesłami, meblościanka w tym szafa, szafki, regały i komody oraz płaski telewizor. W przedpokoju szafa na odzież. Z balkonu widok na tereny zielone. W pobliżu centrum handlowe Millenium sklepy spożywcze, przedszkole, szkoła podstawowa i gimnazjum, basen, kościół, przychodnia , poczta, apteka, plac zabaw dla dzieci, przystanki MPK. Blisko centrum miasta. Czynsz ok. 400,00 zł w tym: centralne ogrzewanie, woda, fundusz remontowy, śmieci, itp.  CENA 280 000 zł do uzgodnienia.   Tel 504 170 940",
+			"dt": "17 listopada 2021, 08:19",
+			"offerId": "13121209",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121209_0.jpg?re=331714033",
+			"price": "280000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "UL.Rejtana 1 pokój, piętro 3, 31m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-43m2-pietro-13-w-bloku-13121204",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137080032"
+				}
+			},
+			"description": "Mieszkanie o pow. 43m2, piętro 1/3 w bloku z 2003 roku w ścisłym centrum Rzeszowa. Salon z aneksem kuchennym w zabudowie ze sprzetem AGD, sypialnia, łazienka razem z wc, przedpokój, bez balkonu, bez piwnicy z możliwością zakupu.W pokojach I przedpokoju panel na podłodze, ściany gładzone. W łazience płytki. Okna pcv. Mieszkanie jednostronne płn-zachodnie. Czynsz 143 zł na 1 os plus gaz i prąd. Własne ogrzewanie gazowe. Centrum miasta idealne miejsce zarówno dla siebie jak i pod wynajem. Cena 340 000 zł   tel 504 170 940",
+			"dt": "17 listopada 2021, 08:18",
+			"offerId": "13121204",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121204_0.jpg?re=1098945729",
+			"price": "340000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "centrum 2 pokoje, cegła ,BLOK z 2003 R"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/lokal-uzytkowy-o-pow-uzyt-37-30-m2-calkowita-13121189",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637136840034"
+				}
+			},
+			"description": "Lokal użytkowy  o pow. użyt 37,30 m2 całkowita ok 45m2, piętro 4/4 na oś. Projektant - ul. Biecka, w bloku z 2010 r. Dwa niezależne pokoje, jasna osobna kuchnia z meblami, łazienka z wc, przedpokój, balkon, piwnica. W pokojach na podłodze panel, ściany gładzone. W kuchni, łazience płytki. Lokal dwustronny północ-południe. Czynsz ok. 150 zł/mies w tym zimna woda, śmiecie, fundusz remontowy, dodatkowo płatny prąd I gaz. Własne ogrzewanie gazowe - piec dwufunkcyjny. Na osiedlu pełna infrastruktura, dobre połączenie z centrum miasta.  Cena 259 000 zł do neg.  TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:14",
+			"offerId": "13121189",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121189_0.jpg?re=1162150659",
+			"price": "259000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "ul. Biecka 2 pokoje, piętro 4/4"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-na-os-pobitno-w-bloku-z-2011-13121187",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637136840035"
+				}
+			},
+			"description": "Mieszkanie na oś. Pobitno w bloku z 2011 roku, mieszkanie na 2 piętrze o pow.30,2 m2 . W pełni wyposażone, gotowe do zamieszkania od zaraz. Ogrzewanie podłogowe w łazience, kuchni oraz przedpokoju, komórka lokatorska 3,6 m, własne miejsce postojowe przed budynkiem na ogrodzonym terenie z bramą zamykaną na pilota. Piecyk dwufunkcyjny. Czynsz 140 zł ( w tym śmieci, sprzątanie klatki schodowej, opłaty administracyjne ). Dodatkowo płatne prąd oraz gaz. Miejsce postojowe oraz komórka lokatorska wliczone w cenę. Cena 299 000 zł do uzgodnienia  TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:14",
+			"offerId": "13121187",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121187_0.jpg?re=754477366",
+			"price": "299000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "oś. Pobitno,kawalerka , 30m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-37-28-m2-na-ul-rejtana-13121182",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637136780036"
+				}
+			},
+			"description": "Mieszkanie o pow. 37,28 m2 na ul. Rejtana, piętro 4/4. Dwa pokoje w tym jeden z przejściem do jasnej kuchni, łazienka z wc, przedpokój, bez balkonu, piwnica. Mieszkanie dwustronne wsch-zach, czynsz ok. 370 zł/mc w tym zimna i ciepła woda, śmieci, ogrzewanie, fundusz remontowy.Mieszkanie wolne od zaraz. Cena 335 000 zł do neg.  Tel 504 170 940",
+			"dt": "17 listopada 2021, 08:13",
+			"offerId": "13121182",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121182_0.jpg?re=834181965",
+			"price": "335000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Rejtana 2 pokoje, piętro 4/4, 38m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-w-rejonie-ul-krzywoustego-36m2-pietro-14-13121178",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637136780037"
+				}
+			},
+			"description": "Mieszkanie w rejonie UL. Krzywoustego 36m2, piętro 1/4. Duży pokój, jasna kuchnia, łazienka razem z wc. Mieszkanie do remontu.Cena 289 000 zł  Tel 504 170 940",
+			"dt": "17 listopada 2021, 08:13",
+			"offerId": "13121178",
+			"imgUrl": "http://www.rzeszowiak.pl/img/wsp/mini/l_no.gif?re=1282370281",
+			"price": "289000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Duża kawalerka 36m2, piętro 1/4,"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/pod-cele-inwestycyjne-lub-dla-siebie-na-start-13120979",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637133300038"
+				}
+			},
+			"description": "Pod cele inwestycyjne lub dla siebie na start - super lokalizacja i fajny układ  Do sprzedania mieszkanie o pow. 42,10 m2 zlokalizowane na oś. Dąbrowskiego - rejon ul. W. Pola na IV piętrze w niskim bloku (bez windy).  Dwustronne - wsch/zach, o funkcjonalnym układzie, składa się z 2 niezależnych pokoi, osobnej jasnej kuchni, łazienki, przedpokoju oraz balkonu i przynależnej piwnicy.  Mieszkanie w dobrym stanie, do ewentualnego odświeżenia, okna PCV, na podłodze panele i płytki, w kuchni meble z agd, w łazience wanna i płytki, w przedpokoju szafa w zabudowie, możliwość pozostawienia umeblowania, czynsz 450 zł/mies w tym zimna woda, (istnieje możliwość podpięcia się pod ciepłą wodę z sieci miejskiej i likwidacje piecyka), ogrzewanie, fundusz remontowy, wolne w granicach miesiąca.  Świetna lokalizacja, idealne pod cele inwestycyjne (obecnie cały czas wynajmowane), w okolicy wyższa uczelnia, szkołą, sklepy, usługi, przystanki MPK, itp. , dużo zieleni i terenów rekreacyjnych, niedaleka odległość do centrum miasta.  c. 325 000 zł do negocjacji  Powyższy opis ma charakter informacyjny i został przygotowany w oparciu o informacje uzyskane od właściciela. Treść niniejszego ogłoszenia nie stanowi oferty w rozumieniu Kodeksu Cywilnego a dane w nim zawarte mają charakter informacyjny i mogą podlegać aktualizacji.           Tel. 793 389 271",
+			"dt": "17 listopada 2021, 07:15",
+			"offerId": "13120979",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13120979_0.jpg?re=1329710049",
+			"price": "325000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "funkcjonalny układ warte uwagi !!!"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/fajna-lokalizacja-idealna-pod-lokate-kapitalu-do-sprzedania-13120977",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637133300039"
+				}
+			},
+			"description": "Fajna lokalizacja, idealna pod lokate kapitału !!!  Do sprzedania mieszkanie o pow. 27 m2 zlokalizowane na oś. Pobitno - ul. Mazurska na IV piętrze (ostatnim, bez windy) w niskim bloku z końca lat 80-tych.  Jednostronne, słoneczne, składa się z pokoju (częściowo przedzielonego tymczasową ścianką na wyodrębniony gabinet - możliwość likwidacji) z przejściem do jasnej kuchni, łazienki przedpokoju oraz balkonu ok. 3,5 m2 i przynależnej piwnicy.  Mieszkanie w dobrym stanie do ewentualnego odświeżenia, okna PCV, na podłodze panele i płytki, w kuchni meble, w łazience wanna i płytki czynsz 320 zł/mies w tym zimna i ciepłą woda, śmiecie, ogrzewanie, fundusz remontowy, wolne od zaraz.  Zielone osiedle z pełną infrastrukturą - sklepy, usługi, przystanki MPK, przedszkole, szpital, dobra komunikacja z resztą miasta. Dobra lokata kapitału pod wynajem (ostatnie lata było wynajmowane).  c. 229 000 zł do negocjacji  Powyższy opis ma charakter informacyjny i został przygotowany w oparciu o informacje uzyskane od właściciela. Treść niniejszego ogłoszenia nie stanowi oferty w rozumieniu Kodeksu Cywilnego a dane w nim zawarte mają charakter informacyjny i mogą podlegać aktualizacji.                 Tel. 793 389 271",
+			"dt": "17 listopada 2021, 07:15",
+			"offerId": "13120977",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13120977_0.jpg?re=355449968",
+			"price": "229000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "warte uwagii  !!!!"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-49m2-|-dwa-pokoje-salon-13120968",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637133180040"
+				}
+			},
+			"description": "Mieszkanie ok 49m2 | Dwa pokoje + salon | Balkon 7,88m2 | Okno w kuchni | Parter | Niski blok.   Do sprzedania mieszkanie 3-pokojowe o powierzchni 48.73m2 usytuowane na parterze w niskim bloku z windą, m. Kielanówka (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 11 w budynku nr 1 - 48.73m2, składa się z:  -salonu z aneksem kuchennym - 17,81m2 -sypialni 1 - 8,05m2 -sypialni 2 - 9,74m2 -łazienki - 4,38m2 -przedpokoju - 8,98m2 Do mieszkania przynależy balkon o powierzchni 7,88m2.  W pobliżu osiedla znajdziemy sklep, przychodnię, aptekę, bank, przystanek MPK.  Dogodny dojazd do centrum Rzeszowa zajmuje zaledwie 15 min samochodem.  Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok. Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555   Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 07:13",
+			"offerId": "13120968",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13120968_0.jpg?re=578519306",
+			"price": "316745",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-49m2-|-dwa-pokoje-salon-13120965",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637133120041"
+				}
+			},
+			"description": "Mieszkanie ok 49m2 | Dwa pokoje + salon | Okno w kuchni | I piętro | Blok z windą.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 48.92m2 usytuowane na I piętrze w niskim bloku z windą, m. Kielanówka (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 26 w budynku nr 1 - 48.92m2, składa się z:  -salonu z aneksem kuchennym - 17,51m2 -sypialni 1 - 9,822 -sypialni 2 - 8,05m2 -łazienki - 4,39m2 -przedpokoju - 9,15m2 Do mieszkania przynależy balkon o powierzchni 7,87m2.  W pobliżu osiedla znajdziemy sklep, przychodnię, aptekę, bank, przystanek MPK.   Dogodny dojazd do centrum Rzeszowa zajmuje zaledwie 15 min samochodem.   Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok. Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555   Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 07:12",
+			"offerId": "13120965",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13120965_0.jpg?re=111087743",
+			"price": "317980",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe, 48.92m2, Kielanówka"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-50m2-|-dwa-pokoje-salon-13120967",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637133120041"
+				}
+			},
+			"description": "Mieszkanie ok 50m2 | Dwa pokoje + salon | Okno w kuchni | I piętro | Blok z windą.   Do sprzedania mieszkanie 3-pokojowe o powierzchni 48,49m2, usytuowane na I piętrze w niskim bloku z windą, m. Kielanówka (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 18 w budynku nr 1 - 48,49m2, składa się z:  -salonu z aneksem kuchennym - 17,54m2 -sypialni 1 - 9,82m2 -sypialni 2 - 7,93m2 -łazienki - 4,28m2 -przedpokoju - 8,92m2 Do mieszkania przynależy balkonu o powierzchni 8,29m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m),  przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z  przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia  bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem,  jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej  stanowi doskonałą bazę do dalszych wycieczek.  Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok.  Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 07:12",
+			"offerId": "13120967",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13120967_0.jpg?re=1588379140",
+			"price": "315185",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe, balkon 8,29m2, Staroniwska"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/sprzedam-mieszkanie-kawalerke-przy-ulicy-rejtana-obok-millenium-13120959",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637132700042"
+				}
+			},
+			"description": "Sprzedam mieszkanie kawalerkę przy ulicy Rejtana obok Millenium o powierzchni 31,5 m2 usytuowane na 3 piętrze w bloku z windą. Mieszkanie składa się z:  - 1 pokoju ( 20 m2), - kuchni jasnej (ok 5 m2), - łazienki (ok 5 m2), - balkonu. Wyposażenie: Kuchnia umeblowana: lodówka, kuchnia gazowa, mikrofalówka. Łazienka z WC, wanną, umywalką, pralką. Pokój w pełni umeblowany: wersalka, sofa rozkładana, stół z krzesłami,  meblościanka w tym szafa, szafki, regały i komody oraz płaski telewizor. W przedpokoju szafa na odzież. Z balkonu widok na tereny zielone. W pobliżu centrum handlowe Millenium sklepy spożywcze, przedszkole, szkoła podstawowa i gimnazjum, basen,  kościół, przychodnia , poczta, apteka,  plac zabaw dla dzieci, przystanki MPK. Blisko centrum miasta. Czynsz ok. 400,00 zł w tym: centralne ogrzewanie, woda, fundusz remontowy, śmieci, itp.  Tel. 607-294-281",
+			"dt": "17 listopada 2021, 07:05",
+			"offerId": "13120959",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13120959_0.jpg?re=2021141936",
+			"price": "280000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Sprzedam kawalerkę przy ul. Rejtana obok Millenium"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/sprzedam-mieszkanie-o-pow-50-66-skladajace-sie-z-13117929",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637100660000"
+				}
+			},
+			"description": "Sprzedam mieszkanie, o pow. 50,66 składające się z: salon + kuchnia, 2 pokoi, łazienki, oraz przedpokoju. Mieszkanie posiada balkon i przynależną piwnicę. Wykończenie: panele (w pokojach i przedpokoju), płytki (w kuchni, łazience ), okna PCV . Piętro: X/4.",
+			"dt": "16 listopada 2021, 22:11",
+			"offerId": "13117929",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13117929_0.jpg?re=1750966684",
+			"price": "380000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Rzeszów 1000-Lecia 51 m2"
+		},
+		{
+			"url": "https://www.olx.pl/d/oferta/mieszkanie-z-ogrodkiem-drabinianka-sikorskiego-CID3-IDM8pYh.html#f6d7fa27a9;promoted",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637187960000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 22:26",
+			"offerId": "711270589",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/huensp7ufkhf1-PL/image;s=644x461",
+			"price": "331000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Mieszkanie z ogródkiem Drabinianka Sikorskiego"
+		},
+		{
+			"url": "https://www.olx.pl/d/oferta/2-pokojowe-mieszkanie-na-sprzedaz-CID3-IDMzNxM.html#f6d7fa27a9",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637175300000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 18:55",
+			"offerId": "717796058",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/k6wrstr7v0sa1-PL/image;s=644x461",
+			"price": "375000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "2 pokojowe mieszkanie na sprzedaż!"
+		},
+		{
+			"url": "https://www.olx.pl/d/oferta/mieszkanie-67-4m2-plus-duzy-taras-ogrodek-33m2-i-2-miejsca-parkingowe-CID3-IDMzFFn.html#f6d7fa27a9",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637169840000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 17:24",
+			"offerId": "717765777",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/1stglkl6ialj2-PL/image;s=644x461",
+			"price": "395000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Mieszkanie 67,4m2 Plus duży taras/ogródek 33m2 i 2 miejsca parkingowe"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/ostatnie-mieszkanie-3-pokojowe-53-5m2-ID480ya.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637166780000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 16:33",
+			"offerId": "631925820",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/8ox25uotyfa5-PL/image;s=644x461",
+			"price": "299000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Ostatnie mieszkanie 3 pokojowe 53,5m2"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/nowe-osiedle-mieszkan-w-szeregowkach-taras-ID4dvM4.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637164920000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 16:02",
+			"offerId": "708052654",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/xnnjew410t7u-PL/image;s=644x461",
+			"price": "349000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "• Nowe Osiedle Mieszkań w Szeregówkach • Taras!"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/50m-al-rejtana-mieszkanie-3-pokojowe-ID4ef84.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637164500000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 15:55",
+			"offerId": "717747377",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/r4rdke6dhdue3-PL/image;s=644x461",
+			"price": "365000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "50m Al.Rejtana mieszkanie 3-pokojowe"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/dwa-osobne-pokoje-z-balkonem-osiedle-tysiaclecia-ID4cyqe.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637162580000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 15:23",
+			"offerId": "689976885",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/pdmd5y039ix52-PL/image;s=644x461",
+			"price": "330000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Dwa Osobne Pokoje z Balkonem - Osiedle Tysiąclecia"
+		},
+		{
+			"url": "https://www.olx.pl/d/oferta/nowe-mieszkanie-56-20-3-pokoje-krakowska-CID3-IDLgtPI.html#f6d7fa27a9;promoted",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637161740000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 15:09",
+			"offerId": "698415722",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/eekbg1gsocts-PL/image;s=644x461",
+			"price": "393400",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Nowe mieszkanie 56,20 - 3 pokoje - Krakowska"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/dwa-pokoje-projektant-stan-deweloperski-ID4dPLT.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637160300000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 14:45",
+			"offerId": "710692081",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/ppkj5xfpg78r3-PL/image;s=644x461",
+			"price": "319000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Dwa Pokoje Projektant - Stan Deweloperski"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/cesja-gotowe-w-2021-baltycka-sprawdz-ID4eeVp.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637156880000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 13:48",
+			"offerId": "717710744",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/oi12sxj4mcjr3-PL/image;s=644x461",
+			"price": "380000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Cesja - Gotowe w 2021 Bałtycka - Sprawdź !"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/nowe-miasto-bezposrednio-3-pokoje-64-m2-parter-ID4e2WN.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637155440000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 13:24",
+			"offerId": "714202147",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/ipl4jag8pt9w1-PL/image;s=644x461",
+			"price": "349900",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Nowe Miasto, bezpośrednio, 3 pokoje, 64 m2, parter"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/mieszkanie-w-inwestycji-wschodnia-15-f1-ID4bAnW.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637155440000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 13:24",
+			"offerId": "717704043",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/vub7ykr8zcpt3-PL/image;s=644x461",
+			"price": "393924",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Mieszkanie w inwestycji Wschodnia 15 | F1"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/mieszkanie-na-sprzedaz-ul-dabrowskiego-56-73-m2-ID4aQoL.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637155080000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 13:18",
+			"offerId": "668816870",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/0x698z0ah6zc1-PL/image;s=644x461",
+			"price": "390000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Mieszkanie na sprzedaż - ul. Dąbrowskiego 56,73 m2"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/mieszkanie-w-inwestycji-wschodnia-15-j1-ID4bApY.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637155020000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 13:17",
+			"offerId": "678725391",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/9hlj46p7zgti3-PL/image;s=644x461",
+			"price": "393924",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Mieszkanie w inwestycji Wschodnia 15 | J1"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/sprzedam-mieszkanie-stan-deweloperski-ID4eeR4.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637154000000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 13:00",
+			"offerId": "717696616",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/xmy53932vja71-PL/image;s=644x461",
+			"price": "335000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Sprzedam mieszkanie, stan deweloperski"
+		},
+		{
+			"url": "https://www.olx.pl/d/oferta/mieszkanie-45-38-m-z-ogrodkiem-30-m-rocha-CID3-IDKxuKw.html#f6d7fa27a9",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637153880000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 12:58",
+			"offerId": "687694483",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/0kykmgqwgplf-PL/image;s=644x461",
+			"price": "319000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Mieszkanie 45.38 m² z ogródkiem 30 m². Rocha"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/mieszkanie-osiedle-za-mlynem-ii-lancut-rezerwacja-ID4dBu7.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637151600000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 12:20",
+			"offerId": "706789073",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/vd2o4kqwe3q63-PL/image;s=644x461",
+			"price": "271362",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Mieszkanie Osiedle za Młynem II Łańcut REZERWACJA"
+		},
+		{
+			"url": "https://www.olx.pl/d/oferta/do-sprzedania-bez-prowizji-duze-3-oddzielne-pokoje-65m2-loggia-piwnica-CID3-IDMliyZ.html#f6d7fa27a9",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637151600000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 12:20",
+			"offerId": "714340377",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/yiohklh3n2pd2-PL/image;s=644x461",
+			"price": "380000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Do Sprzedania BEZ PROWIZJI Duże 3 Oddzielne Pokoje 65m2 Loggia Piwnica"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/3-niezalezne-pokoje-na-osiedlu-kmity-ID4dOH7.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637148660000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 11:31",
+			"offerId": "712438410",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/dsu0kren2k0c3-PL/image;s=644x461",
+			"price": "375000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "3 niezależne pokoje na osiedlu Kmity."
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/kawalerka-w-samym-centrum-miasta-ID4dT86.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637145000000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 10:30",
+			"offerId": "711335020",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/oygopqpqxu5n1-PL/image;s=644x461",
+			"price": "219000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Kawalerka w samym centrum miasta"
+		},
+		{
+			"url": "https://www.olx.pl/d/oferta/2-pokojowe-mieszkanie-w-centrum-rzeszowa-sprzedam-CID3-IDLZBg9.html#f6d7fa27a9;promoted",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637143800000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 10:10",
+			"offerId": "709169029",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/fkawqp368n5t-PL/image;s=644x461",
+			"price": "349000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "2 pokojowe mieszkanie w centrum Rzeszowa sprzedam"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/trzy-pokoje-na-nowej-inwestycji-poludnie-rzeszowa-ID4aa1M.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637141400000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 09:30",
+			"offerId": "710849049",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/9d3deqoaj1nr2-PL/image;s=644x461",
+			"price": "369420",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Trzy Pokoje Na Nowej Inwestycji Południe Rzeszowa"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/drabinianka-3-pokoje-w-spokojej-okolicy-ID4abkM.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637141340000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 09:29",
+			"offerId": "710849152",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/lpg6u65xt6oe1-PL/image;s=644x461",
+			"price": "340740",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Drabinianka - 3 Pokoje w Spokojej Okolicy"
+		},
+		{
+			"url": "https://www.otodom.pl/pl/oferta/drabinianka-duzy-wybor-mieszkan-ID4aN9r.html?",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637141040000"
+				}
+			},
+			"description": "",
+			"dt": "17 listopada 2021, 09:24",
+			"offerId": "689568601",
+			"imgUrl": "https://ireland.apollo.olxcdn.com:443/v1/files/1gf3rf11f8hn-PL/image;s=644x461",
+			"price": "369420",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "olx",
+			"title": "Drabinianka - Duży Wybór Mieszkań"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/witam-serdecznie-oferuje-na-sprzedaz-mieszkanie-wlasnosciowe-na-13122379",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637182385857"
+				}
+			},
+			"description": "Witam serdecznie.  Oferuje na sprzedaż mieszkanie własnościowe na ulicy Paderewskiego. Świetne pod inwestycje!  Okolice Millenium Hall, w pobliżu szkoła, żłobek, przedszkole, wszystko w zasięgu kilku minut. Praktycznie samo centrum handlowe ulicy Rejtana, duży parking, przystanki MPK.  Mieszkanie znajduje się na drugim pietrze, cztero piętrowego bloku.  Częściowo do remontu, ale do zamieszkania.  Mieszkanie dwustronne. Metraż: 61,63m2  Składa się z: 4 niezależnych pokoi, jasnej kuchni, łazienki, osobnej toalety, przedpokoju, balkonu oraz piwnicy.  Okna PCV, parkiet, płytki.  Cena: 360 000 do negocjacji.  W razie zainteresowania proszę o kontakt telefoniczny: 668 066 537  Sprzedaż bez pośredników.",
+			"dt": "17 listopada 2021, 20:53",
+			"offerId": "13122379",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13122379_0.jpg?re=736542788",
+			"price": "360000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Na sprzedaż mieszkanie ul. Paderewskiego  61,63m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/sprzedam-mieszkanie-trzypokojowe-polozone-na-trzecim-pietrze-w-13122207",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637175485859"
+				}
+			},
+			"description": "Sprzedam mieszkanie trzypokojowe położone na trzecim piętrze w niskim bloku przy ul.Kolbego. Mieszkanie składa się z: -salonu z wyjściem na balkon -dwóch samodzielnych pokoi -jasnej kuchni -łazienki -wc -przedpokoju Do mieszkania przynależy piwnica. W mieszkaniu wymienione drzwi wejściowe i wewnętrzne, okna pcv, panele podłogowe.  W kuchni zabudowa na wymiar. Łazienka i wc w płytkach. W przedpokoju szafy w zabudowie. Mieszkanie przestronne, idealne dla rodziny. Termin wyprowadzki do uzgodnienia. Osiedle młode bardzo dobrze skomunikowane z centrum z pełną infrastrukturą, przedszkole, szkoła, centrum handlowe, Kościół, ok.2 km Wyższa Uczelnia WSIZ, niedaleko ok 3km do specjalnej strefy ekonomicznej. Godne polecenia!",
+			"dt": "17 listopada 2021, 18:58",
+			"offerId": "13122207",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13122207_0.jpg?re=1452410318",
+			"price": "375000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Sprzedam przestronne mieszkanie na Baranówce IV"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/do-sprzedazy-mieszkanie-o-pow59-1m-usytuowane-na-parterze-13122062",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637163485860"
+				}
+			},
+			"description": "Do sprzedaży mieszkanie o pow.59,1m usytuowane na parterze kamienicy w ścisłym centrum.  Składa się z : - przedpokoju, -trzech pokoi (jeden z pokoi przechodni) -salonu połączonego z aneksem kuchennym, -łazienki z wc.  W mieszkaniu została wymieniona instalacja elektryczna, gazowa i wodno-kanalizacyjna, nowe okna pcv, drzwi zewnętrzne antywłamaniowe, podłogi w panelach. Przedpokój w płytkach podłogowych. Wysokość pomieszczeń: 2,80m. Do mieszkania przynależy garaż wolno-stojący, murowany (15,80m2) i piwnica (15,50m2). Mieszkanie bezczynszowe.  Cicha i spokojna okolica z dostępem do pełnej infrastruktury! ZAPRASZAMY NA PREZENTACJE ! tel: 508 763 872",
+			"dt": "17 listopada 2021, 15:38",
+			"offerId": "13122062",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13122062_0.jpg?re=1373845131",
+			"price": "385000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "59m rej ul.SŁOWACKIEGO mieszkanie z garażem"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/cztery-nowoczesne-domy-w-zabudowie-blizniaczej-na-osiedlu-13051534",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637162525860"
+				}
+			},
+			"description": "CZTERY NOWOCZESNE DOMY W ZABUDOWIE BLIŹNIACZEJ na osiedlu Drabinianka  Powierzchnia domu: 88,51m2 Powierzchnia działek: 220 – 294 m2  Oferujemy Państwu II etap naszego osiedla w dzielnicy Drabinianka - 4 budynki jednorodzinne w zabudowie bliźniaczej. W tej inwestycji odnajdziecie Państwo nietuzinkową architekturę połączoną z doskonałą lokalizacją. Miejsce zapewnia szybki dojazd do nowopowstającej szkoły, przystanku autobusowego i sklepów, a zarazem spokój i przyjazną atmosferę. Budynki spełniają najnowsze warunki techniczne (WT 2021), co daje Państwu gwarancje ich energooszczędności i pozwoli zaoszczędzić na kosztach ogrzewania. Rozkład pomieszczeń został zaprojektowany z dbałością o funkcjonalność, oferując nabywcom komfort w codziennym użytkowaniu.  Co nas wyróżnia:  •        Autorski projekt architektoniczny z wygodnym układem pomieszczeń i elewacją budynku o wysokim standardzie  •        Lokalizacja: bliskość szkoły, przystanku autobusowego, terenów zielonych i rekreacyjnych  •        Energooszczędne budynki ogrzewane piecem gazowym, przygotowane pod montaż instalacji fotowoltaicznej  •        Przestronne poddasze o funkcjonalnej powierzchni 16m2  •        Żelbetowy strop poddasza zapewniający większą trwałość i wygodę użytkowania  •        Wysoka jakość zastosowanych materiałów  •        Duży ogródek na własnej działce  •        5 letnia rękojmia   Układ pomieszczeń:  PARTER:  •        Wiatrołap – 4,19m2",
+			"dt": "17 listopada 2021, 15:22",
+			"offerId": "13051534",
+			"imgUrl": "http://www.rzeszowiak.pl/img/wsp/mini/l_no.gif?re=402231859",
+			"price": "389000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Alternatywa dla mieszkania, dom z ogrodem"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/sprzedam-mieszkanie-w-centrum-rzeszowa-w-okolicy-ulicy-13122047",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637162345861"
+				}
+			},
+			"description": "Sprzedam mieszkanie  w centrum Rzeszowa w okolicy ulicy  Poniatowskiego . Powierzchnia to 34,5m2 położone w centrum w dwupiętrowym budynku na 2 piętrze. Blok z cegły niskie budownictwo cicha i spokojna okolica.  Mieszkanie składa się z; -przedpokoju -dużego pokoju -sypialni  -kuchni -łazienki z wc  Mieszkanie o orientacji południowej.  Stałe opłaty utrzymania nieruchomości tj.czynsz miesięczny to 370zł (w tym zimna i ciepła woda i ogrzewanie miejskie +fundusz remontowy +śmieci,koszty zarządu).  Nieruchomość posiada KW ,pełna własność. Mieszkanie posiada piwnicę . Do większego odświeżenia. Do zamieszkania od 01.01.2022 roku.  Mieszkanie posiada ogólnodostępne miejsca parkingowe.Pełna własność z Księgą Wieczystą. Godne polecenia!!!",
+			"dt": "17 listopada 2021, 15:19",
+			"offerId": "13122047",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13122047_0.jpg?re=45513019",
+			"price": "299000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Sprzedam przytulne miszkankow centrum!!!"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/sprzedam-dwupokojowe-mieszkanie-o-pow-47-39-m2-zlokalizowane-13121678",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637153645861"
+				}
+			},
+			"description": "Sprzedam dwupokojowe mieszkanie o pow. 47,39 m2 zlokalizowane w Rzeszowie przy ulicy Boruty - Spiechowicza, os. Andersa. Mieszkanie usytuowane jest na I piętrze w czteropiętrowym bloku.  Świetna lokalizacja tuż nieopodal ścisłego centrum.  W najbliższym sąsiedztwie znajdują się sklepy spożywcze, hotel, supermarkety, galeria handlowa Nowy Świat, park Sybiraków, uczelnia WSiZ a także przedszkole i szkoła podstawowa oraz liczne przystanki komunikacji publicznej. Mieszkanie składa się z: - pokoju, - pokoju, - kuchni z oknem, - korytarza, - łazienki z WC. Do mieszkania przynależy piwnica o pow, 3,16m2. Jest możliwość zakupu mieszkania z pełnym umeblowaniem i wyposażeniem (dla Inwestorów pod wynajem). Cena do negocjacji. Zapraszam do obejrzenia",
+			"dt": "17 listopada 2021, 12:54",
+			"offerId": "13121678",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121678_0.jpg?re=1661714762",
+			"price": "340000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "RZESZÓW - 2 pokoje, 1 piętro, ul. Spiechowicza"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/sprzedam-atrakcyjne-mieszkanie-polozone-na-osiedlu-projektant-na-13119828",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637153405862"
+				}
+			},
+			"description": "Sprzedam atrakcyjne mieszkanie położone na osiedlu Projektant na ulicy Krynickiej 6.  Mieszkanie o powierzchni 44m2 zlokalizowane na 2 piętrze (środkowe) w bloku 4 piętrowym z cegły.  Mieszkanie składa się z przedpokoju, kuchni, łazienki, dwóch oddzielnych pokoi i balkonu. Przynależy również do niego piwnica (4.20 m2).  Mieszkanie sprzedaję z wyposażeniem i umeblowaniem, tj. zabudowa kuchenna wraz ze sprzętem AGD (lodówka, kuchenka, zmywarka) w salonie komplet wypoczynkowy z ławą, biurkiem, szafą wnękową w pokoju zabudowa biurka i łóżka.  Niski czynsz ok.276zł z wodą. Ogrzewane piecem dwufunkcyjnym kondensacyjnym z zamkniętą komora spalania. Tanie w utrzymaniu. Pełna własność z gruntem.  Ogłoszenie prywatne bez pośredników.",
+			"dt": "17 listopada 2021, 12:50",
+			"offerId": "13119828",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13119828_0.jpg?re=1843202034",
+			"price": "380000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 2 pokoje, kuchnia, balkon, piwnica na o"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/do-sprzedania-mieszkanie-w-stanie-developerskim-na-osiedlu-13121918",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637153345863"
+				}
+			},
+			"description": "Do sprzedania mieszkanie w stanie developerskim na osiedlu Projektant w ratach 🏢 Mieszkanie dwupokojowe o powierzchni użytkowej 42,38m2 ,położone na I piętrze budynku 6-piętrowym. Posiada ładny duży 14m2 balkon, oraz przyporządkowana piwnicę.. Termin oddania mieszkania to marzec/kwiecień 2023r. 🚗 Do mieszaknia przynależne miejsce parkingowe w garażu podziemnym w cenie 30tys zł.",
+			"dt": "17 listopada 2021, 12:49",
+			"offerId": "13121918",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121918_0.jpg?re=5775687",
+			"price": "298000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Okazja w ratach"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/dzien-dobry-nowe-mieszkanie-do-sprzedaniabez-zadnych-prowizjitransakcja-13121774",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637148665864"
+				}
+			},
+			"description": "Dzień Dobry :) NOWE Mieszkanie DO SPRZEDANIA BEZ ŻADNYCH PROWIZJI Transakcja BEZPOŚREDNIO z WŁAŚCICIELEM  - Capital Towers Podwisłocze 31 Rzeszów - Nowoczesny Budynek przy Centrum Miasta - Kameralne Mieszkanko 30m2 - Komfortowo Umeblowany Pokój Dzienny z TV LCD - Przytulna Strefa Sypialniana - Funkcjonalna Kuchnia z Nowym Wyposażeniem AGD + Zmywarka - Umeblowanie na Wymiar - Przyjemna Łazienka z Prysznicem - Balkon ok 3m2 - Opłaty Administracyjne 150 zł/mc - Rekuperacja - Piętro 5 z 6 - Nowoczesna Winda - Monitoring - Wysokie Okna Zachód - Gotowa Inwestycja pod Wynajem - Pełna Własność - Bez Obciążeń (czysta KW)  Z przyjemnością przedstawiam Państwu bardzo ładne, nowoczesne i jeszcze nigdy nie zamieszkałe 2 pokojowe mieszkanie o powierzchni 30m2 w Rzeszowie w Prestiżowym Budynku Capital Towers na 5 piętrze z windą. Budynek wybudowany równolegle do rzeki Wisłok. W najbliższej okolicy ul. Rejtana, Kopisto, Podwisłocze - Nowe Miasto, Uniwersytet Rzeszowski oraz Wyższa Szkoła Prawa i Administracji i Galeria Millennium Hall. Do rynku kilka minut spacerkiem. Miejsce z wszystkimi atrakcjami miasta oraz ścieżkami rowerowymi. Kilka minut do terenów rekreacyjnych nad rzeką Wisłok (urządzenia do ćwiczeń, grill-palenisko, wypożyczalnia łódek i kajaków) Bliskość przystanków komunikacji miejskiej zapewnia szybki dostęp dowolnego miejsca w mieście MPK 6, 11, 13, 17, 26, 27, 32, 34.  Nieruchomość jest wolna od wszelkich wad prawnych i fizycznych, które ograniczałyby przydatność Nieruchomości",
+			"dt": "17 listopada 2021, 11:31",
+			"offerId": "13121774",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121774_0.jpg?re=1625639821",
+			"price": "398000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Do Sprzedania BEZ PROWIZJI Mieszkanie 30m2 TV Balk"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/pilne-obnizka-ceny-do-sprzedania-mieszkanie-w-13121551",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637144045865"
+				}
+			},
+			"description": "Pilne!!! obniżka ceny !!! Do sprzedania mieszkanie w Rzeszowie przy ul. Wyspiańskiego. Do centrum 10 minut spacerkiem. Mieszkanie jest 4 pokojowe( cztery niezależne pokoje), kuchnia, łazienka, toaleta. Mieszkanie posiada balkon i piwnicę. W czynszu ciepła woda. ogrzewanie miejskie. na gaz tylko kuchenka. Kontakt: 666140444  Mieszkanie świetne jako inwestycja. DO Negocjacji.     Oferta od osoby prywatnej, Agencjom dziękuję.",
+			"dt": "17 listopada 2021, 10:14",
+			"offerId": "13121551",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121551_0.jpg?re=665603113",
+			"price": "369000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "mieszkanie Wyspiańskiego 60m2 4 pokoje"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-58m2-|-dwa-pokoje-salon-13121357",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637140145866"
+				}
+			},
+			"description": "Mieszkanie ok 58m2 | Dwa pokoje + salon | Balkon | II piętro | Blok z windą.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 57,83m2, usytuowane na II piętrze w niskim bloku z windą, m. Kielanówka (działka znajduje się bardzo blisko granicy m. Rzeszów).  Mieszkanie nr 42 w budynku nr 1 - 57,83m2, składa się z:  -salonu - 14,98m2 -kuchni - 9,83m2 -sypialni 1 - 7,28m2 -sypialni 2 - 12,40m2 -łazienki - 5,43m2 -przedpokoju -7,91m2  Do mieszkania przynależy balkon o powierzchni 5,44m2.   W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:09",
+			"offerId": "13121357",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121357_0.jpg?re=702472502",
+			"price": "364329",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Nowe mieszkania na Osiedlu Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-49m2-|-dwa-pokoje-salon-13121355",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637140145866"
+				}
+			},
+			"description": "Mieszkanie ok 49m2 | Dwa pokoje + salon | Okno w kuchni | Balkon 8,29m2 | II piętro | Blok z windą.   Do sprzedania mieszkanie 3-pokojowe o powierzchni 48,49m2, usytuowane na II piętrze w niskim bloku z windą, m. Kielanówka (działa znajduje się bardzo blisko granicy m. Rzeszów).  Mieszkanie nr 32 w budynku nr 1 - 48,49m2, składa się:  ✅Salon z aneksem kuchennym - 17,54m2, ✅Sypialnia 1 - 9,82m2, ✅Sypialnia 2 - 7,93m2, ✅Łazienka – 4,28m2, ✅Przedpokój – 8,92m2,   Do mieszkania przynależy balkon – 8,29m2.   W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok.  Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:09",
+			"offerId": "13121355",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121355_0.jpg?re=376200428",
+			"price": "315185",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe,do 50m2, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-58m2-|-dwa-pokoje-salon-13121354",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637140145867"
+				}
+			},
+			"description": "Mieszkanie ok 58m2 | Dwa pokoje + salon | Balkon 5,19m2 | I piętro | Blok z windą.   Do sprzedania mieszkanie 3-pokojowe o powierzchni 57,83m2, usytuowane na I pietrze w bloku z windą, m. Kielanówka (działka znajduje się bardzo blisko m. Rzeszów).  Mieszkanie nr 28 w budynku nr 1 - 57,83m2, składa się:  ✅Salon - 14,98m2, ✅Kuchnia - 9,83m2, ✅Sypialnia 1 - 7,28m2, ✅Sypialnia 2 - 12,40m2, ✅Łazienka – 5,43m2, ✅Przedpokój – 7,91m2,  Do mieszkania przynależy balkon – 5,19m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok.  Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:09",
+			"offerId": "13121354",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121354_0.jpg?re=558746128",
+			"price": "364329",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Piękne 3-pokojowe mieszkanie, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-47-13m2-|-dwa-pokoje-salon-|-13121349",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637140085869"
+				}
+			},
+			"description": "Mieszkanie 47,13m2 | Dwa pokoje + salon | Balkon 5,39m2 | I piętro | Blok z windą.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 47,13m2, usytuowane na I piętrze w niskim bloku z windą, m. Kielanówka (działka znajduje się bardzo blisko granicy m. Rzeszów).  Mieszkanie nr 21 w budynku nr 1 - 47,13m2, składa się z:  -salonu - 13,27m2 -kuchni - 6,01m2 -sypialni 1 - 7,66m2 -sypialni 2 - 9,66m2 -łazienki - 4,03m2 -przedpokoju - 6,50m2  Do mieszkania przynależy balkon o powierzchni 5,39m2.   W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:08",
+			"offerId": "13121349",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121349_0.jpg?re=171093584",
+			"price": "306345",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Trzy pokoje| Balkon, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-48-92m2-|-trzy-pokoje-|-okno-w-13121350",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637140085869"
+				}
+			},
+			"description": "Mieszkanie 48,92m2 | Trzy pokoje | Okno w aneksie kuchennym | Balkon 7,87m2 | II piętro | Blok z windą.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 48,92m2, usytuowane na II piętrze w niskim bloku z windą, m. Kielanówka (działka znajduje się bardzo blisko granicy m. Rzeszów).  Mieszkanie nr 40 w budynku nr 1 - 48,92m2, składa się z:  -salon z aneksem kuchennym - 17,51m2, -sypialni 1 - 9,82m2, -sypialni 2 - 8,05m2, -łazienki - 4,39m2, -przedpokoju -9,15m2.  Do mieszkania przynależy balkon o powierzchni 7,87m2.   W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:08",
+			"offerId": "13121350",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121350_0.jpg?re=1050446129",
+			"price": "317980",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Trzy pokoje, Balkon 7,87m2, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-47-13m2-|-dwa-pokoje-salon-|-13121351",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637140085870"
+				}
+			},
+			"description": "Mieszkanie 47,13m2 | Dwa pokoje + salon | IV piętro | Blok z windą | Osiedle Natura Park.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 47,13m2, usytuowane na IV piętrze w niskim bloku z windą, m. Kielanówka (usytuowane bardzo blisko granicy Rzeszowa).  Mieszkanie nr 62 w budynku nr 1, składa się z:  -salonu - 13,27m2 -kuchni - 6,01m2 -sypialni 1 - 7,66m2 -sypialni 2 - 9,66m2 -łazienki - 4,03m2 -przedpokoju - 6,50m2  Do mieszkania przynależy balkon o powierzchni 5,73m2.   Na Osiedlu Natura Park możesz korzystać z uroków przyrody już po wyjściu z mieszkania każdego dnia.  Zobacz więcej na naszej stronie: osiedlenaturapark. pl  Zapraszamy do biura sprzedaży:  Dakar Development Sp. z o.o.  ul. Kilińskiego 6,  35-005 Rzeszów  +48 532 514 555   Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:08",
+			"offerId": "13121351",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121351_0.jpg?re=2023007850",
+			"price": "306345",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe, balkon, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-49m2-|-dwa-pokoje-salon-13121337",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139905871"
+				}
+			},
+			"description": "Mieszkanie ok 49m2 | Dwa pokoje + salon | Balkon 7,89m2 | III piętro | Blok z windą.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 48,73m2, usytuowane na III piętrze w niskim bloku z windą, m. Kielanówka (zlokalizowane bardzo blisko granicy Rzeszowa).  Mieszkanie nr 53 w budynku nr 1, składa się z:  -salonu z aneksem kuchennym - 17,58m2 -sypialni 1 - 8,05m2 -sypialni 2 - 9,74m2 -łazienki - 4,38m2 -przedpokoju - 8,98m2  Do mieszkania przynależy balkon o powierzchni 7,89m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Zobacz więcej na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu do biura sprzedaży: Dakar Development sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:05",
+			"offerId": "13121337",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121337_0.jpg?re=247292982",
+			"price": "316745",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie dla rodziny na Osiedlu Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-47m2-|-dwa-pokoje-salon-13121334",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139905871"
+				}
+			},
+			"description": "Mieszkanie ok 47m2 | Dwa pokoje + salon | Balkon 7,84m2 | Parter | Niski blok.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 46,60m2, usytuowane na parterze w niskim bloku z windą, m. Kielanówka(działka zlokalizowana bardzo blisko granicy Rzeszowa).  Mieszkanie nr 3 w budynku nr 1 - 46,60m2, składa się z:  -salonu z aneksem kuchennym - 17,54m2 -sypialni 1 - 7,93m2 -sypialni 2 - 7,93m2 -łazienki - 4,28m2 -przedpokoju - 8,92m2  Do mieszkania przynależy balkon o powierzchni 7,84m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Zobacz więcej na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu do biura sprzedaży: Dakar Development sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:05",
+			"offerId": "13121334",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121334_0.jpg?re=1856530168",
+			"price": "302900",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe na Osiedlu Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-47-13m2-|-dwa-pokoje-salon-|-13121335",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139905872"
+				}
+			},
+			"description": "Mieszkanie 47,13m2 | Dwa pokoje + salon | Taras 20,42m2 | Niski blok.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 47,13m2, usytuowane na parterze w niskim bloku z windą, m. Kielanówka(bardzo blisko granicy Rzeszowa).  Mieszkanie nr 7 w budynku nr 1, składa się z:  -salonu - 13,27m2 -kuchni - 6,01m2 -sypialni 1 - 7,66m2 -sypialni 2 - 9,66m2 -łazienki - 4,03m2 -przedpokoju -6,50m2 Do mieszkania przynależy taras o powierzchni 20,42m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Zobacz więcej na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu do biura sprzedaży: Dakar Development sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:05",
+			"offerId": "13121335",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121335_0.jpg?re=1470960036",
+			"price": "306345",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe z dużym tarasem, Staroniwska"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-49m2-|-dwa-pokoje-salon-13121340",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139905873"
+				}
+			},
+			"description": "Mieszkanie ok 49m2 | Dwa pokoje + salon | W kuchni okno | III piętro | Blok z winda.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 48,92m2, usytuowane na III piętrze w niskim bloku z windą, m. Kielanówka (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 54 w budynku nr 1, składa się z:  -salonu z aneksem kuchennym - 17,51m2 -sypialni 1 - 9,82m2 -sypialni 2 - 8,05m2 -łazienki - 4,39m2 -przedpokoju - 9,15m2  Do mieszkania przynależy balkon o powierzchni 7,88m2.  Zobacz więcej szczegółów: https://osiedlenaturapark. pl  Zapraszamy do kontaktu i biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:05",
+			"offerId": "13121340",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121340_0.jpg?re=545637214",
+			"price": "317980",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Dwustronne mieszkanie 48,92m2, ul. Staroniwska"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-49m2-|-dwa-pokoje-salon-13121336",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139905875"
+				}
+			},
+			"description": "Mieszkanie ok 49m2 | Dwa pokoje + salon | Okno w kuchni | Balkon 7,84m2 | Parter | Niski blok.   Do sprzedania mieszkanie 3-pokojowe o powierzchni 48,92m2, usytuowane na parterze w  m. Kielanówka (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 12 w budynku nr 1 - 48,92m2, składa się z:  -salonu z aneksem kuchennym - 17,51m2 -sypialni 1 - 9,82m2 -sypialni 2 - 8,05m2 -łazienki - 4,39m2 -przedpokoju - 9,15m2  Do mieszkania przynależy balkon o powierzchni 7,84m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.   Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok.  Więcej szczegółów na naszej stronie: osiedlenaturapark. pl 0 Zapraszamy do kontaktu i do biura sprzedaży:  Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:05",
+			"offerId": "13121336",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121336_0.jpg?re=47943665",
+			"price": "317980",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-48m2-|-dwa-pokoje-salon-13121333",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139849074"
+				}
+			},
+			"description": "Mieszkanie ok 48m2 | Dwa pokoje + salon | Balkon | III piętro | Blok z windą | Odległość do centrum Rzeszowa - ok 6km.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 47,13m2, usytuowane na III piętrze w niskim bloku z windą, m. Kielanówka (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 49 w budynku nr 1, składa się z:  -salonu - 13,27m2 -kuchni - 6,01m2 -sypialni 1 - 7,66m2 -sypialni 2 - 9,66m2 -łazienki - 4,03m2 -przedpokoju - 6,50m2  Do mieszkania przynależy balkon o powierzchni 5,39m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej stanowi doskonałą bazę do dalszych wycieczek.  Więcej szczegółów na stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:04",
+			"offerId": "13121333",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121333_0.jpg?re=863432029",
+			"price": "306345",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe, balkon, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-58m2-|-dwa-pokoje-salon-13121332",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637139849075"
+				}
+			},
+			"description": "Mieszkanie ok 58m2 | Dwa pokoje + salon | Balkon | Niski blok | Dojazd samochodem do centrum Rzeszowa - zaledwie 15 min.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 57,83m2, usytuowane na parterze w Kielanówce (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 14 w budynku nr 1 - 57,83m2, składa się z:  -salonu - 14,98m2 -kuchni - 9,83m2 -sypialni 1 - 7,28m2 -sypialni 2 - 12,40m2 -łazienki - 5,43m2 -przedpokoju - 7,91m2  Do mieszkania przynależy balkon o powierzchni 5,44m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m), przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia szybki dojazd do centrum Rzeszowa zarówno samochodem, jak i komunikacją miejską oraz łatwy dostęp do drogi ekspresowej.  Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok.  Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 09:04",
+			"offerId": "13121332",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121332_0.jpg?re=399128886",
+			"price": "364329",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe - 57,83m2Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/wstrzymanemieszkanie-o-pow-49-m2-pietro-44-na-13121207",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637138769076"
+				}
+			},
+			"description": "wstrzymaneMieszkanie o pow. 49 M2, piętro 4/4 na ul.Mikołajczyka.Trzy osobne pokoje, jasna osobna kuchnia, łazienka razem z wc, przedpokój, balkon, piwnica. Mieszkanie dwustronne. Czynsz 450 zł plus prąd i gaz.Brak piecyka gazowego, ogrzewanie oraz ciepła woda z sieci miejskiej.Mieszkanie znajduję się w bardzo dobrej lokalizacji- w najbliższym sąsiedztwie Galeria Rzeszów, Galeria Nowy Świat, Uczelnia WSIiZ, Park Sybiraków, Przystanki autobusowe . W pobliżu znajdują się: szkoła, sklepy, siłownia, przychodnia, apteka, stomatolog, fryzjer, tereny zielone, autobusy MPK, przedszkole, poczta, restauracja, szpital. Cena 300 000 zł do neg        Tel 504 170 940",
+			"dt": "17 listopada 2021, 08:46",
+			"offerId": "13121207",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121207_0.jpg?re=766876080",
+			"price": "300000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mikołajczyka 3 pokoje, piętro 4/4"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/wstrzymanemieszkanie-o-pow-2430m2-pietro-24-w-bloku-13121184",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637138709797"
+				}
+			},
+			"description": "WSTRZYMANEMieszkanie o pow. 24.30m2, piętro 2/4 w bloku z 2019 roku.Mieszkanie urządzono w modnym skandynawskim stylu.Do lokalu przynależy duży balkon oraz komórka lokatorska.  tel 504 170 940",
+			"dt": "17 listopada 2021, 08:45",
+			"offerId": "13121184",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121184_0.jpg?re=1261146184",
+			"price": "249000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Staromieście kawalerka z 2019 roku, piętro 2/4."
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-z-miejscem-postojowymmieszkanie-o-pow-2130-m2-13121224",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137329798"
+				}
+			},
+			"description": "MIESZKANIE Z MIEJSCEM POSTOJOWYM!!!!!!!!!!!!  Mieszkanie o pow. 21.30 m2, piętro 3/6 w bloku z windą z 2008 roku na oś. Staromieście. Salon z aneksem kuchennym z wyjściem na duży balkon. Mieszkanie jednostronne. Czynsz 250 zł plus prąd i gaz. Mieszkanie sprzedawane z komórka lokatorską i miejscem postojowym w garażu podziemnym. Ciche spokojne osiedle, w pobliżu przystanek, sklepy, usługi itp. Cena 225 000 zł mieszkanie plus 29 000 zł miejsce postojowe z komórką lokatorską.   TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:22",
+			"offerId": "13121224",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121224_0.jpg?re=514255937",
+			"price": "225000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Zabłocie kawalerka, winda, nowy blok"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-50m2-ul-dabrowskiego-pietro-210-trzy-13121221",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137269802"
+				}
+			},
+			"description": "Mieszkanie o pow. 50m2,ul. Dąbrowskiego, piętro 2/10. Trzy pokoje osobne, jasna osobna kuchnia, łazienka razem z wc, przedpokój, balkon- loggia, piwnica. Mieszkanie do remontu. Okna pcv. Mieszkanie dwustronne wschód – zachód. Czynsz ok. 450 zł/mies w tym zimna woda, śmiecie, ogrzewanie, winda, fundusz remontowy. MIESZKANIE wolne od zaraz. CENA 343 000 ZŁ DO NEG.   TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:21",
+			"offerId": "13121221",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121221_0.jpg?re=1515249145",
+			"price": "343000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "ul. Dąbrowskiego 3 pokoje, 2 piętro, 50 m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-37-50m2-na-ul-paderewskiego-pietro-13121222",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137269803"
+				}
+			},
+			"description": "Mieszkanie o pow. 37,50m2 na ul. Paderewskiego, piętro 1/4 w  z 2016 rok. Salon z aneksem kuchennym, sypialnia, łazienka razem z wc, przedpokój, balkon, piwnica.Mieszkanie komfortowo wykończone, jednostronne wschodnie. Czynsz ok. 320 zł/mc w tym zimna i ciepła woda, ogrzewanie, śmieci, fundusz remontowy. Blok ogrodzony z bramą na pilota, dużo miejsc parkingowych. Cena 399 000 zł   TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:21",
+			"offerId": "13121222",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121222_0.jpg?re=1796677920",
+			"price": "399000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Paderewskiego  2 pokoje, 41 m2, parter"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-50m2-pietro-210-trzy-pokoje-13121215",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137209804"
+				}
+			},
+			"description": "Mieszkanie o pow. 50m2, piętro 2/10. Trzy pokoje osobne, jasna osobna kuchnia, łazienka razem z wc, przedpokój, balkon- loggia, piwnica. Mieszkanie do remontu. Okna pcv. Mieszkanie dwustronne wschód – zachód. Czynsz ok. 450 zł/mies w tym zimna woda, śmiecie, ogrzewanie, winda, fundusz remontowy. MIESZKANIE wolne od zaraz. CENA 343 000 ZŁ DO NEG.   TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:20",
+			"offerId": "13121215",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121215_0.jpg?re=1844558591",
+			"price": "343000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Dąbrowskiego 3 pokoje, piętro 2/10, 50m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-58m2-w-stanie-developerskim-na-13121212",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137149805"
+				}
+			},
+			"description": "Mieszkanie o pow. 58M2 w stanie DEVELOPERSKIM na parterze z ogródkiem i tarasem,w zabudowie szeregowej na oś. Słocina. Trzy pokoje, salon z aneksem , 2 sypialnie, miejsze na garderobę i spiżarkę.Dwa miejsca postojowe,piękne widoki na las. Mieszkanie dostępne od zaraz. Cena 366 000 zł do neg.   TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:19",
+			"offerId": "13121212",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121212_0.jpg?re=381837198",
+			"price": "366000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "oś.Słocina 3 pokoje, parter, ogródek"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-32-m2-na-os-baranowka-13121208",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137149807"
+				}
+			},
+			"description": "Mieszkanie o pow. 32 m2 na oś. Baranówka IV - ul. Raginisa na wysokim parterze w bloku z 2006 roku. Salon z aneksem kuchennym, łazienka z oknem, przedpokój, balkon, piwnica. Na podłodze płytki, ściany gładzone. W kuchni meble na wymiar plus AGD. W przedpokoju szafa w zabudowie. Mieszkanie jednostronne południowo-zachodnie. Czynsz 330 zł/mc w tym zimna i ciepła woda, śmieci, fundusz remontowy, ogrzewanie. Mieszkanie wolne od zaraz. Cena 280 000 zł do negocjacji    TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:19",
+			"offerId": "13121208",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121208_0.jpg?re=1068927083",
+			"price": "280000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Raginisa kawalerka , parter/4,  32 m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-przy-ulicy-rejtana-o-powierzchni-31-5-m2-13121209",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137149810"
+				}
+			},
+			"description": "Mieszkanie przy ulicy Rejtana o powierzchni 31,5 m2 , PIĘTRO 3/10. Mieszkanie składa się z: - 1 pokoju ( 20 m2), - kuchni jasnej (ok 5 m2), - łazienki (ok 5 m2), - balkonu. Wyposażenie: Kuchnia umeblowana: lodówka, kuchnia gazowa, mikrofalówka. Łazienka z WC, wanną, umywalką, pralką. Pokój w pełni umeblowany: wersalka, sofa rozkładana, stół z krzesłami, meblościanka w tym szafa, szafki, regały i komody oraz płaski telewizor. W przedpokoju szafa na odzież. Z balkonu widok na tereny zielone. W pobliżu centrum handlowe Millenium sklepy spożywcze, przedszkole, szkoła podstawowa i gimnazjum, basen, kościół, przychodnia , poczta, apteka, plac zabaw dla dzieci, przystanki MPK. Blisko centrum miasta. Czynsz ok. 400,00 zł w tym: centralne ogrzewanie, woda, fundusz remontowy, śmieci, itp.  CENA 280 000 zł do uzgodnienia.   Tel 504 170 940",
+			"dt": "17 listopada 2021, 08:19",
+			"offerId": "13121209",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121209_0.jpg?re=1155611404",
+			"price": "280000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "UL.Rejtana 1 pokój, piętro 3, 31m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-43m2-pietro-13-w-bloku-13121204",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637137089812"
+				}
+			},
+			"description": "Mieszkanie o pow. 43m2, piętro 1/3 w bloku z 2003 roku w ścisłym centrum Rzeszowa. Salon z aneksem kuchennym w zabudowie ze sprzetem AGD, sypialnia, łazienka razem z wc, przedpokój, bez balkonu, bez piwnicy z możliwością zakupu.W pokojach I przedpokoju panel na podłodze, ściany gładzone. W łazience płytki. Okna pcv. Mieszkanie jednostronne płn-zachodnie. Czynsz 143 zł na 1 os plus gaz i prąd. Własne ogrzewanie gazowe. Centrum miasta idealne miejsce zarówno dla siebie jak i pod wynajem. Cena 340 000 zł   tel 504 170 940",
+			"dt": "17 listopada 2021, 08:18",
+			"offerId": "13121204",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121204_0.jpg?re=602306675",
+			"price": "340000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "centrum 2 pokoje, cegła ,BLOK z 2003 R"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/lokal-uzytkowy-o-pow-uzyt-37-30-m2-calkowita-13121189",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637136849814"
+				}
+			},
+			"description": "Lokal użytkowy  o pow. użyt 37,30 m2 całkowita ok 45m2, piętro 4/4 na oś. Projektant - ul. Biecka, w bloku z 2010 r. Dwa niezależne pokoje, jasna osobna kuchnia z meblami, łazienka z wc, przedpokój, balkon, piwnica. W pokojach na podłodze panel, ściany gładzone. W kuchni, łazience płytki. Lokal dwustronny północ-południe. Czynsz ok. 150 zł/mies w tym zimna woda, śmiecie, fundusz remontowy, dodatkowo płatny prąd I gaz. Własne ogrzewanie gazowe - piec dwufunkcyjny. Na osiedlu pełna infrastruktura, dobre połączenie z centrum miasta.  Cena 259 000 zł do neg.  TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:14",
+			"offerId": "13121189",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121189_0.jpg?re=1500536356",
+			"price": "259000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "ul. Biecka 2 pokoje, piętro 4/4"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-na-os-pobitno-w-bloku-z-2011-13121187",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637136849815"
+				}
+			},
+			"description": "Mieszkanie na oś. Pobitno w bloku z 2011 roku, mieszkanie na 2 piętrze o pow.30,2 m2 . W pełni wyposażone, gotowe do zamieszkania od zaraz. Ogrzewanie podłogowe w łazience, kuchni oraz przedpokoju, komórka lokatorska 3,6 m, własne miejsce postojowe przed budynkiem na ogrodzonym terenie z bramą zamykaną na pilota. Piecyk dwufunkcyjny. Czynsz 140 zł ( w tym śmieci, sprzątanie klatki schodowej, opłaty administracyjne ). Dodatkowo płatne prąd oraz gaz. Miejsce postojowe oraz komórka lokatorska wliczone w cenę. Cena 299 000 zł do uzgodnienia  TEL 504 170 940",
+			"dt": "17 listopada 2021, 08:14",
+			"offerId": "13121187",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121187_0.jpg?re=1228737659",
+			"price": "299000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "oś. Pobitno,kawalerka , 30m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-o-pow-37-28-m2-na-ul-rejtana-13121182",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637136789816"
+				}
+			},
+			"description": "Mieszkanie o pow. 37,28 m2 na ul. Rejtana, piętro 4/4. Dwa pokoje w tym jeden z przejściem do jasnej kuchni, łazienka z wc, przedpokój, bez balkonu, piwnica. Mieszkanie dwustronne wsch-zach, czynsz ok. 370 zł/mc w tym zimna i ciepła woda, śmieci, ogrzewanie, fundusz remontowy.Mieszkanie wolne od zaraz. Cena 335 000 zł do neg.  Tel 504 170 940",
+			"dt": "17 listopada 2021, 08:13",
+			"offerId": "13121182",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13121182_0.jpg?re=1890575153",
+			"price": "335000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Rejtana 2 pokoje, piętro 4/4, 38m2"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-w-rejonie-ul-krzywoustego-36m2-pietro-14-13121178",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637136789817"
+				}
+			},
+			"description": "Mieszkanie w rejonie UL. Krzywoustego 36m2, piętro 1/4. Duży pokój, jasna kuchnia, łazienka razem z wc. Mieszkanie do remontu.Cena 289 000 zł  Tel 504 170 940",
+			"dt": "17 listopada 2021, 08:13",
+			"offerId": "13121178",
+			"imgUrl": "http://www.rzeszowiak.pl/img/wsp/mini/l_no.gif?re=174367397",
+			"price": "289000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Duża kawalerka 36m2, piętro 1/4,"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/pod-cele-inwestycyjne-lub-dla-siebie-na-start-13120979",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637133309817"
+				}
+			},
+			"description": "Pod cele inwestycyjne lub dla siebie na start - super lokalizacja i fajny układ  Do sprzedania mieszkanie o pow. 42,10 m2 zlokalizowane na oś. Dąbrowskiego - rejon ul. W. Pola na IV piętrze w niskim bloku (bez windy).  Dwustronne - wsch/zach, o funkcjonalnym układzie, składa się z 2 niezależnych pokoi, osobnej jasnej kuchni, łazienki, przedpokoju oraz balkonu i przynależnej piwnicy.  Mieszkanie w dobrym stanie, do ewentualnego odświeżenia, okna PCV, na podłodze panele i płytki, w kuchni meble z agd, w łazience wanna i płytki, w przedpokoju szafa w zabudowie, możliwość pozostawienia umeblowania, czynsz 450 zł/mies w tym zimna woda, (istnieje możliwość podpięcia się pod ciepłą wodę z sieci miejskiej i likwidacje piecyka), ogrzewanie, fundusz remontowy, wolne w granicach miesiąca.  Świetna lokalizacja, idealne pod cele inwestycyjne (obecnie cały czas wynajmowane), w okolicy wyższa uczelnia, szkołą, sklepy, usługi, przystanki MPK, itp. , dużo zieleni i terenów rekreacyjnych, niedaleka odległość do centrum miasta.  c. 325 000 zł do negocjacji  Powyższy opis ma charakter informacyjny i został przygotowany w oparciu o informacje uzyskane od właściciela. Treść niniejszego ogłoszenia nie stanowi oferty w rozumieniu Kodeksu Cywilnego a dane w nim zawarte mają charakter informacyjny i mogą podlegać aktualizacji.           Tel. 793 389 271",
+			"dt": "17 listopada 2021, 07:15",
+			"offerId": "13120979",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13120979_0.jpg?re=270693065",
+			"price": "325000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "funkcjonalny układ warte uwagi !!!"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/fajna-lokalizacja-idealna-pod-lokate-kapitalu-do-sprzedania-13120977",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637133309818"
+				}
+			},
+			"description": "Fajna lokalizacja, idealna pod lokate kapitału !!!  Do sprzedania mieszkanie o pow. 27 m2 zlokalizowane na oś. Pobitno - ul. Mazurska na IV piętrze (ostatnim, bez windy) w niskim bloku z końca lat 80-tych.  Jednostronne, słoneczne, składa się z pokoju (częściowo przedzielonego tymczasową ścianką na wyodrębniony gabinet - możliwość likwidacji) z przejściem do jasnej kuchni, łazienki przedpokoju oraz balkonu ok. 3,5 m2 i przynależnej piwnicy.  Mieszkanie w dobrym stanie do ewentualnego odświeżenia, okna PCV, na podłodze panele i płytki, w kuchni meble, w łazience wanna i płytki czynsz 320 zł/mies w tym zimna i ciepłą woda, śmiecie, ogrzewanie, fundusz remontowy, wolne od zaraz.  Zielone osiedle z pełną infrastrukturą - sklepy, usługi, przystanki MPK, przedszkole, szpital, dobra komunikacja z resztą miasta. Dobra lokata kapitału pod wynajem (ostatnie lata było wynajmowane).  c. 229 000 zł do negocjacji  Powyższy opis ma charakter informacyjny i został przygotowany w oparciu o informacje uzyskane od właściciela. Treść niniejszego ogłoszenia nie stanowi oferty w rozumieniu Kodeksu Cywilnego a dane w nim zawarte mają charakter informacyjny i mogą podlegać aktualizacji.                 Tel. 793 389 271",
+			"dt": "17 listopada 2021, 07:15",
+			"offerId": "13120977",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13120977_0.jpg?re=735697155",
+			"price": "229000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "warte uwagii  !!!!"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-49m2-|-dwa-pokoje-salon-13120968",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637133189820"
+				}
+			},
+			"description": "Mieszkanie ok 49m2 | Dwa pokoje + salon | Balkon 7,88m2 | Okno w kuchni | Parter | Niski blok.   Do sprzedania mieszkanie 3-pokojowe o powierzchni 48.73m2 usytuowane na parterze w niskim bloku z windą, m. Kielanówka (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 11 w budynku nr 1 - 48.73m2, składa się z:  -salonu z aneksem kuchennym - 17,81m2 -sypialni 1 - 8,05m2 -sypialni 2 - 9,74m2 -łazienki - 4,38m2 -przedpokoju - 8,98m2 Do mieszkania przynależy balkon o powierzchni 7,88m2.  W pobliżu osiedla znajdziemy sklep, przychodnię, aptekę, bank, przystanek MPK.  Dogodny dojazd do centrum Rzeszowa zajmuje zaledwie 15 min samochodem.  Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok. Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555   Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 07:13",
+			"offerId": "13120968",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13120968_0.jpg?re=364111212",
+			"price": "316745",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe, Osiedle Natura Park"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-49m2-|-dwa-pokoje-salon-13120965",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637133129821"
+				}
+			},
+			"description": "Mieszkanie ok 49m2 | Dwa pokoje + salon | Okno w kuchni | I piętro | Blok z windą.  Do sprzedania mieszkanie 3-pokojowe o powierzchni 48.92m2 usytuowane na I piętrze w niskim bloku z windą, m. Kielanówka (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 26 w budynku nr 1 - 48.92m2, składa się z:  -salonu z aneksem kuchennym - 17,51m2 -sypialni 1 - 9,822 -sypialni 2 - 8,05m2 -łazienki - 4,39m2 -przedpokoju - 9,15m2 Do mieszkania przynależy balkon o powierzchni 7,87m2.  W pobliżu osiedla znajdziemy sklep, przychodnię, aptekę, bank, przystanek MPK.   Dogodny dojazd do centrum Rzeszowa zajmuje zaledwie 15 min samochodem.   Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok. Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555   Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 07:12",
+			"offerId": "13120965",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13120965_0.jpg?re=1467070789",
+			"price": "317980",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe, 48.92m2, Kielanówka"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/mieszkanie-ok-50m2-|-dwa-pokoje-salon-13120967",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637133129821"
+				}
+			},
+			"description": "Mieszkanie ok 50m2 | Dwa pokoje + salon | Okno w kuchni | I piętro | Blok z windą.   Do sprzedania mieszkanie 3-pokojowe o powierzchni 48,49m2, usytuowane na I piętrze w niskim bloku z windą, m. Kielanówka (bardzo blisko granicy Rzeszowa).  Mieszkanie nr 18 w budynku nr 1 - 48,49m2, składa się z:  -salonu z aneksem kuchennym - 17,54m2 -sypialni 1 - 9,82m2 -sypialni 2 - 7,93m2 -łazienki - 4,28m2 -przedpokoju - 8,92m2 Do mieszkania przynależy balkonu o powierzchni 8,29m2.  W pobliżu osiedla znajdują się: przystanek autobusowy (400 m),  przychodnia, apteka, delikatesy (700 m) oraz szkoła podstawowa z  przedszkolem (1100 m).  Atrakcyjna lokalizacja osiedla zapewnia  bezproblemowy i szybki dojazd do centrum Rzeszowa zarówno samochodem,  jak i komunikacją miejską. Łatwy i szybki dostęp do drogi ekspresowej  stanowi doskonałą bazę do dalszych wycieczek.  Planowany termin zakończenia budowy I etapu, to IV kwartał 2023 rok.  Więcej szczegółów na naszej stronie: osiedlenaturapark. pl  Zapraszamy do kontaktu i do biura sprzedaży: Dakar Development Sp. z o.o. ul. Kilińskiego 6, 35-005 Rzeszów +48 532 514 555  Powyższa oferta ma charakter informacyjny i nie stanowi oferty handlowej w rozumieniu art. 66 §1 Kodeksu Cywilnego.",
+			"dt": "17 listopada 2021, 07:12",
+			"offerId": "13120967",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13120967_0.jpg?re=379114323",
+			"price": "315185",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Mieszkanie 3-pokojowe, balkon 8,29m2, Staroniwska"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/sprzedam-mieszkanie-kawalerke-przy-ulicy-rejtana-obok-millenium-13120959",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637132709823"
+				}
+			},
+			"description": "Sprzedam mieszkanie kawalerkę przy ulicy Rejtana obok Millenium o powierzchni 31,5 m2 usytuowane na 3 piętrze w bloku z windą. Mieszkanie składa się z:  - 1 pokoju ( 20 m2), - kuchni jasnej (ok 5 m2), - łazienki (ok 5 m2), - balkonu. Wyposażenie: Kuchnia umeblowana: lodówka, kuchnia gazowa, mikrofalówka. Łazienka z WC, wanną, umywalką, pralką. Pokój w pełni umeblowany: wersalka, sofa rozkładana, stół z krzesłami,  meblościanka w tym szafa, szafki, regały i komody oraz płaski telewizor. W przedpokoju szafa na odzież. Z balkonu widok na tereny zielone. W pobliżu centrum handlowe Millenium sklepy spożywcze, przedszkole, szkoła podstawowa i gimnazjum, basen,  kościół, przychodnia , poczta, apteka,  plac zabaw dla dzieci, przystanki MPK. Blisko centrum miasta. Czynsz ok. 400,00 zł w tym: centralne ogrzewanie, woda, fundusz remontowy, śmieci, itp.  Tel. 607-294-281",
+			"dt": "17 listopada 2021, 07:05",
+			"offerId": "13120959",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13120959_0.jpg?re=504035479",
+			"price": "280000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Sprzedam kawalerkę przy ul. Rejtana obok Millenium"
+		},
+		{
+			"url": "http://www.rzeszowiak.pl/sprzedam-mieszkanie-o-pow-50-66-skladajace-sie-z-13117929",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637100660000"
+				}
+			},
+			"description": "Sprzedam mieszkanie, o pow. 50,66 składające się z: salon + kuchnia, 2 pokoi, łazienki, oraz przedpokoju. Mieszkanie posiada balkon i przynależną piwnicę. Wykończenie: panele (w pokojach i przedpokoju), płytki (w kuchni, łazience ), okna PCV . Piętro: X/4.",
+			"dt": "16 listopada 2021, 22:11",
+			"offerId": "13117929",
+			"imgUrl": "http://www.rzeszowiak.pl/img/ogl/131/mini/l_13117929_0.jpg?re=163347101",
+			"price": "380000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "rzeszowiak",
+			"title": "Rzeszów 1000-Lecia 51 m2"
+		},
+		{
+			"url": "https://gethome.pl/oferta/sprzedam-mieszkanie-rzeszow-ul-siemienskiego-53m2-trzypokojowe-3-pietro-730396",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637156783015"
+				}
+			},
+			"description": "Powierzchnia: 7150m2\nRozmiar: 53\nLokalizacja: Rzeszów\n\nPiętro: 3\nPokoje: 3\n\n\nOpis:\nZwiedzaj tę nieruchomość bez wychodzenia z domu klikając w link lub ikonę wirtualnego spaceru!\n\n \nBiuro Nieruchomości Eksperci oferuje na sprzedaż trzypokojowe mieszkanie o powierzchni 53 m2 usytuowane na trzecim piętrze w bloku z windą.  Nieruchomość ze względu na lokalizację oferuje szybki i łatwy dostęp do centrum miasta oraz do drogi ekspresowej S 19. Mieszkanie wymaga odświeżenia lub remontu według własnych potrzeb. Idealnie sprawdzi się jako inwestycja pod wynajem oraz do zamieszkania dla rodziny. \n\n\n\nNa mieszkanie o powierzchni 53 m2 składa się: \n\n- salon\n\n- oddzielna kuchnia z oknem\n\n- sypialnia\n\n- sypialnia\n\n- łazienka z WC\n\n- przedpokój\n\n- balkon\n\n\n\nDo mieszkania przynależy piwnica.\n\n\n\nStandard wykończenia:\n\nOkna PCV. Ściany: Przedpokój, kuchnia, pokoje - malowane; łazienka - płytki. Podłogi: Kuchnia - panele; przedpokój, pokoje - parkiet drewniany; łazienka - płytki. W kuchni szafki kuchenne, okap, lodówka, kuchenka gazowa. Pokoje nieumeblowane. W łazience wanna, pralka, lustro. \n\n\n\nKoszty eksploatacyjne:\n\nCzynsz przy jednej osobie wynosi 450 zł . Dodatkowo płatny prąd i gaz według wskazań licznika.\n\n\n\nW pobliżu:\n\nMieszkanie znajduje się na osiedlu 1000-lecia w Rzeszowie. W pobliżu w pełni rozwinięta infrastruktura osiedlowa, przystanek, sklep, zakłady usługowe, żłobek, szkoła podstawowa, kościół, Galeria Rzeszów, Dworzec Główny.\n\n\n\n\n\nCena: 379 000 zł (do negocjacji)\n\n\n\n\n\nNie trać okazji, umów się na prezentację!\n\n\n\nJesteśmy z Tobą od prezentacji do przekazania kluczy. Sprawnie przygotujemy dla Ciebie dokumenty do zakupu, zajmiemy się kwestiami prawnymi, sprawdzimy mieszkanie pod kątem zadłużeń i zobowiązań, a z naszym doradcą finansowym wybierzesz najlepszą ofertę kredytu. Kupując z nami masz gwarancję zakupu nieruchomości bez zadłużeń, zobowiązań, służebności, itp. Zapraszamy na naszą stronę internetową i do zapoznania się z naszymi ofertami. Skontaktuj się z nami, podaj swoje oczekiwania, a znajdziemy nieruchomość specjalnie dla Ciebie. Gorąco polecam i zapraszam do kontaktu.\n\n\n\nPowyższe ogłoszenia nie stanowi oferty handlowej w rozumieniu Kodeksu Cywilnego, a dane w nich zawarte mają charakter informacyjny i mogą ulec zmianie.\n\n \n\n\n::oferta eksportowana z programu mediaRent::\n\nAgent: Jarosław Zając\nRynek: wtórny",
+			"dt": "17 listopada 2021, 13:46",
+			"offerId": "15bd0e33-ff6c-4ae3-afb2-76d7f03e6ffe",
+			"imgUrl": "https://dd2b1oa9yzvlv.cloudfront.net/media/cache/c7/e1/c7e129e2d780eb8c7da3b7db733e7e9a.jpg",
+			"price": "379000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "gethome",
+			"title": "Mieszkanie 53 m2 blisko centrum 3 pokoje"
+		},
+		{
+			"url": "https://gethome.pl/oferta/sprzedam-mieszkanie-rzeszow-ul-grodzisko-28m2-jednopokojowe-2-pietro-730393",
+			"_dt": {
+				"$date": {
+					"$numberLong": "1637156773016"
+				}
+			},
+			"description": "Powierzchnia: 10248m2\nRozmiar: 28.2\nLokalizacja: Rzeszów\n\nPiętro: 2\nPokoje: 1\n\n\nOpis:\nBiuro Nieruchomości Eksperci oferuje na sprzedaż kawalerkę o powierzchni 28,20 m2 usytuowaną na drugim piętrze niskiego, czteropiętrowego bloku. Jest to bardzo zadbana nieruchomość po generalnym remoncie, w pełni wyposażona i gotowa do zamieszkania od zaraz. Doskonała lokalizacja w samym centrum miasta (okolice ul. Słowackiego) oraz parking dla mieszkańców zamykany szlabanem na pilota to mocne atuty prezentowanej nieruchomości. Doskonała lokalizacja pod wynajem!\n\n\nZwiedzaj tę nieruchomość bez wychodzenia z domu klikając w link lub ikonę wirtualnego spaceru!\n\n\nNa mieszkanie o powierzchni 28,20 m2 składa się:\n\n- pokój z balkonem\n\n- kuchnia\n\n- hol\n\n- łazienka z wc\n\n\n\nDo mieszkania przynależy piwnica.\n\n\n\nStandard wykończenia: \n\nMieszkanie gotowe do wprowadzenia. Zostały wymienione wszystkie instalacje. Dwa lata temu przeprowadzony został kapitalny remont. Okna PCV. Ściany gładkie, odmalowane. Podłogi: łazienka, kuchnia - płytki. W holu i w pokoju pięknie odrestaurowany parkiet w idealnym stanie. Szafy wnękowe w zabudowie. Pełne wyposażenie: kuchnia - meble kuchenne, kuchenka, lodówka, okap, stolik z krzesłami; przedpokój - szafy wnękowe, lustro; pokój - meble, łóżko, biurko, fotel; łazienka - wanna z funkcją prysznica, pralka, umywalka, zestaw mebli łazienkowych. Ogrzewanie i ciepła woda z sieci miejskiej.\n\n\n\nKoszty eksploatacyjne:\n\nCzynsz wynosi 303 zł, a dodatkowe opłaty to tylko prąd.\n\n\n\nW okolicy:\n\nMieszkanie znajduje się w ścisłym centrum Rzeszowa. W pobliżu w pełni rozwinięta infrastruktura, Dla mieszkańców parking przed blokiem zamykany szlabanem na pilota. Do płyty rynku ok. 4 minut spacerem. \n\n\n\nCena: 289 000 zł\n\n\n\nNie trać okazji, umów się na prezentację!\n\n\n\nJesteśmy z Tobą od prezentacji do przekazania kluczy. Sprawnie przygotujemy dla Ciebie dokumenty do zakupu, zajmiemy się kwestiami prawnymi, sprawdzimy mieszkanie pod kątem zadłużeń i zobowiązań, a z naszym doradcą finansowym wybierzesz najlepszą ofertę kredytu. Kupując z nami masz gwarancję zakupu nieruchomości bez zadłużeń, zobowiązań, służebności, itp. Zapraszamy na naszą stronę internetową i do zapoznania się z naszymi ofertami. Skontaktuj się z nami, podaj swoje oczekiwania, a znajdziemy nieruchomość specjalnie dla Ciebie. Gorąco polecam i zapraszam do kontaktu.\n\n\n\nPowyższe ogłoszenia nie stanowi oferty handlowej w rozumieniu Art. 66 § 1 Kodeksu Cywilnego, a dane w nich zawarte mają charakter informacyjny i mogą ulec zmianie.\n\n\n::oferta eksportowana z programu mediaRent::\n\nAgent: Jakub Knapik\nRynek: wtórny",
+			"dt": "17 listopada 2021, 13:46",
+			"offerId": "eaea7f89-2a3a-4c00-b7c4-9070b1260d69",
+			"imgUrl": "https://dd2b1oa9yzvlv.cloudfront.net/media/cache/bb/16/bb1699f369aebb1eddfb673e3c086bbd.jpg",
+			"price": "289000",
+			"scrapedAt": {
+				"$date": {
+					"$numberLong": "1637185013215"
+				}
+			},
+			"site": "gethome",
+			"title": "Kawalerka w centrum, 2 piętro, 28 m2, po remoncie!"
+		}
+	],
+	"__v": {
+		"$numberInt": "0"
+	}
+}
