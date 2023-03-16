@@ -59,7 +59,7 @@ export class RzeszowiakScraper implements ISiteScraperByHtml {
 
 			const offer: IOffer = {
 				site: 'rzeszowiak',
-				_dt,
+				dt_: _dt,
 				dt,
 				scrapedAt: new Date(globals.programStartTime),
 				title,

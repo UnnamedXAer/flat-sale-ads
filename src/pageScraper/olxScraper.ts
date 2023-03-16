@@ -58,7 +58,7 @@ export class OlxScraper implements ISiteScraperByHtml {
 
 			const offer: IOffer = {
 				site: 'olx',
-				_dt,
+				dt_: _dt,
 				dt,
 				scrapedAt: new Date(globals.programStartTime),
 				title,

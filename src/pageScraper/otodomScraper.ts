@@ -84,7 +84,7 @@ export class OtodomScraper implements ISiteScraperByHtml {
 
 			const offer: IOffer = {
 				site: 'otodom',
-				_dt,
+				dt_: _dt,
 				dt,
 				scrapedAt: new Date(globals.programStartTime),
 				title,

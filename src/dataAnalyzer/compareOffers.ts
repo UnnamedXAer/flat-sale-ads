@@ -74,7 +74,7 @@ export async function getOffersUnion(
 		l.debug({
 			dataDirectory: dataDirectory,
 			title: currentOffer.title,
-			_dt: currentOffer._dt,
+			_dt: currentOffer.dt_,
 			dt: currentOffer.dt,
 			id: currentOffer.offerId,
 			price: currentOffer.price
@@ -94,12 +94,12 @@ export async function getOffersUnion(
 			}
 		});
 
-		const currentOfferTime = new Date(currentOffer._dt).getTime();
+		const currentOfferTime = new Date(currentOffer.dt_).getTime();
 		if (isFinite(currentOfferTime) === false) {
 			break;
 		}
 
-		const uniqOfferTime = new Date(currentOffer._dt).getTime();
+		const uniqOfferTime = new Date(currentOffer.dt_).getTime();
 		if (isFinite(uniqOfferTime) === false) {
 			break;
 		}

@@ -75,7 +75,7 @@ export class Scraper implements IScraper {
 			try {
 				currentPage = await this.getPage(browser, url, siteScraper);
 			} catch (err) {
-				return [offers, err];
+				return [offers, err as Error];
 			}
 			const $currentPage: cheerio.Root = await this.getPageContent(currentPage);
 
@@ -163,7 +163,7 @@ export class Scraper implements IScraper {
 		} catch (err) {
 			await page.close({ runBeforeUnload: true });
 			throw new Error(
-				`Unable to correctly load page:\n"${url}"\ndue to following error: \n ${err.message}`
+				`Unable to correctly load page:\n"${url}"\ndue to following error: \n ${(err as Error).message}`
 			);
 		}
 		return page;

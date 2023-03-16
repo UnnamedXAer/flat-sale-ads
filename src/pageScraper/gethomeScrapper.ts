@@ -348,7 +348,7 @@ export class GethomeScraper implements ISiteScraperByObject {
 
 			const siteOffer: IOffer = {
 				site: 'gethome',
-				_dt,
+				dt_: _dt,
 				dt,
 				scrapedAt: new Date(globals.programStartTime),
 				title,

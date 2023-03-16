@@ -21,7 +21,7 @@ export class MongoRepository implements IRepository {
 	private mapOffer(offerDoc: IOffer /* wrong type */): IOffer {
 		const offer: IOffer = {
 			url: offerDoc.url,
-			_dt: offerDoc._dt,
+			dt_: offerDoc.dt_,
 			description: offerDoc.description,
 			dt: offerDoc.dt,
 			offerId: offerDoc.offerId,
