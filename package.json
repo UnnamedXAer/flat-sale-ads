@@ -14,10 +14,14 @@
 		"prestart": "npm run build",
 		"start": "node dist/index.js",
 		"start:dist": "node dist/index.js",
-		"start:dev": "nodemon"
+		"start:dev": "nodemon",
+		"start:server": "node dist/server.js"
 	},
 	"devDependencies": {
 		"@types/cheerio": "^0.22.23",
+		"@types/cors": "^2.8.12",
+		"@types/debug": "^4.1.7",
+		"@types/express": "^4.17.13",
 		"@types/jest": "^26.0.19",
 		"@types/mongoose": "^5.10.3",
 		"@types/node": "^14.18.38",
@@ -34,7 +38,10 @@
 	"dependencies": {
 		"@prisma/client": "^4.11.0",
 		"cheerio": "^1.0.0-rc.5",
+		"cors": "^2.8.5",
+		"debug": "^4.3.2",
 		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
 		"mongoose": "^5.11.11",
 		"puppeteer": "^5.5.0",
 		"tslog": "^4.8.2"

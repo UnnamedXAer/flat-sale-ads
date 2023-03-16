@@ -21,8 +21,9 @@ export const createConfig = (process: NodeJS.Process): Config => {
 		NODE_ENV: (process.env.NODE_ENV as NODE_ENV) || 'development',
 		isDev: process.env.NODE_ENV !== 'production',
 		envPrefix: getEnvPrefix(),
-		scrapeSiteTimeout: 1000 * 160,
-		startMaximized: process.env.START_BROWSER_MAXIMIZED === 'TRUE',
+		scrapeSiteTimeout: 1000 * 180,
+		startMaximized: !!process.env.START_BROWSER_MAXIMIZED,
+		skipVisualization: !!process.env.SKIP_VISUALIZATION,
 		logsLevel:
 			(process.env.LOGS_LEVEL as Config['logsLevel'] | undefined) ||
 			(process.env.NODE_ENV === 'production' ? 'warn' : 'silly'),

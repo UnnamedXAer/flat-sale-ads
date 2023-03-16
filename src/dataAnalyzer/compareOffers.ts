@@ -1,8 +1,10 @@
-import { getDataDirLatestOffers } from '../files';
-import l from '../logger';
-import { DataDirectory, IOffer } from '../types';
+import { IOffer } from '../types';
 
 export function assertSameOffers(uniqueOffer: IOffer, currentOffer: IOffer): boolean {
+	const priceEqual = assertEqualOfferProp(uniqueOffer, currentOffer, 'price');
+	if (assertEqualOfferProp(uniqueOffer, currentOffer, 'url') && priceEqual) {
+		return true;
+	}
 	const siteEqual = assertEqualOfferProp(uniqueOffer, currentOffer, 'site');
 
 	if (siteEqual && assertEqualOfferProp(uniqueOffer, currentOffer, 'offerId')) {
@@ -10,16 +12,12 @@ export function assertSameOffers(uniqueOffer: IOffer, currentOffer: IOffer): boo
 	}
 
 	if (assertEqualOfferProp(uniqueOffer, currentOffer, 'title')) {
-		if (siteEqual) {
-			if (assertEqualOfferProp(uniqueOffer, currentOffer, 'description')) {
-				return true;
-			}
-			return false;
-		}
-		if (assertEqualOfferProp(uniqueOffer, currentOffer, 'price')) {
+		if (priceEqual) {
 			return true;
 		}
-		return false;
+		if (siteEqual && assertEqualOfferProp(uniqueOffer, currentOffer, 'description')) {
+			return true;
+		}
 	}
 
 	return false;
@@ -41,11 +39,7 @@ export function assertEqualOfferProp(
 			val2 = (val2 as string).slice(0, 150);
 		}
 	}
-	let output = val1 === val2;
-	if (!val1 && !val2) {
-		output = false;
-	}
-
+	let output = val1 === val2 && !!val1;
 
 	return output;
 }

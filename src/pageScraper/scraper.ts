@@ -42,8 +42,7 @@ export class Scraper implements IScraper {
 		this.validateOffers(todayOffers, siteScraper.serviceName);
 		try {
 			await this.saveSiteOffers(siteScraper.serviceName, todayOffers);
-		}
-		catch (err) {
+		} catch (err) {
 			l.error(err);
 			throw err;
 		}
@@ -122,11 +121,14 @@ export class Scraper implements IScraper {
 		do {
 			try {
 				const page = await this.loadPage(browser, url, siteScraper);
+				l.debug(
+					`[${siteScraper.serviceName}] page loaded.`
+				);
 				return page;
 			} catch (err) {
 				if (Date.now() - startTime > config.scrapeSiteTimeout) {
-					new Error(
-						`[${siteScraper.serviceName}] Scraping exceeded ${config.scrapeSiteTimeout} min.`
+					throw new Error(
+						`[${siteScraper.serviceName}] Scraping exceeded ${config.scrapeSiteTimeout} s.`
 					);
 				}
 				retries++;
@@ -187,7 +189,13 @@ export class Scraper implements IScraper {
 						x.dt === '' ||
 						x.imgUrl === ''
 					) {
-						return x.offerId ? x.offerId : x.url ? x.url : x.title ? x.title : x;
+						return x.offerId
+							? x.offerId
+							: x.url
+							? x.url
+							: x.title
+							? x.title
+							: x;
 					}
 					return null;
 				})

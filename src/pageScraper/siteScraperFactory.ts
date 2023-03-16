@@ -12,7 +12,7 @@ export function makeSiteScraper(siteName: SiteName): ISiteScraper {
 			return new OlxScraper();
 		case 'rzeszowiakAgencje':
 		case 'rzeszowiak':
-			return new RzeszowiakScraper();
+			return new RzeszowiakScraper(siteName);
 		case 'otodom':
 			return new OtodomScraper();
 		case 'gethome':
