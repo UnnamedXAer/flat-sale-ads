@@ -52,7 +52,7 @@ const main = async () => {
 		useFindAndModify: false,
 		useCreateIndex: true
 	};
-	storage.connect(process.env.MONGO_URI as string, connectOptions);
+	await storage.connect(process.env.MONGO_URI as string, connectOptions);
 
 	await start_scrape();
 	await start_analyze();
