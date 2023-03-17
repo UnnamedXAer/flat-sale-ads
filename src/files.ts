@@ -67,7 +67,7 @@ export function mapFileData(fileData: ReadTextFileData): IOffersInfo {
 export function mapOffersDataToOffers(offersData: OfferTextFileData[]): IOffer[] {
 	return offersData.map((offerData) => {
 		return {
-			_dt: new Date(offerData._dt),
+			dt_: new Date(offerData._dt),
 			dt: offerData.dt,
 			offerId: offerData.id,
 			scrapedAt: new Date(offerData.scrapedAt),

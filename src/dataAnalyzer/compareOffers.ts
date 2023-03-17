@@ -1,4 +1,6 @@
-import { IOffer } from '../types';
+import { getDataDirLatestOffers } from '../files';
+import l from '../logger';
+import { DataDirectory, IOffer } from '../types';
 
 export function assertSameOffers(uniqueOffer: IOffer, currentOffer: IOffer): boolean {
 	const priceEqual = assertEqualOfferProp(uniqueOffer, currentOffer, 'price');

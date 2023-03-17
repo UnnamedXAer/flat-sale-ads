@@ -2,7 +2,7 @@ import { model, Document } from 'mongoose';
 import { IOffersInfo } from '../../types';
 import { offersInfoSchema } from './schema';
 
-export interface IOffersInfoDocument extends IOffersInfo, Document {}
+export interface IOffersInfoDocument extends Omit<IOffersInfo, 'id'>, Document {}
 
 export const OfferModel = model<IOffersInfoDocument>('AllOffer', offersInfoSchema);
 

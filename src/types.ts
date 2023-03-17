@@ -26,7 +26,17 @@ export interface Logger {
   fatal(...args: any[]): void;
 }
 
-type TLogLevelName = 'silly' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal';
+// type TLogLevelName = 'silly' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal';
+
+export enum TLogLevel {
+  silly,
+  trace,
+  debug,
+  info,
+  warn,
+  error,
+  fatal
+}
 
 export interface Config {
   NODE_ENV: NODE_ENV;
@@ -34,7 +44,8 @@ export interface Config {
   envPrefix: EnvPrefix;
   scrapeSiteTimeout: number;
   startMaximized: boolean;
-  logsLevel: TLogLevelName;
+  skipVisualization: boolean;
+  logsLevel: TLogLevel;
   appTemporaryDataFolder: string;
   dateTimeFormatParams: [string, Intl.DateTimeFormatOptions];
   dateFormatParams: [string, Intl.DateTimeFormatOptions];
