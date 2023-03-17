@@ -36,18 +36,18 @@ async function start_scrape(storage: IRepository) {
   await browser.close();
 }
 
-async function start_analyze(storage: IRepository) {
-  await analyzeData(storage);
+function start_analyze(storage: IRepository) {
+  return analyzeData(storage);
 }
-async function start_generateVisualization(storage: IRepository) {
-  await createVisualization(storage);
+function start_generateVisualization(storage: IRepository) {
+  return createVisualization(storage);
 }
 const main = async () => {
   timeStop = timeStart('main');
   globals.programStartTime = Date.now();
   l.info('Program START');
   const _config = config; // to keep import from being auto removed as unused
-  const storage = await connectToStorage(RepositoryName.PostgreSql);
+  const storage = await connectToStorage(l, RepositoryName.PostgreSql);
 
   await start_scrape(storage);
   await start_analyze(storage);

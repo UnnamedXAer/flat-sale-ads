@@ -17,6 +17,11 @@ export const createConfig = (process: NodeJS.Process): Config => {
     day: 'numeric'
   };
 
+  const cost= {
+    min: 100000,
+    max: 455000
+  }
+
   return {
     NODE_ENV: (process.env.NODE_ENV as NODE_ENV) || 'development',
     isDev: process.env.NODE_ENV !== 'production',
@@ -50,10 +55,10 @@ export const createConfig = (process: NodeJS.Process): Config => {
       // last 3 days
       rzeszowiakAgencje:
         process.env.URL_RZESZOWIAK_AGENCJE ||
-        'http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-agencje-2580011252?min=100000&max=400000&r=mieszkania',
+        `http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-agencje-2580011252?min=${cost.min}&max=${cost.max}&r=mieszkania`,
       rzeszowiak:
         process.env.URL_RZESZOWIAK ||
-        'http://www.rzeszowiak.pl/Nieruchomosci-3070011252?min=100000&max=400000&r=mieszkania',
+        `http://www.rzeszowiak.pl/Nieruchomosci-3070011252?min=${cost.min}&max=${cost.max}&r=mieszkania`,
 
       // location = Rzeszów +10km
       // price = 100k-400k
@@ -61,7 +66,7 @@ export const createConfig = (process: NodeJS.Process): Config => {
       // ordered by create date
       olx:
         process.env.URL_OLX ||
-        'https://www.olx.pl/nieruchomosci/mieszkania/sprzedaz/rzeszow/?search%5Bfilter_float_price%3Afrom%5D=100000&search%5Bfilter_float_price%3Ato%5D=400000&search%5Border%5D=created_at%3Adesc&search%5Bdist%5D=10',
+        `https://www.olx.pl/nieruchomosci/mieszkania/sprzedaz/rzeszow/?search%5Bfilter_float_price%3Afrom%5D=${cost.min}&search%5Bfilter_float_price%3Ato%5D=${cost.max}&search%5Border%5D=created_at%3Adesc&search%5Bdist%5D=10`,
 
       // location = Rzeszów +10km
       // price = 100k-400k
@@ -70,10 +75,10 @@ export const createConfig = (process: NodeJS.Process): Config => {
       // ordered by create date
       otodom:
         process.env.URL_OTODOM ||
-        'https://www.otodom.pl/sprzedaz/mieszkanie/rzeszow/?search%5Bfilter_float_price_per_m%3Afrom%5D=100000&search%5Bfilter_float_price_per_m%3Ato%5D=400000&search%5Bcreated_since%5D=3&search%5Bcity_id%5D=201&search%5Bdist%5D=10&search%5Border%5D=created_at_first%3Adesc&nrAdsPerPage=72',
+        `https://www.otodom.pl/sprzedaz/mieszkanie/rzeszow/?search%5Bfilter_float_price_per_m%3Afrom%5D=${cost.min}&search%5Bfilter_float_price_per_m%3Ato%5D=${cost.max}&search%5Bcreated_since%5D=3&search%5Bcity_id%5D=201&search%5Bdist%5D=10&search%5Border%5D=created_at_first%3Adesc&nrAdsPerPage=72`,
       gethome:
         process.env.URL_GETHOME ||
-        'https://gethome.pl/mieszkania/na-sprzedaz/rzeszow/?price__gte=100000&price__lte=400000&sort=-created'
+        `https://gethome.pl/mieszkania/na-sprzedaz/rzeszow/?price__gte=${cost.min}&price__lte=${cost.max}&sort=-created`
     }
   };
 };

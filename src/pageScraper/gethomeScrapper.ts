@@ -186,211 +186,210 @@ import { ISiteScraperByObject, ScraperDataType, SiteScraperDebugInfo } from './t
 // }
 
 interface GethomeOffersInfo {
-	offers: IOffer[];
-	pageNum: number;
-	pageCount: number;
-	isDone: boolean;
+  offers: IOffer[];
+  pageNum: number;
+  pageCount: number;
+  isDone: boolean;
 }
 
 interface GethomeData {
-	offerList: {
-		offers: {
-			offers: GethomeOffer[];
-			page: number;
-			pageCount: number;
-		};
-		[key: string]: any;
-	};
-	[key: string]: any;
+  offerList: {
+    offers: {
+      offers: GethomeOffer[];
+      page: number;
+      pageCount: number;
+    };
+    [key: string]: any;
+  };
+  [key: string]: any;
 }
 
 interface GethomeOffer {
-	id: string;
-	agent: { id: string; name: string; last_name: string; phone_number: string };
-	agency: Object | null;
-	created_at: string;
-	deal_type: string;
-	market_type: string;
-	property: {
-		location: {
-			path: {
-				name: string;
-				slug: string;
-				type: string;
-			}[];
-			short_name: 'string';
-		};
-		address: string;
-		floor: number;
-		id: string;
-		plan_img: any;
-		room_number: number;
-		size: number;
-		type: string | 'apartment';
-	};
-	price: {
-		old: number | null;
-		per_month: null | number;
-		per_sqm: number;
-		total: number;
-	};
-	description: string;
-	link: string;
-	images: {
-		link: string;
-		thumbnail_306x171: string;
-		thumbnail_612x342: string;
-	}[];
-	slug: string;
-	investment: any;
-	coordinates: { lat: number; lng: number; type: string | 'point' };
-	name: string;
+  id: string;
+  agent: { id: string; name: string; last_name: string; phone_number: string };
+  agency: Object | null;
+  created_at: string;
+  deal_type: string;
+  market_type: string;
+  offer_type: string[];
+  property: {
+    location: {
+      path: {
+        name: string;
+        slug: string;
+        type: string;
+      }[];
+      short_name: 'string';
+    };
+    address: string;
+    floor: number;
+    id: string;
+    plan_img: any;
+    room_number: number;
+    size: number;
+    type: string | 'apartment';
+  };
+  price: {
+    old: number | null;
+    per_month: null | number;
+    per_sqm: number;
+    total: number;
+  };
+  description?: string;
+  link: string;
+  pictures: {
+    o_img_306x171: string;
+    o_img_360x171: string;
+    o_img_414x171: string;
+    o_img_500: string;
+    o_img_639x171: string;
+    o_img_800: string;
+  }[];
+  slug: string;
+  investment: any;
+  coordinates: { lat: number; lng: number; type?: string | 'point' };
+  name: string;
 }
 
 export class GethomeScraper implements ISiteScraperByObject {
-	_debugInfo: SiteScraperDebugInfo = {
-		idx: -1,
-		url: ''
-	};
-	scrapperDataType: ScraperDataType.Object = ScraperDataType.Object;
-	serviceName: SiteName = 'gethome';
-	info = {
-		pageCount: 1
-	};
+  _debugInfo: SiteScraperDebugInfo = {
+    idx: -1,
+    url: ''
+  };
+  scrapperDataType: ScraperDataType.Object = ScraperDataType.Object;
+  serviceName: SiteName = 'gethome';
+  info = {
+    pageCount: 1
+  };
 
-	async getPageAds(page: Page): Promise<[ads: IOffer[], isDone: boolean]> {
-		const adsInfo = await this.getPageAdsInfo(page);
-		this.info.pageCount = adsInfo.pageCount;
+  async getPageAds(page: Page): Promise<[ads: IOffer[], isDone: boolean]> {
+    const adsInfo = await this.getPageAdsInfo(page);
+    this.info.pageCount = adsInfo.pageCount;
 
-		return [adsInfo.offers, adsInfo.isDone];
-	}
+    return [adsInfo.offers, adsInfo.isDone];
+  }
 
-	async getPageDataObject(page: Page): Promise<GethomeData['offerList']> {
-		const data: GethomeData = await page.evaluate(
-			() => (window as any).__INITIAL_STATE__
-		);
-		return data.offerList;
-	}
+  async getPageDataObject(page: Page): Promise<GethomeData['offerList']> {
+    const data: GethomeData = await page.evaluate(
+      () => (window as any).__INITIAL_STATE__
+    );
+    return data.offerList;
+  }
 
-	async getPageAdsInfo(page: Page): Promise<GethomeOffersInfo> {
-		const offerList = await this.getPageDataObject(page);
-		const { offers: offersInfo } = offerList;
-		const { offers: offersData } = offersInfo;
+  async getPageAdsInfo(page: Page): Promise<GethomeOffersInfo> {
+    const offerList = await this.getPageDataObject(page);
+    const { offers: offersInfo } = offerList;
+    const { offers: offersData } = offersInfo;
 
-		const now = Date.now();
-		// @todo: use link from offers
-		const [siteOffers, isDone] = this.parsePageAds(offersData, page.url());
-		l.info(
-			`[${this.serviceName}]->parsePageAds execution time: ${Date.now() - now} ms.`
-		);
+    const now = Date.now();
+    // @todo: use link from offers
+    const [siteOffers, isDone] = this.parsePageAds(offersData, page.url());
+    l.info(`[${this.serviceName}]->parsePageAds execution time: ${Date.now() - now} ms.`);
 
-		const adsInfo: GethomeOffersInfo = {
-			offers: siteOffers,
-			pageNum: offersInfo.page,
-			pageCount: offersInfo.pageCount,
-			isDone: isDone
-		} as GethomeOffersInfo;
+    const adsInfo: GethomeOffersInfo = {
+      offers: siteOffers,
+      pageNum: offersInfo.page,
+      pageCount: offersInfo.pageCount,
+      isDone: isDone
+    } as GethomeOffersInfo;
 
-		return adsInfo;
-	}
+    return adsInfo;
+  }
 
-	parsePageAds(
-		offersData: GethomeOffer[],
-		pageUrl: string
-	): [ads: IOffer[], isDone: boolean] {
-		const offers: IOffer[] = [];
-		let isDone = false;
-		for (let i = 0, offersCount = offersData.length; i < offersCount; i++) {
-			const offer = offersData[i];
-			const [_dt, dt, _isDone] = this.getAdTime(offer.created_at);
-			if (_isDone === true) {
-				isDone = true;
-				break;
-			}
+  parsePageAds(
+    offersData: GethomeOffer[],
+    pageUrl: string
+  ): [ads: IOffer[], isDone: boolean] {
+    const offers: IOffer[] = [];
+    let isDone = false;
+    for (let i = 0, offersCount = offersData.length; i < offersCount; i++) {
+      const offer = offersData[i];
+      const [dt_, dt, _isDone] = this.getAdTime(offer.created_at);
+      if (_isDone === true) {
+        isDone = true;
+        break;
+      }
 
-			// @improvement: find "stan wykończenia" in offer data.
-			const description =
-				(offer.price.per_sqm
-					? 'Powierzchnia: ' + offer.price.per_sqm + 'm2'
-					: '') +
-				'\nRozmiar: ' +
-				offer.property.size +
-				'\nLokalizacja: ' +
-				(offer.property.address
-					? offer.property.address.trim()
-					: offer.property.location.short_name.trim()) +
-				'\n' +
-				(offer.property.floor ? '\nPiętro: ' + offer.property.floor : '') +
-				(offer.property.room_number
-					? '\nPokoje: ' + offer.property.room_number
-					: '') +
-				'\n\n' +
-				'\nOpis:\n' +
-				offer.description.trim() +
-				(offer.agent
-					? '\n\nAgent: ' +
-					  offer.agent.name.trim() +
-					  ' ' +
-					  offer.agent.last_name.trim()
-					: '') +
-				(offer.market_type.trim()
-					? '\nRynek: ' +
-					  (offer.market_type.trim() === 'aftermarket'
-							? 'wtórny'
-							: 'pierwotny')
-					: ''); // @todo: check all market_type options.
+      // @improvement: find "stan wykończenia" in offer data.
+      const description =
+        (Number.isFinite(offer.price.per_sqm)
+          ? 'Powierzchnia: ' + offer.price.per_sqm + 'm2'
+          : '') +
+        '\nRozmiar: ' +
+        offer.property.size +
+        '\nLokalizacja: ' +
+        (offer.property.address
+          ? offer.property.address.trim()
+          : offer.property.location.short_name.trim()) +
+        '\n' +
+        (Number.isFinite(offer.property.floor)
+          ? '\nPiętro: ' + offer.property.floor
+          : '') +
+        (Number.isFinite(offer.property.room_number)
+          ? '\nPokoje: ' + offer.property.room_number
+          : '') +
+        '\n\n' +
+        '\nOpis:\n' +
+        (offer.description ? offer.description.trim() : '<empty>') +
+        (offer.agent
+          ? '\n\nAgent: ' + offer.agent.name.trim() + ' ' + offer.agent.last_name.trim()
+          : '') +
+        (offer.market_type.trim()
+          ? '\nRynek: ' +
+            (offer.market_type.trim() === 'aftermarket' ? 'wtórny' : 'pierwotny')
+          : ''); // @todo: check all market_type options.
 
-			const title = offer.name.trim();
-			const url = 'https://gethome.pl/oferta/' + offer.slug;
-			const imgUrl = offer.images[0].thumbnail_306x171;
-			const price = this.getAdPrice(offer.price.total);
-			const id = offer.id;
+      const title = offer.name.trim();
+      const url = 'https://gethome.pl/oferta/' + offer.slug;
+      const imgUrl = offer.pictures[0].o_img_306x171;
+      const price = this.getAdPrice(offer.price.total);
+      const id = offer.id;
 
-			const siteOffer: IOffer = {
-				site: 'gethome',
-				dt_: _dt,
-				dt,
-				scrapedAt: new Date(globals.programStartTime),
-				title,
-				price,
-				offerId: id,
-				url,
-				description,
-				imgUrl
-			};
-			offers.push(siteOffer);
-		}
-		return [offers, isDone];
-	}
+      const siteOffer: IOffer = {
+        site: 'gethome',
+        dt_: dt_,
+        dt,
+        scrapedAt: new Date(globals.programStartTime),
+        title,
+        price,
+        offerId: id,
+        url,
+        description,
+        imgUrl
+      };
+      offers.push(siteOffer);
+    }
+    return [offers, isDone];
+  }
 
-	getAdTime(offerTime: string): [adDate: Date, adDateText: string, isDone: boolean] {
-		const adDate = this.parseAdTime(offerTime);
-		const formattedDate = adDate.toLocaleString(...config.dateTimeFormatParams);
-		const isDone = this.checkIfAdTooOld(adDate);
-		return [adDate, formattedDate, isDone];
-	}
+  getAdTime(offerTime: string): [adDate: Date, adDateText: string, isDone: boolean] {
+    const adDate = this.parseAdTime(offerTime);
+    const formattedDate = adDate.toLocaleString(...config.dateTimeFormatParams);
+    const isDone = this.checkIfAdTooOld(adDate);
+    return [adDate, formattedDate, isDone];
+  }
 
-	parseAdTime(offerTime: string): Date {
-		const adDate = new Date(offerTime);
-		return adDate;
-	}
+  parseAdTime(offerTime: string): Date {
+    const adDate = new Date(offerTime);
+    return adDate;
+  }
 
-	getAdPrice(offerPrice: number): string {
-		return '' + offerPrice;
-	}
+  getAdPrice(offerPrice: number): string {
+    return '' + offerPrice;
+  }
 
-	getUrlsToNextPages(baseUrl: string): string[] {
-		const pageUrls: string[] = [];
+  getUrlsToNextPages(baseUrl: string): string[] {
+    const pageUrls: string[] = [];
 
-		for (let i = 2; i <= this.info.pageCount; i++) {
-			pageUrls.push(baseUrl + '&page=' + i);
-		}
+    for (let i = 2; i <= this.info.pageCount; i++) {
+      pageUrls.push(baseUrl + '&page=' + i);
+    }
 
-		l.debug(`${this.serviceName} pages number: ${pageUrls.length} + 1 (first page).`);
-		return pageUrls;
-	}
+    l.debug(`${this.serviceName} pages number: ${pageUrls.length} + 1 (first page).`);
+    return pageUrls;
+  }
 
-	checkIfAdTooOld(adDate: Date): boolean {
-		return adDate.getTime() < globals.programStartTime - 1 * DAY_MS;
-	}
+  checkIfAdTooOld(adDate: Date): boolean {
+    return adDate.getTime() < globals.programStartTime - 1 * DAY_MS;
+  }
 }

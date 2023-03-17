@@ -1,7 +1,14 @@
-import { IOffer, IOffersInfo, IRepository, Logger, siteNames } from '../../types';
-import { Prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import {
+  ConnectToStorage,
+  IOffer,
+  IOffersInfo,
+  IRepository,
+  Logger,
+  siteNames
+} from '../../types';
 
-export class PostgreSqlRepository implements IRepository {
+class PostgreSqlRepository implements IRepository {
   private l: Logger;
   private conn: PrismaClient;
 
@@ -20,12 +27,9 @@ export class PostgreSqlRepository implements IRepository {
   }
 
   getNewOffers(): Promise<IOffersInfo | null> {
-    return this.getOffers(
-      'Temporary',
-      this.conn.tmpOffersInfo,
-      this.conn.tmpOffer,
-      1
-    ).then((x) => (x.length > 0 ? x[0] : null));
+    return this.getOffers('Temporary', this.conn.offersInfo, this.conn.offer, 1).then(
+      (x) => (x.length > 0 ? x[0] : null)
+    );
   }
 
   saveTmpOffers(o: IOffer[], date: Date): Promise<void> {
@@ -42,14 +46,12 @@ export class PostgreSqlRepository implements IRepository {
     return this.getOffers('Temporary', this.conn.tmpOffersInfo, this.conn.tmpOffer);
   }
 
-  async deleteTmpOffers(): Promise<void> {
-    const offersResult = await this.conn.tmpOffer.deleteMany();
-    const infoResult = await this.conn.tmpOffersInfo.deleteMany();
+  deleteAllOffers(): Promise<void> {
+    return this.deleteOffers('All', this.conn.tmpOffersInfo, this.conn.tmpOffer);
+  }
 
-    this.l.debug(
-      `Temporary offers removed. offersInfo:${infoResult.count} / offers: ${offersResult.count} `
-    );
-    return;
+  deleteTmpOffers(): Promise<void> {
+    return this.deleteOffers('Temporary', this.conn.tmpOffersInfo, this.conn.tmpOffer);
   }
 
   async connect(): Promise<void> {
@@ -107,7 +109,7 @@ export class PostgreSqlRepository implements IRepository {
     }
 
     this.l.debug(
-      'Number of ${label.toLowerCase()} offers infos in storage is: ',
+      `Number of ${label.toLowerCase()} offers infos in storage is: `,
       offersInfos.length
     );
 
@@ -132,4 +134,24 @@ export class PostgreSqlRepository implements IRepository {
     });
     return Promise.all(offers);
   }
+
+  private async deleteOffers(
+    label: 'Temporary' | 'All',
+    offersInfoTable: PrismaClient['offersInfo'] | PrismaClient['tmpOffersInfo'],
+    offersTable: PrismaClient['offer'] | PrismaClient['tmpOffer']
+  ): Promise<void> {
+    const offersResult = await offersTable.deleteMany();
+    const infoResult = await offersInfoTable.deleteMany();
+
+    this.l.debug(
+      `${label} offers removed. offersInfo:${infoResult.count} / offers: ${offersResult.count} `
+    );
+    return;
+  }
 }
+
+export const connectToStorage: ConnectToStorage = async (logger: Logger) => {
+  const storage = new PostgreSqlRepository(logger);
+  await storage.connect();
+  return storage;
+};

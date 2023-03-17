@@ -1,7 +1,10 @@
-import { ConnectOptions } from 'mongoose';
-import { IRepository, RepositoryName } from '../types';
+import { ConnectionOptions } from 'mongoose';
+import { ConnectToStorage, IRepository, Logger, RepositoryName } from '../types';
 
-export async function connectToStorage(repoName: RepositoryName): Promise<IRepository> {
+export async function connectToStorage(
+  l: Logger,
+  repoName: RepositoryName
+): Promise<IRepository> {
   let connString: string = '';
   let connOptions: { [key: string]: string } | undefined;
 
@@ -15,7 +18,7 @@ export async function connectToStorage(repoName: RepositoryName): Promise<IRepos
         useUnifiedTopology: true,
         useFindAndModify: false,
         useCreateIndex: true
-      } as ConnectOptions as typeof connOptions;
+      } as ConnectionOptions as typeof connOptions;
 
       break;
     case RepositoryName.PostgreSql:
@@ -25,9 +28,10 @@ export async function connectToStorage(repoName: RepositoryName): Promise<IRepos
       throw new Error(`Repository "${repoName}" not recognized.`);
   }
 
-  const module = (await import(`./${repoName}`)) as { storage: IRepository };
+  const { connectToStorage } = (await import(`./${repoName}`)) as {
+    connectToStorage: ConnectToStorage;
+  };
 
-  await module.storage.connect(connString, connOptions);
-  const storage: IRepository = module.storage;
+  const storage: IRepository = await connectToStorage(l);
   return storage;
 }

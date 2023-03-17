@@ -26,8 +26,6 @@ export interface Logger {
   fatal(...args: any[]): void;
 }
 
-// type TLogLevelName = 'silly' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal';
-
 export enum TLogLevel {
   silly,
   trace,
@@ -61,10 +59,13 @@ export interface IRepository {
   getNewOffers(): Promise<IOffersInfo | null>;
   saveTmpOffers(o: IOffer[], date: Date): Promise<void>;
   getTmpOffers(): Promise<IOffersInfo[]>;
+  deleteAllOffers(): Promise<void>;
   deleteTmpOffers(): Promise<void>;
   connect(uri: string, options?: { [key: string]: string }): Promise<void>;
   disconnect(): Promise<void>;
 }
+
+export type ConnectToStorage = (logger: Logger) => Promise<IRepository>;
 
 export enum RepositoryName {
   Mongo = 'mongo',
